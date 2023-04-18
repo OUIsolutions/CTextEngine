@@ -1,18 +1,19 @@
 //
 // Created by jurandi on 18-04-2023.
 //
-#include "CwebEngine/CwebEngineMain.c"
 #include <stdio.h>
+
+#include "CwebEngine/CwebEngineMain.c"
 
 
 void create_document(){
-    OPEN(HTML,NULL);
-        OPEN(BODY,NULL);
-            OPEN(H1,NULL);
-                FRAGMENT("Hello World");
-            CLOSE(H1,NULL);
-        CLOSE(BODY,NULL);
-    CLOSE(HTML,NULL);
+    $OPEN(HTML,"aaaa");
+        $OPEN(BODY,NULL);
+            $OPEN(H1,NULL);
+                $FRAGMENT("Hello World");
+            $CLOSE(H1,NULL);
+        $CLOSE(BODY,NULL);
+    $CLOSE(HTML,NULL);
 }
 
 int main(){

@@ -1,3 +1,0 @@
-/home/jurandi/Documentos/Oui/CwebEngine/cmake-build-debug/CMakeFiles/CwebEngine.dir
-/home/jurandi/Documentos/Oui/CwebEngine/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/jurandi/Documentos/Oui/CwebEngine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
