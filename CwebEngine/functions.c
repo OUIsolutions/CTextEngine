@@ -2,7 +2,7 @@
 
 void private_cweb_engine_add(const char *element){
     // Add to stack
-    strcat(cweb_engine_stack,element);
+    strcat(cweb_stack_pointer,element);
 
 }
 
@@ -29,14 +29,5 @@ void $CLOSE(const char *tag,const char *props){
 }
 
 
-void cweb_engine_render(char *html){
-    // Render stack
-    strcpy(html,cweb_engine_stack);
-}
-
-void cweb_engine_clear_stack(){
-    // Clear stack
-    strcpy(cweb_engine_stack,"");
-}
 
 

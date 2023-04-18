@@ -16,11 +16,12 @@ void create_document(){
     $CLOSE(HTML,NULL);
 }
 
+
 int main(){
+   char result[1000] ={};
+   cweb_stack_pointer = result;
    create_document();
    
-   char result[1000];
-   cweb_engine_render(result);
 
    printf("%s\n",result);
 }
