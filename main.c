@@ -24,4 +24,5 @@ int main(){
    
 
    printf("%s\n",result);
+   printf("Ident level: %d\n",cweb_ident_level);
 }

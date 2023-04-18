@@ -3,6 +3,9 @@
 //
 
 char *cweb_stack_pointer;
+#define CWEB_LINE_BREAKER "\n"
+#define CWEB_SEPARATOR "   "
+int cweb_ident_level = 0;
 
 void private_cweb_engine_add(const char *element);
 
