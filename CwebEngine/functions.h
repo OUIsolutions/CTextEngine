@@ -14,7 +14,7 @@ void $OPEN(const char *tag,const char *props);
 
 void $CLOSE(const char *tag,const char *props);
 
-void cweb_engine_render(const char *html);
+void cweb_engine_render(char *html);
 void cweb_engine_clear_stack();
 
 

@@ -18,7 +18,9 @@ void create_document(){
 
 int main(){
    create_document();
-   char result[100];
+   
+   char result[1000];
    cweb_engine_render(result);
-   printf("%s",result);
+
+   printf("%s\n",result);
 }
