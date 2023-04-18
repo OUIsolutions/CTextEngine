@@ -6,8 +6,8 @@
 #include "CwebEngine/CwebEngineMain.c"
 
 
-void create_document(){
-    $OPEN(HTML,"aaaa");
+void create_document(char *props){
+    $OPEN(HTML,props);
         $OPEN(BODY,NULL);
             $OPEN(H1,NULL);
                 $FRAGMENT("Hello World");
@@ -20,9 +20,13 @@ void create_document(){
 int main(){
    char result[1000] ={};
    cweb_stack_pointer = result;
-   create_document();
+   create_document("Mateus");
+   
+   char result2[1000] ={};
+   cweb_stack_pointer = result2;
+   create_document("Teste3");
    
 
-   printf("%s\n",result);
+   printf("%s\n",result2);
    printf("Ident level: %d\n",cweb_ident_level);
 }
