@@ -70,18 +70,10 @@ void BOOLEAN(int boolean){
 
 void SPRINT(const char *text,...){
    
-    int size;
-    int text_size = strlen(text);
-    for(int i =0;i <text_size;i++){
-        if(text[i] =='%'){
-            size++;
-        } 
-    }
-
    va_list argptr;
    
 
-   va_start(argptr, size);
+   va_start(argptr, text);
     if(text[0] != '%'){
         CHAR(text[0]);
     }
