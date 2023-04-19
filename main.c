@@ -10,9 +10,7 @@ void create_document(char *props){
     $OPEN(HTML,props);
         $OPEN(BODY,NULL);
             $OPEN(H1,NULL);
-
                 $FRAGMENT("Hello World");
-            
             $CLOSE(H1);
         $CLOSE(BODY);
     $CLOSE(HTML);
