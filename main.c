@@ -16,17 +16,24 @@ void create_document(char *props){
     CLOSE(HTML);
 }
 
+void join_components(char *component1,char *component2){
+    FRAGMENT(component1);
+    FRAGMENT(component2);
+}
+
+
 
 int main(){
    char result[1000] ={};
-   cweb_stack_pointer = result;
-   create_document("Mateus");
-   
+   create_component(result,create_document,"teste");
+  
    char result2[1000] ={};
-   cweb_stack_pointer = result2;
-   create_document("Teste3");
-   
+   create_component(result2,create_document,"teste2");
+  
 
-   printf("%s\n",result2);
+   char result3[2000] ={};
+   create_component(result3,join_components,result,result2);
+
+   printf("%s\n",result3);
    printf("Ident level: %d\n",cweb_ident_level);
 }
