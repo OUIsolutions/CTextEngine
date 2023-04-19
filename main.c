@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 
-#include "CwebEngine/CwebEngineMain.c"
+#include "CTextEngine/CTextEngineMain.c"
 
 
 void create_document(char *props,int data){
@@ -24,7 +24,7 @@ void create_document(char *props,int data){
 int main(){
    
    char result[1000] ={};
-   cweb_stack_pointer = result;
+   ctext_stack_pointer = result;
    
 
    create_document("aaaa",20);
@@ -33,5 +33,5 @@ int main(){
    
 
    printf("%s\n",result);
-   printf("Ident level: %d\n",cweb_ident_level);
+   printf("Ident level: %d\n",ctext_ident_level);
 }
