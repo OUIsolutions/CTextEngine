@@ -10,7 +10,7 @@ void create_document(char *props,int data){
     $OPEN(HTML,props);
         OPEN(BODY);
             OPEN(H1);
-                SPRINT("Hello World %d",data);
+                SPRINT("Hello World %d with props ",data);
             CLOSE(H1);
         CLOSE(BODY);
     CLOSE(HTML);
@@ -26,7 +26,6 @@ int main(){
    
 
    create_document("aaaa",20);
-   create_document("bbbb",20);
 
    
 
