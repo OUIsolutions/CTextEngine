@@ -10,9 +10,7 @@ void create_document(char *props,int data){
     $OPEN(HTML,props);
         OPEN(BODY);
             OPEN(H1);
-                TEXT("aaaa");
-                TEXT(" ");
-                INTEGER(data);
+                SPRINT("Hello World %d",data);
             CLOSE(H1);
         CLOSE(BODY);
     CLOSE(HTML);

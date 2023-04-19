@@ -37,19 +37,15 @@ void $OPEN(const char *tag,const char *props){
 }
 
 void SPRINT(const char *text,...){
-    bool percent_found = false;
+   
     va_list argptr;
 
 
-    for(int i =0;i < strlen(text);i++){
-        
+    for(int i =1;i < strlen(text);i++){
+        char last_char = text[i-1];     
         char current_char = text[i];
-        if(current_char == '%'){
-            percent_found = true;
-            continue;
-        }
-
-        if(percent_found){
+        
+        if(last_char == '%'){
             switch(current_char){
                 case 's':
                     TEXT(va_arg(argptr,char *));
@@ -68,9 +64,11 @@ void SPRINT(const char *text,...){
                     TEXT(&current_char);
                     break;
             }
-            
-            percent_found = false;
-        
+            i++;
+            continue;
+        }
+        if(current_char != '%'){
+            TEXT(&current_char);
         }
     }
 }
