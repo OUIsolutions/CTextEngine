@@ -14,9 +14,6 @@ void private_cweb_engine_add_separator(int ident_level);
 
 
 
-void cweb_set_main_stack(const char *buffer){
-    cweb_stack_pointer = buffer;
-}
 
 
 #define cweb_render(buffer, caller, ...) \
