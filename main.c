@@ -22,7 +22,8 @@ void create_document(char *props){
 int main(){
    
    char result[1000] ={};
-   cweb_set_main_stack(result);
+   cweb_stack_pointer = result;
+   
    
    create_document("aaaa");
    create_document("bbbb");
