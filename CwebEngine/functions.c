@@ -41,11 +41,17 @@ void TEXT(const char *text){
     private_cweb_engine_cat(text);
 }
 void INTEGER(int number){
-    private_cweb_engine_cat(itoa(number));
+   //convert int to string
+    char str[12];
+    sprintf(str, "%d", number);
+    private_cweb_engine_cat(str);
 }
 
 void FLOAT(float number){
-    private_cweb_engine_cat(ftoa(number));
+    //convert float to string
+    char str[12];
+    sprintf(str, "%f", number);
+    private_cweb_engine_cat(str);
 }
 
 

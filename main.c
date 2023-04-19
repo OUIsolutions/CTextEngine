@@ -11,6 +11,8 @@ void create_document(char *props,int data){
         OPEN(BODY);
             OPEN(H1);
                 TEXT("aaaa");
+                TEXT(" ");
+                INTEGER(data);
             CLOSE(H1);
         CLOSE(BODY);
     CLOSE(HTML);
