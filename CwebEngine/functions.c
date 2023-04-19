@@ -8,9 +8,9 @@ void private_cweb_engine_add(const char *element){
 
 }
 
+
 void private_add_separator(int ident_level){
     
-
     int i;
     private_cweb_engine_add(CWEB_LINE_BREAKER);
 
@@ -18,6 +18,7 @@ void private_add_separator(int ident_level){
         private_cweb_engine_add(CWEB_SEPARATOR);
     }
 }
+
 
 void $FRAGMENT(const char *text){
     private_cweb_engine_add(text);
@@ -39,7 +40,7 @@ void $OPEN(const char *tag,const char *props){
     private_cweb_engine_add(">");
 }
 
-void $CLOSE(const char *tag,const char *props){
+void $CLOSE(const char *tag){
     cweb_ident_level -= 1;
     private_add_separator(cweb_ident_level);
     private_cweb_engine_add("</");
