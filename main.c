@@ -24,13 +24,12 @@ int main(){
    char result[1000] ={};
    cweb_stack_pointer = result;
    
-   
+
    create_document("aaaa");
    create_document("bbbb");
 
   
- 
 
-   printf("%s\n",result3);
+   printf("%s\n",result);
    printf("Ident level: %d\n",cweb_ident_level);
 }
