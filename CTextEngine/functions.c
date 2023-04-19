@@ -70,6 +70,8 @@ void BOOLEAN(int boolean){
 
 void SPRINT(const char *text,...){
    
+    
+    int text_size = strlen(text);
    va_list argptr;
    
 
