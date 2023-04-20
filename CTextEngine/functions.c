@@ -6,6 +6,7 @@ void ctext_get_stack_ownership(char *stack_pointer){
 }
 void ctext_release_stack_ownership(){
     ctext_stack_pointer = ctext_old_stack_pointer;
+    ctext_ident_level = 0;
 }
 
 void private_ctext_engine_cat(const char *element){
