@@ -16,10 +16,12 @@ void private_ctext_engine_cat(const char *element){
 
 
 
-void private_add_separator(int ident_level){
+void private_add_separator(int ident_level,bool break_line){
     
     int i;
-    private_ctext_engine_cat(CTEXT_LINE_BREAKER);
+    if(break_line){
+        private_ctext_engine_cat(CTEXT_LINE_BREAKER);
+    }
 
     for(i=0;i<ident_level;i++){
         private_ctext_engine_cat(CTEXT_SEPARATOR);
@@ -28,7 +30,7 @@ void private_add_separator(int ident_level){
 
 
 void $OPEN(const char *tag,const char *props){
-    private_add_separator(ctext_ident_level);
+    private_add_separator(ctext_ident_level,true);
     ctext_ident_level += 1;    
 
  
@@ -127,14 +129,17 @@ void SPRINT(const char *text,...){
 
 void OPEN(const char *tag){
     
-    private_add_separator(ctext_ident_level);
 
+    if(tag==NULL){
+        private_add_separator(ctext_ident_level,false);
+        ctext_ident_level += 1;
+        return;
+    }
+
+    private_add_separator(ctext_ident_level,true);
     ctext_ident_level += 1;
 
 
-    if(tag==NULL){
-        return;
-    }
     private_ctext_engine_cat("<");
     private_ctext_engine_cat(tag);
 
@@ -143,10 +148,12 @@ void OPEN(const char *tag){
 
 void CLOSE(const char *tag){
     ctext_ident_level -= 1;
-    private_add_separator(ctext_ident_level);
     if(tag==NULL){
+         private_add_separator(ctext_ident_level,false);
         return;
     }
+
+    private_add_separator(ctext_ident_level,true);
     private_ctext_engine_cat("</");
     private_ctext_engine_cat(tag);
     private_ctext_engine_cat(">");
