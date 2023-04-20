@@ -1,12 +1,18 @@
 
 
 void ctext_get_stack_ownership(char *stack_pointer){
+    if(ctext_ocupied_stack){
+        printf("Error: CTextEngine stack already ocupied\n");
+        exit(1);
+    }
+    ctext_ocupied_stack = true;
     ctext_old_stack_pointer = ctext_stack_pointer;
     ctext_stack_pointer = stack_pointer;
 }
 void ctext_release_stack_ownership(){
     ctext_stack_pointer = ctext_old_stack_pointer;
     ctext_ident_level = 0;
+    ctext_ocupied_stack = false;
 }
 
 void private_ctext_engine_cat(const char *element){
@@ -32,10 +38,9 @@ void private_add_separator(int ident_level,bool break_line){
 
 void $OPEN(const char *tag,const char *props){
     private_add_separator(ctext_ident_level,true);
+
     ctext_ident_level += 1;    
-
  
-
     private_ctext_engine_cat("<");
     private_ctext_engine_cat(tag);
 

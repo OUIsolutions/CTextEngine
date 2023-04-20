@@ -4,6 +4,8 @@
 
 char *ctext_stack_pointer;
 char *ctext_old_stack_pointer;
+bool ctext_ocupied_stack = false;
+
 #ifndef CTEXT_LINE_BREAKER
     #define CTEXT_LINE_BREAKER "\n"
 #endif
