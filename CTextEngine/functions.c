@@ -9,10 +9,16 @@ void ctext_get_stack_ownership(char *stack_pointer){
     ctext_old_stack_pointer = ctext_stack_pointer;
     ctext_stack_pointer = stack_pointer;
 }
+
 void ctext_release_stack_ownership(){
     ctext_stack_pointer = ctext_old_stack_pointer;
     ctext_ident_level = 0;
     ctext_ocupied_stack = false;
+}
+
+void ctext_insecure_wait_for_stack_ownership(char *stack_pointer){
+    while(ctext_ocupied_stack){}
+    ctext_get_stack_ownership(stack_pointer);
 }
 
 void private_ctext_engine_cat(const char *element){
