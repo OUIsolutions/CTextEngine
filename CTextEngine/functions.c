@@ -1,12 +1,19 @@
 
 
-
+void ctext_get_stack_ownership(char *stack_pointer){
+    ctext_old_stack_pointer = ctext_stack_pointer;
+    ctext_stack_pointer = stack_pointer;
+}
+void ctext_release_stack_ownership(){
+    ctext_stack_pointer = ctext_old_stack_pointer;
+}
 
 void private_ctext_engine_cat(const char *element){
     // Add to stack
     strcat(ctext_stack_pointer,element);
 
 }
+
 
 
 void private_add_separator(int ident_level){
@@ -21,10 +28,11 @@ void private_add_separator(int ident_level){
 
 
 void $OPEN(const char *tag,const char *props){
-    
     private_add_separator(ctext_ident_level);
+    ctext_ident_level += 1;    
 
-    ctext_ident_level += 1;
+ 
+
     private_ctext_engine_cat("<");
     private_ctext_engine_cat(tag);
 
@@ -71,7 +79,7 @@ void BOOLEAN(int boolean){
 void SPRINT(const char *text,...){
    
     
-    int text_size = strlen(text);
+   int text_size = strlen(text);
    va_list argptr;
    
 
@@ -122,6 +130,11 @@ void OPEN(const char *tag){
     private_add_separator(ctext_ident_level);
 
     ctext_ident_level += 1;
+
+
+    if(tag==NULL){
+        return;
+    }
     private_ctext_engine_cat("<");
     private_ctext_engine_cat(tag);
 
@@ -131,6 +144,9 @@ void OPEN(const char *tag){
 void CLOSE(const char *tag){
     ctext_ident_level -= 1;
     private_add_separator(ctext_ident_level);
+    if(tag==NULL){
+        return;
+    }
     private_ctext_engine_cat("</");
     private_ctext_engine_cat(tag);
     private_ctext_engine_cat(">");
