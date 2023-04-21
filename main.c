@@ -8,13 +8,15 @@
 
 void create_document(char *props,int data,char *body){
     
-    s->$OPEN(s,HTML,props);
-        s->OPEN(s,body);
-            s->OPEN(s,H1);
-                s->SPRINT(s,"Hello World %d with %s props ",data,props);
-            s->CLOSE(s,H1);
-       s->CLOSE(s,body);
-    s->CLOSE(s,HTML);
+    $OPEN(s,HTML,props);
+
+        OPEN(s,BODY);
+            OPEN(s,H1);
+                SPRINT(s,"Hello World %d with %s props ",data,props);
+            CLOSE(s,H1);
+        CLOSE(s,BODY);
+    
+    CLOSE(s,HTML);
 }
 
 
