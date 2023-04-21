@@ -7,13 +7,14 @@
 
 
 void create_document(char *props,int data,char *body){
-    $OPEN(HTML,props);
-        OPEN(body);
-            OPEN(H1);
-                SPRINT("Hello World %d with %s props ",data,props);
-            CLOSE(H1);
-        CLOSE(body);
-    CLOSE(HTML);
+    
+    s->$OPEN(s,HTML,props);
+        s->OPEN(s,body);
+            s->OPEN(s,H1);
+                s->SPRINT(s,"Hello World %d with %s props ",data,props);
+            s->CLOSE(s,H1);
+       s->CLOSE(s,body);
+    s->CLOSE(s,HTML);
 }
 
 
@@ -21,26 +22,6 @@ void create_document(char *props,int data,char *body){
 
 int main(){
    
-   char result[1000] ={};
-   ctext_get_stack_ownership(result);
    
-
-   create_document("aaaa",20,BODY);
-
-   
-   
-   printf("%s\n",result);
-   printf("Ident level: %d\n",ctext_ident_level);
-   ctext_release_stack_ownership();
-
-   puts("----------------------------\n");
-
-   char result2[1000] ={};
-   ctext_get_stack_ownership(result2);
-   create_document("bbb",40,NULL);
-   printf("%s\n",result2);
-   printf("Ident level: %d\n",ctext_ident_level);
-
-   ctext_release_stack_ownership();
      
 }
