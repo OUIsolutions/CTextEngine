@@ -16,7 +16,7 @@ struct CText{
 
 
     void (*$open)(struct CText *self, const char *tag, const char *props);
-    void (*open)(struct CText *self, const char *tag, const char *props);
+    void (*open)(struct CText *self, const char *tag);
     void (*close)(struct CText *self, const char *tag);
 
 
@@ -37,4 +37,10 @@ void private_ctext_text(struct CText *self, const char *text);
 void private_ctext_cat_separator(struct CText *self, bool break_line);
 
 void private_ctext_$open(struct CText *self, const char *tag, const char *props);
+
+void private_ctext_open(struct CText *self, const char *tag);
+
+void private_ctext_close(struct CText *self, const char *tag);
+
+
 void private_ctext_free(struct CText *self);

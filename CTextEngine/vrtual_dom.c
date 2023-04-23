@@ -84,37 +84,8 @@ void SPRINT(const char *text,...){
     va_end(argptr);
 }
 
-void OPEN(const char *tag){
-    
-
-    if(tag==NULL){
-        private_add_separator(ctext_ident_level,false);
-        ctext_ident_level += 1;
-        return;
-    }
-
-    private_add_separator(ctext_ident_level,true);
-    ctext_ident_level += 1;
 
 
-    private_ctext_engine_cat("<");
-    private_ctext_engine_cat(tag);
-
-    private_ctext_engine_cat(">");
-}
-
-void CLOSE(const char *tag){
-    ctext_ident_level -= 1;
-    if(tag==NULL){
-         private_add_separator(ctext_ident_level,false);
-        return;
-    }
-
-    private_add_separator(ctext_ident_level,true);
-    private_ctext_engine_cat("</");
-    private_ctext_engine_cat(tag);
-    private_ctext_engine_cat(">");
-}
 
 
 

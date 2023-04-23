@@ -3,27 +3,27 @@
 //
 #include <stdio.h>
 
-#include "CTextEngine/CTextEngineMain.c"
+#include "CTextEngine//CText.c"
 
 
-void create_document(char *props,int data,char *body){
-    
-    $OPEN(s,HTML,props);
+struct CText * create_document(const char *props, int data){
+    struct CText *vd = newCTextVirtualDom(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-        OPEN(s,BODY);
-            OPEN(s,H1);
-                SPRINT(s,"Hello World %d with %s props ",data,props);
-            CLOSE(s,H1);
-        CLOSE(s,BODY);
-    
-    CLOSE(s,HTML);
+    $open(vd,HTML,"b=10");
+        $open(vd,BODY,NULL);
+            vd->text(vd,"text content here");
+        vd->close(vd,BODY);
+    vd->close(vd,HTML);
+
+    return vd;
 }
 
 
 
 
 int main(){
-   
-   
-     
+    struct CText *vd =  create_document("aaaa", 20);
+    printf("%s",vd->rendered_text);
+    vd->free(vd);
+
 }
