@@ -10,7 +10,7 @@ struct CText * newCTextVirtualDom(const char *line_breaker, const char *separato
     self->separator = strdup(separator);
 
     self->text = private_ctext_text;
-    self->cat_separator = private_ctext_cat_separator;
+    self->segment = private_ctext_segment;
     self->open_with_string_props = private_ctext_open_with_string_props;
     self->open = private_ctext_open;
     self->close = private_ctext_close;

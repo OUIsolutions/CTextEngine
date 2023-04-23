@@ -12,7 +12,7 @@ struct CText{
     int ident_level;
 
     void (*text)(struct CText *self, const char *element);
-    void (*cat_separator)(struct CText *self, bool break_line);
+    void (*segment)(struct CText *self);
 
 
     void (*open_with_string_props)(struct CText *self, const char *tag, const char *props);
@@ -29,7 +29,7 @@ struct CText *newCTextVirtualDom(const char *line_breaker, const char *separator
 
 void private_ctext_text(struct CText *self, const char *text);
 
-void private_ctext_cat_separator(struct CText *self, bool break_line);
+void private_ctext_segment(struct CText *self);
 
 void private_ctext_open_with_string_props(struct CText *self, const char *tag, const char *props);
 

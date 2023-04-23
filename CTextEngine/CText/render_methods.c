@@ -10,13 +10,13 @@ void private_ctext_text(struct CText *self, const char *text){
 }
 
 
-void private_ctext_cat_separator(struct CText *self, bool break_line){
+void private_ctext_segment(struct CText *self){
 
-    if(break_line){
-        self->text(self,self->line_breaker);
-    }
 
-    for(int i=0;i<self->ident_level;i++){
+    self->text(self,self->line_breaker);
+
+
+    for(int i=0;i<self->ident_level -1;i++){
         self->text(self,self->separator);
     }
 
@@ -24,9 +24,10 @@ void private_ctext_cat_separator(struct CText *self, bool break_line){
 }
 
 void private_ctext_open_with_string_props(struct CText *self, const char *tag, const char *props){
-    self->cat_separator(self,true);
+
 
     self->ident_level += 1;
+    self->segment(self);
 
     self->text(self,"<");
     self->text(self,tag);
@@ -40,21 +41,25 @@ void private_ctext_open_with_string_props(struct CText *self, const char *tag, c
 
 void private_ctext_open(struct CText *self, const char *tag){
     if(tag ==  NULL){
-        self->cat_separator(self,false);
         self->ident_level += 1;
+        self->segment(self);
+        return;
     }
+
     self->open_with_string_props(self, tag, NULL);
 }
 
 
 void private_ctext_close(struct CText *self, const char *tag){
 
+
+
+    self->segment(self);
     self->ident_level -= 1;
     if(tag==NULL){
-        self->cat_separator(self,false);
         return;
     }
-    self->cat_separator(self,true);
+
     self->text(self,"</");
     self->text(self,tag);
     self->text(self,">");
