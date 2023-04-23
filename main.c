@@ -9,11 +9,14 @@
 struct CText * create_document(const char *props, int data){
     struct CText *vd = newCTextVirtualDom(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    $open(vd,HTML,"b=10");
-        $open(vd,BODY,NULL);
+    vd->open(vd,HTML);
+        vd->open(vd,BODY);
             vd->text(vd,"text content here");
         vd->close(vd,BODY);
     vd->close(vd,HTML);
+
+
+
 
     return vd;
 }
