@@ -8,15 +8,26 @@
 
 struct CText * create_document(const char *props, int data){
     struct CText *vd = newCTextVirtualDom(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    /*
+    vd->open(vd,NULL);
 
+    vd->text(vd,"a1: ##");
+    vd->text(vd,"a2: ");
+
+        vd->open(vd,NULL);
+            vd->text(vd,"b1: ##");
+            vd->segment(vd);
+            vd->text(vd,"b2: ##");
+
+        vd->close(vd,NULL);
+    vd->close(vd,NULL);
+    */
     vd->open(vd,HTML);
         vd->open(vd,BODY);
-            vd->text(vd,"text content here");
+            vd->segment(vd);
+            vd->text(vd,"aaaaa");
         vd->close(vd,BODY);
     vd->close(vd,HTML);
-
-
-
 
     return vd;
 }
