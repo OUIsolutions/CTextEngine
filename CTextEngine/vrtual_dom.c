@@ -1,47 +1,12 @@
 
 
 
-void private_ctext_engine_cat(const char *element){
-    // Add to stack
-    strcat(ctext_stack_pointer,element);
-
-}
 
 
 
-void private_add_separator(int ident_level,bool break_line){
-    
-    int i;
-    if(break_line){
-        private_ctext_engine_cat(CTEXT_LINE_BREAKER);
-    }
-
-    for(i=0;i<ident_level;i++){
-        private_ctext_engine_cat(CTEXT_SEPARATOR);
-    }
-}
 
 
-void $OPEN(const char *tag,const char *props){
-    private_add_separator(ctext_ident_level,true);
 
-    ctext_ident_level += 1;    
- 
-    private_ctext_engine_cat("<");
-    private_ctext_engine_cat(tag);
-
-    if(props!=NULL){
-        private_ctext_engine_cat(" ");
-        private_ctext_engine_cat(props);
-
-    }
-    private_ctext_engine_cat(">");
-}
-
-
-void TEXT(const char *text){
-    private_ctext_engine_cat(text);
-}
 void CHAR(char character){
     char str[2] = {character,'\0'};
     private_ctext_engine_cat(str);
