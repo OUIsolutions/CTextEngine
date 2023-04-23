@@ -1,6 +1,6 @@
 
 
-void private_ctext_text(struct CText *self, const char *text){
+void ctext_text(struct CText *self, const char *text){
 
     self->rendered_text_alocation_size+= strlen(text);
     self->rendered_text = (char*)(realloc(
@@ -11,7 +11,7 @@ void private_ctext_text(struct CText *self, const char *text){
 }
 
 
-void private_ctext_segment(struct CText *self){
+void ctext_segment(struct CText *self){
 
 
     self->text(self,self->line_breaker);
@@ -25,7 +25,7 @@ void private_ctext_segment(struct CText *self){
 
 }
 
-void private_ctext_open_with_string_props(struct CText *self, const char *tag, const char *props){
+void ctext_open_with_string_props(struct CText *self, const char *tag, const char *props){
 
 
     self->ident_level += 1;
@@ -41,7 +41,7 @@ void private_ctext_open_with_string_props(struct CText *self, const char *tag, c
     self->text(self,">");
 }
 
-void private_ctext_open(struct CText *self, const char *tag){
+void ctext_open(struct CText *self, const char *tag){
     if(tag ==  NULL){
         self->ident_level += 1;
         self->segment(self);
@@ -52,7 +52,7 @@ void private_ctext_open(struct CText *self, const char *tag){
 }
 
 
-void private_ctext_close(struct CText *self, const char *tag){
+void ctext_close(struct CText *self, const char *tag){
 
 
 

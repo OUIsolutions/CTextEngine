@@ -9,16 +9,16 @@ struct CText * newCTextStack(const char *line_breaker, const char *separator){
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
 
-    self->text = private_ctext_text;
-    self->segment = private_ctext_segment;
-    self->open_with_string_props = private_ctext_open_with_string_props;
-    self->open = private_ctext_open;
-    self->close = private_ctext_close;
-    self->free =  private_ctext_free;
+    self->text = ctext_text;
+    self->segment = ctext_segment;
+    self->open_with_string_props = ctext_open_with_string_props;
+    self->open = ctext_open;
+    self->close = ctext_close;
+    self->free =  ctext_free;
     return self;
 }
 
-void private_ctext_free(struct CText *self){
+void ctext_free(struct CText *self){
     free(self->line_breaker);
     free(self->separator);
     free(self->rendered_text);

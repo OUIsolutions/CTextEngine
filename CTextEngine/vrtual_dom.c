@@ -5,36 +5,6 @@
 
 
 
-
-
-void CHAR(char character){
-    char str[2] = {character,'\0'};
-    private_ctext_engine_cat(str);
-}
-void INTEGER(int number){
-   //convert int to string
-    char str[12]="";
-    sprintf(str, "%d", number);
-    
-    private_ctext_engine_cat(str);
-}
-
-void FLOAT(float number){
-    //convert float to string
-    char str[12] ="";
-    sprintf(str, "%f", number);
-    private_ctext_engine_cat(str);
-}
-
-
-void BOOLEAN(int boolean){
-    if(boolean){
-        private_ctext_engine_cat("true");
-    }else{
-        private_ctext_engine_cat("false");
-    }
-}
-
 void SPRINT(const char *text,...){
    
     
