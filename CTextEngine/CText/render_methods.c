@@ -23,7 +23,7 @@ void private_ctext_cat_separator(struct CText *self, bool break_line){
 
 }
 
-void private_ctext_open_with_props(struct CText *self, const char *tag, const char *props){
+void private_ctext_open_with_string_props(struct CText *self, const char *tag, const char *props){
     self->cat_separator(self,true);
 
     self->ident_level += 1;
@@ -39,14 +39,11 @@ void private_ctext_open_with_props(struct CText *self, const char *tag, const ch
 }
 
 void private_ctext_open(struct CText *self, const char *tag){
-
-    self->open_with_props(self,tag,NULL);
-}
-void private_ctext_open_empty(struct CText *self){
-
-    self->cat_separator(self,false);
-    self->ident_level += 1;
-
+    if(tag ==  NULL){
+        self->cat_separator(self,false);
+        self->ident_level += 1;
+    }
+    self->open_with_string_props(self, tag, NULL);
 }
 
 

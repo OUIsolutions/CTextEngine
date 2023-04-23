@@ -15,18 +15,10 @@ struct CText{
     void (*cat_separator)(struct CText *self, bool break_line);
 
 
-    void (*open_with_props)(struct CText *self, const char *tag, const char *props);
+    void (*open_with_string_props)(struct CText *self, const char *tag, const char *props);
     void (*open)(struct CText *self, const char *tag);
-    void (*open_empty)(struct CText *self);
-
-
     void (*close)(struct CText *self, const char *tag);
 
-
-
-    void (*integer)(struct CText *self, int number);
-    void (*real)(struct CText *self, float number);
-    void (*boolean)(struct CText *self, int boolean);
 
     void (*free)(struct CText *self);
     
@@ -39,9 +31,7 @@ void private_ctext_text(struct CText *self, const char *text);
 
 void private_ctext_cat_separator(struct CText *self, bool break_line);
 
-void private_ctext_open_with_props(struct CText *self, const char *tag, const char *props);
-
-void private_ctext_open_empty(struct CText *self);
+void private_ctext_open_with_string_props(struct CText *self, const char *tag, const char *props);
 
 
 void private_ctext_open(struct CText *self, const char *tag);

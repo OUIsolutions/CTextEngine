@@ -11,9 +11,8 @@ struct CText * newCTextVirtualDom(const char *line_breaker, const char *separato
 
     self->text = private_ctext_text;
     self->cat_separator = private_ctext_cat_separator;
-    self->open_with_props = private_ctext_open_with_props;
+    self->open_with_string_props = private_ctext_open_with_string_props;
     self->open = private_ctext_open;
-    self->open_empty = private_ctext_open_empty;
     self->close = private_ctext_close;
     self->free =  private_ctext_free;
     return self;
