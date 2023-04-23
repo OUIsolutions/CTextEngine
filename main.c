@@ -4,11 +4,26 @@
 #include <stdio.h>
 
 #include "CTextEngine//CText.c"
-#define test_yaml
-//#define test_html
 
 
+#ifdef __cplusplus
 
+    #define SET_MAIN_STACK(self) \
+    auto OPEN = [self](const char *tag){\
+        self->open(self,tag);\
+    };   \
+    auto CLOSE = [self](const char *tag){\
+        self->close(self,tag);\
+    };   \
+    \
+    auto text = [self](const char *text){\
+        self->text(self,text);\
+    };   \
+    auto endLine = [self](){\
+        self->segment(self);\
+    };   \
+
+#else 
 #define SET_MAIN_STACK(self) \
    \
    void OPEN(const char *tag){\
@@ -17,6 +32,7 @@
     void CLOSE(const char *tag){\
         self->close(self,tag);\
     }   \
+    \
     void text(const char *text){\
         self->text(self,text);\
     }   \
@@ -24,33 +40,44 @@
         self->segment(self);\
     }   \
 
+#endif
 
 
 
-struct CText * create_document(const char *props, int data){
-    struct CText *vd = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    SET_MAIN_STACK(vd)
 
-    OPEN(NULL);
-        text("x1: ##");
-        endLine();
-        text("x2:");
-            OPEN(NULL);
-                text("b1: ##");
-                endLine();
-                text("b2: ##");
-            CLOSE(NULL);
-        text("x3: ##");
-    CLOSE(NULL);
+
+
+
+struct CText *vd;
+SET_MAIN_STACK(vd);
+
+
+void create_html(const char *props, int data){
+
+    OPEN(HTML);
+        OPEN(HEAD);
+            if(data == 1)
+
+                OPEN(TITLE);
+                    text("data is 1");
+                CLOSE(TITLE);
+
+        CLOSE(HEAD);
+        OPEN(BODY);
+                OPEN(P);
+                    text("data is 1");
+                CLOSE(P);
+
+        CLOSE(BODY);
 
     return vd;
 }
 
 
 
-
 int main(){
-    struct CText *vd =  create_document("aaaa", 20);
+    vd = newCTextStack(CTEXT_LINE_BREAKER,CTEXT_SEPARATOR);
+    create_html("aaaaaaa",20);
     printf("%s",vd->rendered_text);
     vd->free(vd);
 
