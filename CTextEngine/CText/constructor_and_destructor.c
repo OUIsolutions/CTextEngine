@@ -1,6 +1,6 @@
 
 
-struct CText * newCTextVirtualDom(const char *line_breaker, const char *separator){
+struct CText * newCTextStack(const char *line_breaker, const char *separator){
     struct CText *self = (struct CText*)malloc(sizeof(struct CText));
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"");

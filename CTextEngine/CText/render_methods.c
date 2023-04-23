@@ -1,6 +1,7 @@
 
 
 void private_ctext_text(struct CText *self, const char *text){
+
     self->rendered_text_alocation_size+= strlen(text);
     self->rendered_text = (char*)(realloc(
             self->rendered_text,self->rendered_text_alocation_size
@@ -14,6 +15,7 @@ void private_ctext_segment(struct CText *self){
 
 
     self->text(self,self->line_breaker);
+
 
 
     for(int i=0;i<self->ident_level -1;i++){
@@ -54,11 +56,16 @@ void private_ctext_close(struct CText *self, const char *tag){
 
 
 
-    self->segment(self);
-    self->ident_level -= 1;
     if(tag==NULL){
+        self->ident_level -= 1;
+        self->segment(self);
         return;
     }
+
+    self->segment(self);
+    self->ident_level -= 1;
+
+
 
     self->text(self,"</");
     self->text(self,tag);

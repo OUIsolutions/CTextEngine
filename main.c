@@ -4,30 +4,44 @@
 #include <stdio.h>
 
 #include "CTextEngine//CText.c"
+#define test_yaml
+//#define test_html
+
+
+
+#define SET_MAIN_STACK(self) \
+   \
+   void OPEN(const char *tag){\
+        self->open(self,tag);\
+    }   \
+    void CLOSE(const char *tag){\
+        self->close(self,tag);\
+    }   \
+    void text(const char *text){\
+        self->text(self,text);\
+    }   \
+    void endLine(){\
+        self->segment(self);\
+    }   \
+
+
 
 
 struct CText * create_document(const char *props, int data){
-    struct CText *vd = newCTextVirtualDom(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    /*
-    vd->open(vd,NULL);
+    struct CText *vd = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    SET_MAIN_STACK(vd)
 
-    vd->text(vd,"a1: ##");
-    vd->text(vd,"a2: ");
-
-        vd->open(vd,NULL);
-            vd->text(vd,"b1: ##");
-            vd->segment(vd);
-            vd->text(vd,"b2: ##");
-
-        vd->close(vd,NULL);
-    vd->close(vd,NULL);
-    */
-    vd->open(vd,HTML);
-        vd->open(vd,BODY);
-            vd->segment(vd);
-            vd->text(vd,"aaaaa");
-        vd->close(vd,BODY);
-    vd->close(vd,HTML);
+    OPEN(NULL);
+        text("x1: ##");
+        endLine();
+        text("x2:");
+            OPEN(NULL);
+                text("b1: ##");
+                endLine();
+                text("b2: ##");
+            CLOSE(NULL);
+        text("x3: ##");
+    CLOSE(NULL);
 
     return vd;
 }

@@ -24,7 +24,7 @@ struct CText{
     
 };
 
-struct CText *newCTextVirtualDom(const char *line_breaker, const char *separator);
+struct CText *newCTextStack(const char *line_breaker, const char *separator);
 
 
 void private_ctext_text(struct CText *self, const char *text);
