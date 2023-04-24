@@ -306,5 +306,70 @@ int main(){
 
 # Functions Api
 
-## Text
-The **text** **(ctext_text)**, Method is responsable for append new text into the stack 
+## text
+The **text**, Method is responsable for append new text into the stack 
+
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){
+    
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+
+    s->text(s,"test element");
+   printf("%s\n",s->rendered_text);
+   s->free(s);
+
+}
+~~~
+
+## segment_text
+Same as text, but will break an new line 
+
+~~~c
+
+#include "CTextEngine.h"
+int main(){
+   struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+   s->segment_text(s,"test element");
+   printf("%s\n",s->rendered_text);
+   s->free(s);
+
+}
+~~~
+## format
+format has the same function as text, but allow formatations 
+
+~~~c
+include "CTextEngine.h"
+
+int main(){
+    
+   struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+   int age = 20;
+   const char *name = "John";
+   s->format(s,"Hes name is %s, he is %i years old ",name,age);
+   printf("%s\n",s->rendered_text);
+   s->free(s);
+
+}
+~~~
+## segment_format
+same as format, but breaking an line 
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){
+    
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    int age = 20;
+    const char *name = "John";
+    s->segment_format(s,"Hes name is %s, he is %i years old ",name,age);
+   printf("%s\n",s->rendered_text);
+   s->free(s);
+
+}
+~~~
+
