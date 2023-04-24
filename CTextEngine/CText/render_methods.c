@@ -10,6 +10,11 @@ void ctext_text(struct CTextStack *self, const char *text){
     strcat(self->rendered_text,text);
 }
 
+void ctext_segment_text(struct CTextStack *self, const char *text){
+    self->segment(self);
+    self->text(self,text);
+}
+
 
 void ctext_format(struct CTextStack *self, const char *format, ...){
     va_list  argptr;
