@@ -4,24 +4,24 @@
 
 
 int main(){
-    const char *lang = "en";
-    const char *text = "text exemple";
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
+    int age = 15;
 
-
-    s->$open(s,HTML,"lang=\"%s\"",lang);
+    s->open(s,HTML);
         s->open(s,HEAD);
      
         s->close(s,HEAD);
         s->open(s,BODY);
             s->open(s,H1);
-                s->segment_text(s,"This is a text");
+            if(age > 18)
+                s->segment_text(s,"You are an adout");
+            else if (age > 12)
+                s->segment_text(s,"You are a child");
+            else 
+                s->segment_text(s,"You are a baby");
             s->close(s,H1);
-            s->open(s,P);
-                s->segment_format(s,"This is a formated  text  %s",text);
-            s->close(s,P);
-
         s->close(s,BODY);
     s->close(s,HTML);
 
