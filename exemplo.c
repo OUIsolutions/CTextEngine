@@ -18,7 +18,6 @@ struct CTextStack * create_html(const char *lang, const char *text){
                 s->segment_format(s,"This is a title");
             s->close(s,TITLE);
         s->close(s,HEAD);
-
         s->open(s,BODY);
             s->open(s,H1);
                 s->segment_format(s,"This is an Tag");
