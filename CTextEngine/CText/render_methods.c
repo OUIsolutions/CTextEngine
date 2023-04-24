@@ -21,7 +21,7 @@ void ctext_segment(struct CTextStack *self){
 
     self->text(self,self->line_breaker);
 
-    for(int i=0;i<self->ident_level -1;i++){
+    for(int i=0;i<self->ident_level;i++){
         self->text(self,self->separator);
 
     }
@@ -30,11 +30,7 @@ void ctext_segment(struct CTextStack *self){
 }
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...){
-
-
-    self->ident_level += 1;
-    self->segment(self);
-
+    self->segment(self);    
     self->text(self,"<");
     self->text(self,tag);
 
@@ -46,12 +42,14 @@ void ctext_$open(struct CTextStack *self, const char *tag, const char *format,..
         private_ctext_generate_formated_text(self,format,argptr);
     }
     self->text(self,">");
+
+    self->ident_level += 1;
+
 }
 
 void ctext_open(struct CTextStack *self, const char *tag){
     if(tag ==  NULL){
         self->ident_level += 1;
-        self->segment(self);
         return;
     }
 
@@ -65,12 +63,12 @@ void ctext_close(struct CTextStack *self, const char *tag){
 
     if(tag==NULL){
         self->ident_level -= 1;
-        self->segment(self);
+
         return;
     }
-
-    self->segment(self);
     self->ident_level -= 1;
+    self->segment(self);
+
 
 
 

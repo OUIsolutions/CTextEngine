@@ -8,15 +8,14 @@ struct CTextStack * create_html(const char *lang, const char *text){
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     s->text(s,"<!DOCTYPE html>");
-    s->segment(s);
     s->$open(s,HTML,"lang=\"%s\"",lang);
         s->open(s,HEAD);
-            
+            /*
             s->$open(s,META,"charset=\"utf-8\"");
             s->close(s,NULL);
             s->$open(s,META,"name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"");
             s->close(s,NULL);
-
+            */
             
             s->open(s,TITLE);
                 s->text(s,"This is a title");
