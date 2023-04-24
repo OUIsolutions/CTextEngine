@@ -9,7 +9,7 @@ int main(){
     int age = 20;
     const char *name = "John";
     s->segment_format(s,"Hes name is %s, he is %i years old ",name,age);
-   printf("%s\n",s->rendered_text);
-   s->free(s);
+    printf("%s\n",s->rendered_text);
+    s->free(s);
 
 }

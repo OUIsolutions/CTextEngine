@@ -12,7 +12,7 @@ int main(){
 
     s->$open(s,HTML,"lang=\"%s\"",lang);
         s->open(s,HEAD);
-     
+        
         s->close(s,HEAD);
         s->open(s,BODY);
             s->open(s,H1);
