@@ -74,10 +74,6 @@ void ctext_open(struct CTextStack *self, const char *tag){
 }
 
 
-void ctext_onlyopen(struct CTextStack *self, const char *tag){
-    self->open(self,tag);
-    self->close(self,tag);
-}
 
 
 void ctext_close(struct CTextStack *self, const char *tag){
