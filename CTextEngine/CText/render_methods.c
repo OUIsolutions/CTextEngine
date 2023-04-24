@@ -35,7 +35,8 @@ void ctext_format(struct CTextStack *self, const char *format, ...){
 
             else if(current_char == 'c'){
 
-                char element[2]= { va_arg(argptr,int),'\0'};
+                char result = va_arg(argptr,int);
+                char element [2] = {result,'\0'};
                 self->text(self,element);
             }
 
@@ -86,7 +87,7 @@ void ctext_segment(struct CTextStack *self){
 
 }
 
-void ctext_$open(struct CTextStack *self, const char *tag, const char *props){
+void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...){
 
 
     self->ident_level += 1;
