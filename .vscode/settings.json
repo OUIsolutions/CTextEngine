@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "tags.h": "c",
-        "ctextenginemain.h": "c"
+        "ctextenginemain.h": "c",
+        "ostream": "cpp",
+        "memory": "cpp"
     }
 }

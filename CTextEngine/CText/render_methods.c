@@ -44,7 +44,24 @@ void ctext_$open(struct CTextStack *self, const char *tag, const char *format,..
     self->text(self,">");
 
     self->ident_level += 1;
+}
 
+void ctext_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
+    self->segment(self);
+    self->text(self,"<");
+    self->text(self,tag);
+
+
+    if(format!=NULL){
+        self->text(self," ");
+        va_list  argptr;
+        va_start(argptr, format);
+        private_ctext_generate_formated_text(self,format,argptr);
+    }
+    self->text(self,">");
+
+    self->ident_level += 1;
+    self->close(self,tag);
 }
 
 void ctext_open(struct CTextStack *self, const char *tag){
@@ -54,6 +71,12 @@ void ctext_open(struct CTextStack *self, const char *tag){
     }
 
     self->$open(self, tag, NULL);
+}
+
+
+void ctext_onlyopen(struct CTextStack *self, const char *tag){
+    self->open(self,tag);
+    self->close(self,tag);
 }
 
 
