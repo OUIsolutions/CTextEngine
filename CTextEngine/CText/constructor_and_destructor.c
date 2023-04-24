@@ -12,6 +12,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->text = ctext_text;
     self->format = ctext_format;
     self->segment = ctext_segment;
+    self->segment_format = ctext_segment_format;
     self->$open = ctext_$open;
     self->only$open =ctext_only$open;
     self->auto$close = ctext_auto$close;

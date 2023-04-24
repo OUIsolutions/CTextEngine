@@ -17,6 +17,14 @@ void ctext_format(struct CTextStack *self, const char *format, ...){
     private_ctext_generate_formated_text(self,format,argptr);
 }
 
+void ctext_segment_format(struct CTextStack *self, const char *format, ...){
+    self->segment(self);
+    va_list  argptr;
+    va_start(argptr, format);
+    private_ctext_generate_formated_text(self,format,argptr);
+}
+
+
 void ctext_segment(struct CTextStack *self){
 
     self->text(self,self->line_breaker);
