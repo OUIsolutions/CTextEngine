@@ -294,6 +294,7 @@ void ctext_auto$close(struct CTextStack *self, const char *tag, const char *form
 }
 void ctext_open(struct CTextStack *self, const char *tag){
     if(tag ==  NULL){
+
         self->ident_level += 1;
         return;
     }
