@@ -4,39 +4,42 @@
 #define CTEXT_SEPARATOR "   "
 
 
-struct CText{
+struct CTextStack{
     char *rendered_text;
     int rendered_text_alocation_size;
     char *line_breaker;
     char *separator;
     int ident_level;
 
-    void (*text)(struct CText *self, const char *element);
-    void (*segment)(struct CText *self);
+    void (*text)(struct CTextStack *self, const char *element);
+    void (*sprint)(struct CTextStack *self, const char *format, ...);
+
+    void (*segment)(struct CTextStack *self);
 
 
-    void (*$open)(struct CText *self, const char *tag, const char *props);
-    void (*open)(struct CText *self, const char *tag);
-    void (*close)(struct CText *self, const char *tag);
+    void (*$open)(struct CTextStack *self, const char *tag, const char *props);
+    void (*open)(struct CTextStack *self, const char *tag);
+    void (*close)(struct CTextStack *self, const char *tag);
 
 
-    void (*free)(struct CText *self);
+    void (*free)(struct CTextStack *self);
     
 };
 
-struct CText *newCTextStack(const char *line_breaker, const char *separator);
+struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
 
 
-void ctext_text(struct CText *self, const char *text);
+void ctext_text(struct CTextStack *self, const char *text);
 
-void ctext_segment(struct CText *self);
+void ctext_segment(struct CTextStack *self);
 
-void ctext_$open(struct CText *self, const char *tag, const char *props);
+void ctext_$open(struct CTextStack *self, const char *tag, const char *props);
+
+void ctext_sprint(struct CTextStack *self, const char *format, ...);
+
+void ctext_open(struct CTextStack *self, const char *tag);
+
+void ctext_close(struct CTextStack *self, const char *tag);
 
 
-void ctext_open(struct CText *self, const char *tag);
-
-void ctext_close(struct CText *self, const char *tag);
-
-
-void ctext_free(struct CText *self);
+void ctext_free(struct CTextStack *self);

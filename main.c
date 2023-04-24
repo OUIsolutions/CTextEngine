@@ -3,26 +3,25 @@
 //
 #include <stdio.h>
 
-#include "CTextEngine/CText.c"
+#include "CTextEngine/CTextStack.c"
 
 
 
 
-struct CText *vd;
-SET_MAIN_STACK(vd);
 
-
-void create_html(const char *props, int data){
+struct CTextStack * create_html(const char *props, int data){
     
-    struct CText *s = newCTextStack(CTEXT_LINE_BREAKER,CTEXT_SEPARATOR);
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+
     s->open(s,HTML);
-    
+
         s->open(s,BODY);
-          
+
             s->open(s,H1);
             
                 s->text(s,"Hello World");
-          
+                s->sprint(s,"value: %d",data);
+
             s->close(s,H1);
      
         s->close(s,BODY);
@@ -31,15 +30,15 @@ void create_html(const char *props, int data){
 
 
 
-    return vd;
+    return s;
 }
 
 
 
 int main(){
-    vd = newCTextStack(CTEXT_LINE_BREAKER,CTEXT_SEPARATOR);
-    create_html("aaaaaaa",20);
-    printf("%s",vd->rendered_text);
-    vd->free(vd);
+
+   struct CTextStack *s = create_html("aaa",20);
+    printf("%s",s->rendered_text);
+    s->free(s);
 
 }
