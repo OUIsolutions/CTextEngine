@@ -12,18 +12,19 @@
 struct CTextStack * create_html(const char *props, int data){
     
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-
     s->open(s,HTML);
-
         s->open(s,BODY);
-
             s->open(s,H1);
-            
-                s->text(s,"Hello World");
-                s->sprint(s,"value: %d",data);
-
+                s->open(s,NULL);
+                    s->text(s,"Hello World");
+                    s->segment(s);
+                    s->format(s, "int value: %d", data);
+                    s->segment(s);
+                    s->format(s, "string value: %s", props);
+                    s->segment(s);
+                    s->format(s, " %c %b %d %i %s", 'b', true, 33, 34, "aaa");
+                s->close(s,NULL);
             s->close(s,H1);
-     
         s->close(s,BODY);
    
     s->close(s,HTML);

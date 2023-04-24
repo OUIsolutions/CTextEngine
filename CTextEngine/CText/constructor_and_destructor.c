@@ -10,7 +10,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->separator = strdup(separator);
 
     self->text = ctext_text;
-    self->sprint = ctext_sprint;
+    self->format = ctext_format;
     self->segment = ctext_segment;
     self->$open = ctext_$open;
     self->open = ctext_open;

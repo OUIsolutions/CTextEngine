@@ -12,7 +12,7 @@ struct CTextStack{
     int ident_level;
 
     void (*text)(struct CTextStack *self, const char *element);
-    void (*sprint)(struct CTextStack *self, const char *format, ...);
+    void (*format)(struct CTextStack *self, const char *format, ...);
 
     void (*segment)(struct CTextStack *self);
 
@@ -35,7 +35,7 @@ void ctext_segment(struct CTextStack *self);
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *props);
 
-void ctext_sprint(struct CTextStack *self, const char *format, ...);
+void ctext_format(struct CTextStack *self, const char *format, ...);
 
 void ctext_open(struct CTextStack *self, const char *tag);
 

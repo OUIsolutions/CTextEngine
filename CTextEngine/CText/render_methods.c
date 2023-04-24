@@ -10,7 +10,7 @@ void ctext_text(struct CTextStack *self, const char *text){
     strcat(self->rendered_text,text);
 }
 
-void ctext_sprint(struct CTextStack *self, const char *format, ...){
+void ctext_format(struct CTextStack *self, const char *format, ...){
 
     int text_size = strlen(format);
     va_list argptr;
@@ -34,17 +34,29 @@ void ctext_sprint(struct CTextStack *self, const char *format, ...){
             }
 
             else if(current_char == 'c'){
-                char element[2] = {va_arg(argptr,char),'\0'};
+
+                char element[2]= { va_arg(argptr,int),'\0'};
                 self->text(self,element);
             }
+
             else if(current_char == 'b'){
-                
+                bool value = va_arg(argptr,int);
+                if(value){
+                    self->text(self,"true");
+                }else{
+                    self->text(self,"false");
+                }
+            }
+            else if(current_char == 's'){
+                const char *value = va_arg(argptr,const char*);
+                self->text(self,value);
+            }
+            else{
+                char element[2] = {current_char,'\0'};
+                self->text(self,element);
             }
 
 
-            else if(current_char == '%b'){
-
-            }
 
             continue;
         }
