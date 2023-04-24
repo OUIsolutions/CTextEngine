@@ -3,7 +3,9 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <stdio.h>
+#ifndef CTEXT_NOT_INCLUDE_TAGS
 #include "tags.h"
+#endif
 #include "CTextStack.h"
 #include "extras.h"
 
