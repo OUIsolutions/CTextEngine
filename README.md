@@ -76,6 +76,51 @@ int main(){
 }
 ~~~
 
+## Controling Scopes
+with the breakline and separator, you can control the size of scopes in te way you want
+these is an exemple of full mimifyed text 
+~~~c
+
+#include "CTextEngine.h"
+
+
+
+int main(){
+    const char *lang = "en";
+    const char *text = "text exemple";
+    const char *breakline = "";
+    const char *separator = "";
+    struct CTextStack *s = newCTextStack(breakline, separator);
+
+    s->$open(s,HTML,"lang=\"%s\"",lang);
+        s->open(s,HEAD);
+     
+        s->close(s,HEAD);
+        s->open(s,BODY);
+            s->open(s,H1);
+                s->segment_text(s,"This is a text");
+            s->close(s,H1);
+            s->open(s,P);
+                s->segment_format(s,"This is a formated  text  %s",text);
+            s->close(s,P);
+
+        s->close(s,BODY);
+    s->close(s,HTML);
+
+   printf("%s\n",s->rendered_text);
+   int ident_level = s->ident_level;
+   if(ident_level == 0){
+        printf("all identation is ok\n");
+    }else{
+        printf("identation error\n");
+        printf("unclosed tags: %d\n",ident_level);
+    }
+   s->free(s);
+
+}
+
+~~~
+
 ## Dealing with Conditions 
 
 ~~~c
@@ -258,3 +303,8 @@ int main(){
 
 }
 ~~~
+
+# Functions Api
+
+## Text
+The **text** **(ctext_text)**, Method is responsable for append new text into the stack 
