@@ -20,12 +20,13 @@ struct CTextStack{
     void (*$open)(struct CTextStack *self, const char *tag, const char *format,...);
     void (*only$open)(struct CTextStack *self, const char *tag, const char *format,...);
     void (*open)(struct CTextStack *self, const char *tag);
-    void (*onlyopen)(struct CTextStack *self, const char *tag);
+    void (*only_open)(struct CTextStack *self, const char *tag);
+
     void (*close)(struct CTextStack *self, const char *tag);
 
 
     void (*free)(struct CTextStack *self);
-    
+    a
 };
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
@@ -37,12 +38,13 @@ void ctext_segment(struct CTextStack *self);
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...);
 
-void ctext_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
+void ctext_only_$open(struct CTextStack *self, const char *tag, const char *format,...);
 
 void ctext_format(struct CTextStack *self, const char *format, ...);
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
+void ctext_only_open(struct CTextStack *self, const char *tag);
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
