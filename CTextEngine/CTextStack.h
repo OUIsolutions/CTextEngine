@@ -15,7 +15,7 @@ struct CText{
     void (*segment)(struct CText *self);
 
 
-    void (*open_with_string_props)(struct CText *self, const char *tag, const char *props);
+    void (*$open)(struct CText *self, const char *tag, const char *props);
     void (*open)(struct CText *self, const char *tag);
     void (*close)(struct CText *self, const char *tag);
 
@@ -31,7 +31,7 @@ void ctext_text(struct CText *self, const char *text);
 
 void ctext_segment(struct CText *self);
 
-void ctext_open_with_string_props(struct CText *self, const char *tag, const char *props);
+void ctext_$open(struct CText *self, const char *tag, const char *props);
 
 
 void ctext_open(struct CText *self, const char *tag);
