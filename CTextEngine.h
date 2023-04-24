@@ -27,8 +27,6 @@ SOFTWARE.
 #include <stdarg.h>
 #include <stdio.h>
 
-
-#ifndef CTEXT_NOT_INCLUDE_TAGS
 //
 // Created by jurandi on 18-04-2023.
 //
@@ -96,7 +94,6 @@ SOFTWARE.
 
 
 
-#endif
 
 
 #define CTEXT_LINE_BREAKER "\n"

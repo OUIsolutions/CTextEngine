@@ -22,10 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include "depencies.h"
-
-#ifndef CTEXT_NOT_INCLUDE_TAGS
 #include "tags.h"
-#endif
 #include "CTextStack.h"
 #include "extras.h"
 

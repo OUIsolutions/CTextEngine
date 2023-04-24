@@ -371,6 +371,100 @@ int main(){
     s->free(s);
 }
 ~~~
+## open 
+Opens an new scope , if tag is NULL it will not render the current tag 
 
+~~~c
 
+#include "CTextEngine.h"
+int main(){
+    
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    s->open(s,HTML);
+    s->close(s,HTML);
+    printf("%s\n",s->rendered_text);
+    s->free(s);
 
+}
+~~~
+
+## $open
+open an new scope but allowing you to pass an formated tag props 
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){   
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    const char *lang = "en";
+    s->$open(s,HTML, "lang=\"%s\"",lang);
+    s->close(s,HTML);
+    printf("%s\n",s->rendered_text);
+    s->free(s);
+}
+~~~
+
+## only$open 
+Only open an scope , its ideal for "meta" tags 
+
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){
+    
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    const char *name = "viewport";
+    s->only$open(
+        s,
+        META, 
+        "name=\"%s\" content=\"width=device-width, initial-scale=1.0",
+        name
+    );
+    printf("%s\n",s->rendered_text);
+    s->free(s);
+
+}
+~~~
+## auto$close 
+Implement an autoclose tag 
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){   
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    const char *src = "img.com";
+    s->auto$close(s,IMG,"src=\"%s\"",src);
+    printf("%s\n",s->rendered_text);
+    s->free(s);
+
+}
+~~~
+## close 
+Close the tag passed, if is null will only downcrease the ident 
+~~~c
+
+#include "CTextEngine.h"
+
+int main(){
+    
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    s->open(s,HTML);
+    s->close(s,HTML);
+    printf("%s\n",s->rendered_text);
+    s->free(s);
+
+}
+~~~
+
+## free
+fre the alocated memory
+~~~c
+#include "CTextEngine.h"
+int main(){
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    s->free(s);
+
+}
+~~~
