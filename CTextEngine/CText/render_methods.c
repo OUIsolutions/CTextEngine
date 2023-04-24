@@ -60,10 +60,23 @@ void ctext_only$open(struct CTextStack *self, const char *tag, const char *forma
     }
     self->text(self,">");
 
-    self->ident_level += 1;
-    self->close(self,tag);
-}
 
+}
+void ctext_auto$close(struct CTextStack *self, const char *tag, const char *format,...){
+    self->segment(self);
+    self->text(self,"<");
+    self->text(self,tag);
+
+
+    if(format!=NULL){
+        self->text(self," ");
+        va_list  argptr;
+        va_start(argptr, format);
+        private_ctext_generate_formated_text(self,format,argptr);
+    }
+    self->text(self,"/>");
+
+}
 void ctext_open(struct CTextStack *self, const char *tag){
     if(tag ==  NULL){
         self->ident_level += 1;

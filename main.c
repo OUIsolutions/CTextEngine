@@ -13,7 +13,8 @@ struct CTextStack * create_html(const char *lang, const char *text){
             
             s->only$open(s,META,"charset=\"utf-8\"");
             s->only$open(s,META,"name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"");
-
+            s->auto$close(s,IMG,"src = \"https://www.w3schools.com/images/w3schools_green.jpg\" alt=\"W3Schools.com\" width=\"104\" height=\"142\"");
+            s->auto$close(s,BR,NULL);
             s->open(s,TITLE);
                 s->text(s,"This is a title");
             s->close(s,TITLE);
