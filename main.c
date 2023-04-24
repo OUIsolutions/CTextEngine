@@ -12,7 +12,7 @@
 struct CTextStack * create_html(const char *props, int data){
     
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    s->open(s,HTML);
+    s->$open(s,HTML,"teste=\"%s\"",props);
         s->open(s,BODY);
             s->open(s,H1);
                 s->open(s,NULL);
