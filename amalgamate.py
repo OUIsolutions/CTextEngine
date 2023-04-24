@@ -4,7 +4,7 @@ OUTPUT = 'CTextEngine.h'
 
 
 LIB_DIR = 'CTextEngine'
-STARTER  =f'CTextEngineMain.c'
+STARTER  =f'CTextEngineMain.h'
 
 
 def generate_amalgamation(file:str)->str:

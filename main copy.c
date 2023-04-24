@@ -10,7 +10,6 @@ struct CTextStack * create_html(const char *lang, const char *text){
     s->text(s,"<!DOCTYPE html>");
     s->$open(s,HTML,"lang=\"%s\"",lang);
         s->open(s,HEAD);
-            
             s->only$open(s,META,"charset=\"utf-8\"");
             s->only$open(s,META,"name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"");
             s->auto$close(s,IMG,"src = \"https://www.w3schools.com/images/w3schools_green.jpg\" alt=\"W3Schools.com\" width=\"104\" height=\"142\"");
@@ -35,10 +34,28 @@ struct CTextStack * create_html(const char *lang, const char *text){
 }
 
 
+struct CTextStack * create_yaml(int a1, int b1,int b2,int a3){
+
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+
+    s->format(s,"a1: %d",a1);
+    
+    s->format(s,"a1:");
+    s->open(s,NULL);
+        s->format(s,"b1: %d",b1);
+        s->format(s,"b2: %d",b2);
+    s->close(s,NULL);
+    s->format(s,"a3: %d",a3);
+
+
+    return s;
+}
+
+
 
 int main(){
 
-   struct CTextStack *s = create_html("en","test");
+   struct CTextStack *s = creae
    printf("%s",s->rendered_text);
    dtw_write_string_file_content("test.html",s->rendered_text);
    s->free(s);
