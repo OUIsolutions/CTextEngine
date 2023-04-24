@@ -3,6 +3,7 @@
         "tags.h": "c",
         "ctextenginemain.h": "c",
         "ostream": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "typeinfo": "c"
     }
 }
