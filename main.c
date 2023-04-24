@@ -10,12 +10,12 @@ struct CTextStack * create_html(const char *lang, const char *text){
     s->text(s,"<!DOCTYPE html>");
     s->$open(s,HTML,"lang=\"%s\"",lang);
         s->open(s,HEAD);
-            /*
+            
             s->$open(s,META,"charset=\"utf-8\"");
             s->close(s,NULL);
             s->$open(s,META,"name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"");
             s->close(s,NULL);
-            */
+        
             
             s->open(s,TITLE);
                 s->text(s,"This is a title");
