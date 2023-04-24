@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "tags.h": "c"
+        "tags.h": "c",
+        "ctextenginemain.h": "c"
     }
 }
