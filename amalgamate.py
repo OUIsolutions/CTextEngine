@@ -18,7 +18,7 @@ def get_amalgamated_code(starter:str)->str:
     try:
         with open(starter) as f:
             #get current dir name
-            current_dir = starter.split('/')[0]
+            current_dir = '/'.join(starter.split('/')[:-1])
             lines = f.readlines()
             for line in lines:
                 ##trim line 

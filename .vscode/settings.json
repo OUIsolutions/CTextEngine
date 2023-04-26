@@ -4,6 +4,7 @@
         "ctextenginemain.h": "c",
         "ostream": "cpp",
         "memory": "cpp",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "extras.h": "c"
     }
 }
