@@ -162,9 +162,7 @@ void private_ctext_generate_formated_text(
     va_list argptr
     );
 
-void works(){
-    printf("works\n");
-}
+
 struct CTextStack * newCTextStack(const char *line_breaker, const char *separator){
     struct CTextStack *self = (struct CTextStack*)malloc(sizeof(struct CTextStack));
     self->rendered_text = (char*)malloc(2);
