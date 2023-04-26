@@ -21,6 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#ifndef CTEXTENGINE_H
+#define CTEXTENGINE_H
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -100,7 +103,9 @@ SOFTWARE.
 
 struct CTextStack{
     char *rendered_text;
-    int rendered_text_alocation_size;
+    size_t rendered_text_alocation_size;
+    size_t rendered_text_size;
+    
     char *line_breaker;
     char *separator;
     int ident_level;
@@ -135,7 +140,12 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 void ctext_text(struct CTextStack *self, const char *text);
 
+void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
+
 void ctext_segment_text(struct CTextStack *self, const char *text);
+
+void private_ctext_segment_char(struct CTextStack *self, char t);
+
 void ctext_segment(struct CTextStack *self);
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...);
@@ -166,8 +176,9 @@ void private_ctext_generate_formated_text(
 struct CTextStack * newCTextStack(const char *line_breaker, const char *separator){
     struct CTextStack *self = (struct CTextStack*)malloc(sizeof(struct CTextStack));
     self->rendered_text = (char*)malloc(2);
-    strcpy(self->rendered_text,"");
+    strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
+    self->rendered_text_size = 0;
     self->ident_level = 0;
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
@@ -193,15 +204,42 @@ void ctext_free(struct CTextStack *self){
     free(self);
 }
 
-
-void ctext_text(struct CTextStack *self, const char *text){
-
-    self->rendered_text_alocation_size+= strlen(text);
-    self->rendered_text = (char*)(realloc(
+void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
+    
+    if(self->rendered_text_size >= (self->rendered_text_alocation_size-2)){
+      
+        self->rendered_text_alocation_size  =  (self->rendered_text_alocation_size  * 2)+2;
+        self->rendered_text = (char*)(realloc(
             self->rendered_text,self->rendered_text_alocation_size
      ));
 
-    strcat(self->rendered_text,text);
+    }
+}
+void ctext_text(struct CTextStack *self, const char *text){
+
+    if (!text || !text[0]) {
+        // Tratar caso de ponteiro nulo ou string vazia
+        return;
+    }
+
+    size_t text_size = strlen(text);
+    
+    self->rendered_text_size += text_size;
+    private_ctext_text_double_size_if_reachs(self);
+    
+    memcpy(
+        self->rendered_text + self->rendered_text_size - text_size,
+        text,
+        text_size 
+    );
+    self->rendered_text[self->rendered_text_size] = '\0';
+}
+
+void private_ctext_segment_char(struct CTextStack *self, char t){
+    self->rendered_text_size += 1;
+    private_ctext_text_double_size_if_reachs(self);
+    self->rendered_text[self->rendered_text_size-1] = t;
+    self->rendered_text[self->rendered_text_size] = '\0';
 }
 
 void ctext_segment_text(struct CTextStack *self, const char *text){
@@ -238,45 +276,45 @@ void ctext_segment(struct CTextStack *self){
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...){
     self->segment(self);    
-    self->text(self,"<");
+    private_ctext_segment_char(self,'<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        self->text(self," ");
+        private_ctext_segment_char(self,' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    self->text(self,">");
+    private_ctext_segment_char(self,'>');
 
     self->ident_level += 1;
 }
 
 void ctext_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    self->text(self,"<");
+    private_ctext_segment_char(self,'<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        self->text(self," ");
+        private_ctext_segment_char(self,' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    self->text(self,">");
+    private_ctext_segment_char(self,'>');
 
 
 }
 void ctext_auto$close(struct CTextStack *self, const char *tag, const char *format,...){
     self->segment(self);
-    self->text(self,"<");
+    private_ctext_segment_char(self,'<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        self->text(self," ");
+        private_ctext_segment_char(self,' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
@@ -299,8 +337,6 @@ void ctext_open(struct CTextStack *self, const char *tag){
 
 void ctext_close(struct CTextStack *self, const char *tag){
 
-
-
     if(tag==NULL){
         self->ident_level -= 1;
 
@@ -310,11 +346,9 @@ void ctext_close(struct CTextStack *self, const char *tag){
     self->segment(self);
 
 
-
-
     self->text(self,"</");
     self->text(self,tag);
-    self->text(self,">");
+    private_ctext_segment_char(self,'>');
 }
 
 
@@ -342,11 +376,10 @@ void private_ctext_generate_formated_text(
             }
 
             else if(current_char == 'c'){
-
                 char result = va_arg(argptr,int);
-                char element [2] = {result,'\0'};
-                stack->text(stack,element);
+                private_ctext_segment_char(stack,result);
             }
+            
 
             else if(current_char == 'b'){
                 bool value = va_arg(argptr,int);
@@ -361,8 +394,8 @@ void private_ctext_generate_formated_text(
                 stack->text(stack,value);
             }
             else{
-                char element[2] = {current_char,'\0'};
-                stack->text(stack,element);
+                
+                private_ctext_segment_char(stack,current_char);
             }
 
 
@@ -380,4 +413,4 @@ void private_ctext_generate_formated_text(
 
     va_end(argptr);
 }
-
+#endif // CTEXTENGINE_H

@@ -21,6 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#ifndef CTEXTENGINE_H
+#define CTEXTENGINE_H
+
 #include "depencies.h"
 #include "tags.h"
 #include "CTextStack.h"
@@ -30,4 +33,4 @@ SOFTWARE.
 #include "CText/render_methods.c"
 #include "extras.c"
 
-
+#endif // CTEXTENGINE_H

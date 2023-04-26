@@ -6,6 +6,7 @@
         "memory": "cpp",
         "typeinfo": "c",
         "extras.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ctextstack.h": "c"
     }
 }
