@@ -26,7 +26,6 @@ SOFTWARE.
 #include <stdbool.h>
 #include <stdarg.h>
 #include <stdio.h>
-
 //
 // Created by jurandi on 18-04-2023.
 //
@@ -95,7 +94,6 @@ SOFTWARE.
 
 
 
-
 #define CTEXT_LINE_BREAKER "\n"
 #define CTEXT_SEPARATOR "   "
 
@@ -158,13 +156,11 @@ void ctext_close(struct CTextStack *self, const char *tag);
 
 void ctext_free(struct CTextStack *self);
 
-
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
     va_list argptr
     );
-
 
 
 struct CTextStack * newCTextStack(const char *line_breaker, const char *separator){
@@ -196,7 +192,6 @@ void ctext_free(struct CTextStack *self){
     free(self->rendered_text);
     free(self);
 }
-
 
 
 void ctext_text(struct CTextStack *self, const char *text){
@@ -324,7 +319,6 @@ void ctext_close(struct CTextStack *self, const char *tag){
 
 
 
-
 void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){
     int text_size = strlen(format);
@@ -386,6 +380,4 @@ void private_ctext_generate_formated_text(
 
     va_end(argptr);
 }
-
-
 

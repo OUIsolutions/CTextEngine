@@ -4,21 +4,23 @@
 
 
 int main(){
-    const char *lang = "en";
-    const char *text = "text exemple";
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->$open(s,HTML,"lang=\"%s\"",lang);
+    const char *names[] = {"name1","name2","name3","name4","name 5"};
+
+
+
+    s->open(s,HTML);
         s->open(s,HEAD);
-        
+     
         s->close(s,HEAD);
         s->open(s,BODY);
-            s->open(s,H1);
-                s->segment_text(s,"This is a text");
-            s->close(s,H1);
-            s->open(s,P);
-                s->segment_format(s,"This is a formated  text  %s",text);
-            s->close(s,P);
+            for(int i = 0; i < sizeof(names)/ sizeof(char *) ; i++){
+                s->open(s,H1);
+                    s->segment_text(s,names[i]);
+                s->close(s,H1);
+            }
 
         s->close(s,BODY);
     s->close(s,HTML);

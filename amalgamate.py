@@ -1,53 +1,49 @@
 
+from sys import exit
+from os.path import join
 
-OUTPUT = 'CTextEngine.h'
-
-
-LIB_DIR = 'CTextEngine'
-STARTER  =f'CTextEngineMain.h'
-
-
-def generate_amalgamation(file:str)->str:
-
-    with open(f'{LIB_DIR}/{file}','r') as arq:
-        code = arq.read()
-
-
-    generated = ''
-    lines = code.split('\n')
-    current_line = 0
-
-    for line in lines:
-        current_line += 1
-        #Testing if is an project include
-        
-
-        if line.startswith('#include'):
-            try:
-                path = line.split(' ')[1]
-            except IndexError:
-                print(f'Error on include on line {current_line}')
-                exit(1)
-
-            if '"' in path:
-                path = path.replace('"','')
-                try:
-                    with open(f'{LIB_DIR}/{path}','r') as arq:
-                        generated += arq.read() + '\n'
-                        continue      
-                except FileNotFoundError:
-                    print(f'File {path} not found on line {current_line}')
-                    exit(1)
-        else:
-            generated += line + '\n'
-    return generated
+def get_inclusion_dir(referencer_dir:str, line:str)->str or None:
+    line = line.strip()
+    if not line.startswith('#include'):
+        return None
+    
+    if '"' in line:
+        relative_file =  line.split('"')[1]
+        return join(referencer_dir,relative_file)
 
 
-code  = generate_amalgamation(STARTER)
+def get_amalgamated_code(starter:str)->str:
+ 
+    current_text = ''
+    try:
+        with open(starter) as f:
+            #get current dir name
+            current_dir = starter.split('/')[0]
+            lines = f.readlines()
+            for line in lines:
+                ##trim line 
+                file_to_include =  get_inclusion_dir(current_dir,line)
+                if not file_to_include:
+                   current_text += line
+                   continue
 
-with open(OUTPUT,'w') as arq:
-    arq.write(code)
+                current_text += get_amalgamated_code(file_to_include)
+                    
+    except FileNotFoundError:
+        print(f'FileNotFoundError: {starter}')
+        exit(1)
+
+    return current_text
 
 
-        
-        
+
+
+def main():
+    OUTPUT = 'CTextEngine.h'
+    STARTER  =f'CTextEngine/CTextEngineMain.h'
+    amalgamated_code = get_amalgamated_code(STARTER)
+    with open(OUTPUT,'w') as f:
+        f.write(amalgamated_code)
+
+if __name__ == '__main__':
+    main()
