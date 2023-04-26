@@ -5,6 +5,7 @@
         "ostream": "cpp",
         "memory": "cpp",
         "typeinfo": "c",
-        "extras.h": "c"
+        "extras.h": "c",
+        "stdio.h": "c"
     }
 }

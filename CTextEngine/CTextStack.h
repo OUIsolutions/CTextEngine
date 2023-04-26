@@ -6,7 +6,9 @@
 
 struct CTextStack{
     char *rendered_text;
-    int rendered_text_alocation_size;
+    size_t rendered_text_alocation_size;
+    size_t rendered_text_size;
+    
     char *line_breaker;
     char *separator;
     int ident_level;
@@ -41,7 +43,12 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 void ctext_text(struct CTextStack *self, const char *text);
 
+void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
+
 void ctext_segment_text(struct CTextStack *self, const char *text);
+
+void private_ctext_segment_char(struct CTextStack *self, char t);
+
 void ctext_segment(struct CTextStack *self);
 
 void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...);

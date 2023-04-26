@@ -22,11 +22,10 @@ void private_ctext_generate_formated_text(
             }
 
             else if(current_char == 'c'){
-
                 char result = va_arg(argptr,int);
-                char element [2] = {result,'\0'};
-                stack->text(stack,element);
+                private_ctext_segment_char(stack,result);
             }
+            
 
             else if(current_char == 'b'){
                 bool value = va_arg(argptr,int);
@@ -41,8 +40,8 @@ void private_ctext_generate_formated_text(
                 stack->text(stack,value);
             }
             else{
-                char element[2] = {current_char,'\0'};
-                stack->text(stack,element);
+                
+                private_ctext_segment_char(stack,current_char);
             }
 
 
