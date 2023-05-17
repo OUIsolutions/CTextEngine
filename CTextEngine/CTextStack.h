@@ -33,8 +33,9 @@ struct CTextStack{
 
     void (*close)(struct CTextStack *self, const char *tag);
 
-
     void (*free)(struct CTextStack *self);
+
+    void (*restart)(struct CTextStack *self);
 
 };
 
@@ -68,3 +69,5 @@ void ctext_open(struct CTextStack *self, const char *tag);
 void ctext_close(struct CTextStack *self, const char *tag);
 
 void ctext_free(struct CTextStack *self);
+
+void ctext_restart(struct CTextStack *self);
