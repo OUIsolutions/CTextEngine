@@ -206,12 +206,13 @@ void ctext_free(struct CTextStack *self){
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
     
-    if(self->rendered_text_size >= (self->rendered_text_alocation_size-2)){
+
+    while(self->rendered_text_size >= (self->rendered_text_alocation_size-2)){
       
         self->rendered_text_alocation_size  =  (self->rendered_text_alocation_size  * 2)+2;
         self->rendered_text = (char*)(realloc(
             self->rendered_text,self->rendered_text_alocation_size
-     ));
+        ));
 
     }
 }
