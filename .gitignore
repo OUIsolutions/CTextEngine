@@ -6,6 +6,7 @@ doTheWorld.c
 *.ko
 *.obj
 *.elf
+doTheWorld.h
 
 # Linker output
 *.ilk
