@@ -132,6 +132,8 @@ struct CTextStack{
 
     void (*free)(struct CTextStack *self);
 
+    char * (*self_transform_in_string)(struct CTextStack *self);
+
     void (*restart)(struct CTextStack *self);
 
 };
@@ -167,6 +169,9 @@ void ctext_close(struct CTextStack *self, const char *tag);
 
 void ctext_free(struct CTextStack *self);
 
+char * ctext_self_transform_in_string(struct CTextStack *self);
+
+
 void ctext_restart(struct CTextStack *self);
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
@@ -196,6 +201,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->open = ctext_open;
     self->close = ctext_close;
     self->free =  ctext_free;
+    self->self_transform_in_string = ctext_self_transform_in_string;
     self->restart = ctext_restart;
     return self;
 }
@@ -208,6 +214,13 @@ void ctext_free(struct CTextStack *self){
     free(self);
 }
 
+char * ctext_self_transform_in_string(struct CTextStack *self){
+    free(self->line_breaker);
+    free(self->separator);
+    char *result = self->rendered_text;
+    free(self);
+    return result;
+}
 void ctext_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);

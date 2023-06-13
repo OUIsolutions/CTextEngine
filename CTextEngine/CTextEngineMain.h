@@ -29,7 +29,7 @@ SOFTWARE.
 #include "CTextStack.h"
 #include "extras.h"
 
-#include "CText/constructor_and_destructor.c"
+#include "CText/admnistrative_methods.c"
 #include "CText/render_methods.c"
 #include "extras.c"
 
