@@ -54,9 +54,6 @@ void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
 void CTextStack_segment_text(struct CTextStack *self, const char *text);
 
 
-void private_CTextStack_segment_char(struct CTextStack *self, char t);
-
-
 void CTextStack_segment(struct CTextStack *self);
 
 

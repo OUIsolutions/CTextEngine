@@ -104,7 +104,7 @@ SOFTWARE.
 typedef struct CTextStack{
     char *rendered_text;
     size_t rendered_text_alocation_size;
-    size_t rendered_text_size;
+    size_t size;
     
     char *line_breaker;
     char *separator;
@@ -134,6 +134,7 @@ typedef struct CTextStack{
 
     char * (*self_transform_in_string)(struct CTextStack *self);
 
+    struct CTextStack * (*slice)(struct CTextStack *self,int starter,int end);
     void (*restart)(struct CTextStack *self);
 
 }CTextStack;
@@ -143,36 +144,49 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 void CTextStack_text(struct CTextStack *self, const char *text);
 
+
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
+
 
 void CTextStack_segment_text(struct CTextStack *self, const char *text);
 
-void private_CTextStack_segment_char(struct CTextStack *self, char t);
 
 void CTextStack_segment(struct CTextStack *self);
 
+
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
+
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
+
 
 void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
 void CTextStack_format(struct CTextStack *self, const char *format, ...);
 
+
 void CTextStack_segment_format(struct CTextStack *self, const char *format, ...);
+
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
+
 void CTextStack_free(struct CTextStack *self);
+
 
 char * CTextStack_self_transform_in_string(struct CTextStack *self);
 
 
 void CTextStack_restart(struct CTextStack *self);
+
+
+//algorithm methods
+struct CTextStack *CTextStack_slice(struct CTextStack *self,int starter,int end);
+
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
@@ -185,7 +199,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->rendered_text_size = 0;
+    self->size = 0;
     self->ident_level = 0;
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
@@ -203,6 +217,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->free =  CTextStack_free;
     self->self_transform_in_string = CTextStack_self_transform_in_string;
     self->restart = CTextStack_restart;
+    self->slice = CTextStack_slice;
     return self;
 }
 
@@ -226,13 +241,27 @@ void CTextStack_restart(struct CTextStack *self){
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->rendered_text_size = 0;
+    self->size = 0;
     self->ident_level = 0;
+}
+
+struct CTextStack * CTextStack_slice(struct CTextStack *self,int starter,int end){
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+
+
+
+    for(int i =starter; i < end; i++){
+        new_element->segment_format(new_element,"%c",self->rendered_text[i]);
+    }
+
+    return new_element;
+
 }
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
     
 
-    while(self->rendered_text_size >= (self->rendered_text_alocation_size-2)){
+    while(self->size >= (self->rendered_text_alocation_size - 2)){
       
         self->rendered_text_alocation_size  =  (self->rendered_text_alocation_size  * 2)+2;
         self->rendered_text = (char*)(realloc(
@@ -250,23 +279,18 @@ void CTextStack_text(struct CTextStack *self, const char *text){
 
     size_t text_size = strlen(text);
     
-    self->rendered_text_size += text_size;
+    self->size += text_size;
     private_ctext_text_double_size_if_reachs(self);
     
     memcpy(
-        self->rendered_text + self->rendered_text_size - text_size,
+            self->rendered_text + self->size - text_size,
         text,
         text_size 
     );
-    self->rendered_text[self->rendered_text_size] = '\0';
+    self->rendered_text[self->size] = '\0';
 }
 
-void private_CTextStack_segment_char(struct CTextStack *self, char t){
-    self->rendered_text_size += 1;
-    private_ctext_text_double_size_if_reachs(self);
-    self->rendered_text[self->rendered_text_size-1] = t;
-    self->rendered_text[self->rendered_text_size] = '\0';
-}
+
 
 void CTextStack_segment_text(struct CTextStack *self, const char *text){
     self->segment(self);
@@ -302,45 +326,50 @@ void CTextStack_segment(struct CTextStack *self){
 
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    private_CTextStack_segment_char(self, '<');
+    self->format(self, "%c",'<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_CTextStack_segment_char(self, ' ');
+        self->format(self, "%c",' ');
+
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    private_CTextStack_segment_char(self, '>');
+    self->format(self, "%c",'>');
+
 
     self->ident_level += 1;
 }
 
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    private_CTextStack_segment_char(self, '<');
+    self->format(self, "%c",'<');
+
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_CTextStack_segment_char(self, ' ');
+        self->format(self, "%c",' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    private_CTextStack_segment_char(self, '>');
+    self->format(self, "%c",'>');
 
 
 }
 void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    private_CTextStack_segment_char(self, '<');
+    self->format(self, "%c",'<');
+
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_CTextStack_segment_char(self, ' ');
+        self->format(self, "%c",' ');
+
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
@@ -374,7 +403,8 @@ void ctext_close(struct CTextStack *self, const char *tag){
 
     self->text(self,"</");
     self->text(self,tag);
-    private_CTextStack_segment_char(self, '>');
+    self->format(self, "%c",'>');
+
 }
 
 
@@ -383,7 +413,8 @@ void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){
     long  text_size = strlen(format);
 
-    for(int i =0;i < text_size -1 ;i++){
+    int i;
+    for(i =0;i < text_size -1 ;i++){
 
         char single_test[3] = {format[i],format[i+1],'\0'};
         char double_test[4] = {0};
@@ -414,7 +445,8 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
-            private_CTextStack_segment_char(stack, result);
+            char element[2] = {result,'\0'};
+            stack->text(stack,element);
             i+=1;
             continue;
         }
@@ -461,16 +493,14 @@ void private_ctext_generate_formated_text(
             continue;
         }
 
-
-
-
-
         char element[2] = {format[i],'\0'};
         stack->text(stack,element);
 
         }
 
-    if(text_size > 0){
+
+
+    if(text_size > 0 && text_size> i){
         char element[2] = {format[text_size-1],'\0'};
         stack->text(stack,element);
     }

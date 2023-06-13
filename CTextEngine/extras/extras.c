@@ -3,7 +3,8 @@ void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){
     long  text_size = strlen(format);
 
-    for(int i =0;i < text_size -1 ;i++){
+    int i;
+    for(i =0;i < text_size -1 ;i++){
 
         char single_test[3] = {format[i],format[i+1],'\0'};
         char double_test[4] = {0};
@@ -34,7 +35,8 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
-            private_CTextStack_segment_char(stack, result);
+            char element[2] = {result,'\0'};
+            stack->text(stack,element);
             i+=1;
             continue;
         }
@@ -81,16 +83,14 @@ void private_ctext_generate_formated_text(
             continue;
         }
 
-
-
-
-
         char element[2] = {format[i],'\0'};
         stack->text(stack,element);
 
         }
 
-    if(text_size > 0){
+
+
+    if(text_size > 0 && text_size> i){
         char element[2] = {format[text_size-1],'\0'};
         stack->text(stack,element);
     }
