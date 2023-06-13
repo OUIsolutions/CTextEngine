@@ -10,38 +10,38 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
 
-    self->text = ctext_text;
-    self->segment_text = ctext_segment_text;
-    self->format = ctext_format;
-    self->segment = ctext_segment;
-    self->segment_format = ctext_segment_format;
-    self->$open = ctext_$open;
-    self->only$open =ctext_only$open;
-    self->auto$close = ctext_auto$close;
+    self->text = CTextStack_text;
+    self->segment_text = CTextStack_segment_text;
+    self->format = CTextStack_format;
+    self->segment = CTextStack_segment;
+    self->segment_format = CTextStack_segment_format;
+    self->$open = CTextStack_$open;
+    self->only$open =CTextStack_only$open;
+    self->auto$close = CTextStack_auto$close;
     self->open = ctext_open;
     self->close = ctext_close;
-    self->free =  ctext_free;
-    self->self_transform_in_string = ctext_self_transform_in_string;
-    self->restart = ctext_restart;
+    self->free =  CTextStack_free;
+    self->self_transform_in_string = CTextStack_self_transform_in_string;
+    self->restart = CTextStack_restart;
     return self;
 }
 
 
-void ctext_free(struct CTextStack *self){
+void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     free(self->rendered_text);
     free(self);
 }
 
-char * ctext_self_transform_in_string(struct CTextStack *self){
+char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     char *result = self->rendered_text;
     free(self);
     return result;
 }
-void ctext_restart(struct CTextStack *self){
+void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");

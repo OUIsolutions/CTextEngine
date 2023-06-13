@@ -44,35 +44,35 @@ struct CTextStack{
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
 
 
-void ctext_text(struct CTextStack *self, const char *text);
+void CTextStack_text(struct CTextStack *self, const char *text);
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
 
-void ctext_segment_text(struct CTextStack *self, const char *text);
+void CTextStack_segment_text(struct CTextStack *self, const char *text);
 
-void private_ctext_segment_char(struct CTextStack *self, char t);
+void private_CTextStack_segment_char(struct CTextStack *self, char t);
 
-void ctext_segment(struct CTextStack *self);
+void CTextStack_segment(struct CTextStack *self);
 
-void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
-void ctext_only$open(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
-void ctext_auto$close(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
-void ctext_format(struct CTextStack *self, const char *format, ...);
+void CTextStack_format(struct CTextStack *self, const char *format, ...);
 
-void ctext_segment_format(struct CTextStack *self, const char *format, ...);
+void CTextStack_segment_format(struct CTextStack *self, const char *format, ...);
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
-void ctext_free(struct CTextStack *self);
+void CTextStack_free(struct CTextStack *self);
 
-char * ctext_self_transform_in_string(struct CTextStack *self);
+char * CTextStack_self_transform_in_string(struct CTextStack *self);
 
 
-void ctext_restart(struct CTextStack *self);
+void CTextStack_restart(struct CTextStack *self);
