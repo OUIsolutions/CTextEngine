@@ -1,20 +1,36 @@
+#include "CTextEngine.h"
 
-#include "CTextEngine/CTextEngineMain.h"
-#include "doTheWorld.h"
 
 
 int main(){
-
+    const char *lang = "en";
+    const char *text = "text exemple";
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    char *teste = dtw_load_string_file_content("amalgamate.py");
 
-    s->segment_text(s, teste);
 
-    s->restart(s);
-    s->segment_text(s, "aaaaaaaaaa");
-    
-    dtw_write_string_file_content("teste.html",s->rendered_text);
-    s->free(s);
-    free(teste);
+    s->$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+        s->open(s,CTEXT_HEAD);
+     
+        s->close(s,CTEXT_HEAD);
+        s->open(s,CTEXT_BODY);
+            s->open(s,CTEXT_H1);
+                s->segment_text(s,"This is a text");
+            s->close(s,CTEXT_H1);
+            s->open(s,CTEXT_P);
+                s->segment_format(s,"This is a formated  text  %s",text);
+            s->close(s,CTEXT_P);
+
+        s->close(s,CTEXT_BODY);
+    s->close(s,CTEXT_HTML);
+
+   printf("%s\n",s->rendered_text);
+   int ident_level = s->ident_level;
+   if(ident_level == 0){
+        printf("all identation is ok\n");
+    }else{
+        printf("identation error\n");
+        printf("unclosed tags: %d\n",ident_level);
+    }
+   s->free(s);
 
 }
