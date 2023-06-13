@@ -27,10 +27,10 @@ SOFTWARE.
 #include "depencies.h"
 #include "tags.h"
 #include "CTextStack.h"
-#include "extras.h"
+#include "extras/extras.h"
 
 #include "CText/admnistrative_methods.c"
 #include "CText/render_methods.c"
-#include "extras.c"
+#include "extras/extras.c"
 
 #endif // CTEXTENGINE_H
