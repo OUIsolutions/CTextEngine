@@ -1,7 +1,9 @@
 
-struct CTextStack * CTextStack_slice(struct CTextStack *self,int starter,int end){
+struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+
+
 
 
 

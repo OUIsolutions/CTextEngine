@@ -35,9 +35,11 @@ typedef struct CTextStack{
 
     void (*free)(struct CTextStack *self);
 
+
     char * (*self_transform_in_string)(struct CTextStack *self);
 
-    struct CTextStack * (*slice)(struct CTextStack *self,int starter,int end);
+    struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
+
     void (*restart)(struct CTextStack *self);
 
 }CTextStack;
@@ -88,4 +90,4 @@ void CTextStack_restart(struct CTextStack *self);
 
 
 //algorithm methods
-struct CTextStack *CTextStack_slice(struct CTextStack *self,int starter,int end);
+struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
