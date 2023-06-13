@@ -1,19 +1,18 @@
+
+
 #include "CTextEngine/CTextEngineMain.h"
 
 
 
 int main(){
-    const char *lang = "en";
-    const char *text = "text exemple";
-    struct CTextStack *s = newCTextStack("", "");
-    struct  CTextStack *s1 = newCTextStack("","");
-    s1->text(s1,"valor s aaaaaaaa2");
-    s->text(s,"valor s");
 
-    s->format(s," copiado %tc final",s1);
+    CTextStack *s = newCTextStack("", "");
+    s->segment_text(s,"ddd");
+    s->segment_text(s,"ddd");
+    s->segment_text(s,"ddd");
+    printf("%i\n",s->size);
+    printf("%s\n",s->rendered_text);
 
-    printf("%s",s->rendered_text);
-    s->free(s);
 
 
 }

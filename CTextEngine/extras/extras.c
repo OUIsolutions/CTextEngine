@@ -34,7 +34,7 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
-            private_ctext_segment_char(stack,result);
+            private_CTextStack_segment_char(stack, result);
             i+=1;
             continue;
         }

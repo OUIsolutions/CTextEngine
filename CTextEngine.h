@@ -101,7 +101,7 @@ SOFTWARE.
 #define CTEXT_SEPARATOR "   "
 
 
-struct CTextStack{
+typedef struct CTextStack{
     char *rendered_text;
     size_t rendered_text_alocation_size;
     size_t rendered_text_size;
@@ -136,43 +136,43 @@ struct CTextStack{
 
     void (*restart)(struct CTextStack *self);
 
-};
+}CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
 
 
-void ctext_text(struct CTextStack *self, const char *text);
+void CTextStack_text(struct CTextStack *self, const char *text);
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
 
-void ctext_segment_text(struct CTextStack *self, const char *text);
+void CTextStack_segment_text(struct CTextStack *self, const char *text);
 
-void private_ctext_segment_char(struct CTextStack *self, char t);
+void private_CTextStack_segment_char(struct CTextStack *self, char t);
 
-void ctext_segment(struct CTextStack *self);
+void CTextStack_segment(struct CTextStack *self);
 
-void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
-void ctext_only$open(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
-void ctext_auto$close(struct CTextStack *self, const char *tag, const char *format,...);
+void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
-void ctext_format(struct CTextStack *self, const char *format, ...);
+void CTextStack_format(struct CTextStack *self, const char *format, ...);
 
-void ctext_segment_format(struct CTextStack *self, const char *format, ...);
+void CTextStack_segment_format(struct CTextStack *self, const char *format, ...);
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
-void ctext_free(struct CTextStack *self);
+void CTextStack_free(struct CTextStack *self);
 
-char * ctext_self_transform_in_string(struct CTextStack *self);
+char * CTextStack_self_transform_in_string(struct CTextStack *self);
 
 
-void ctext_restart(struct CTextStack *self);
+void CTextStack_restart(struct CTextStack *self);
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
@@ -190,38 +190,38 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
 
-    self->text = ctext_text;
-    self->segment_text = ctext_segment_text;
-    self->format = ctext_format;
-    self->segment = ctext_segment;
-    self->segment_format = ctext_segment_format;
-    self->$open = ctext_$open;
-    self->only$open =ctext_only$open;
-    self->auto$close = ctext_auto$close;
+    self->text = CTextStack_text;
+    self->segment_text = CTextStack_segment_text;
+    self->format = CTextStack_format;
+    self->segment = CTextStack_segment;
+    self->segment_format = CTextStack_segment_format;
+    self->$open = CTextStack_$open;
+    self->only$open =CTextStack_only$open;
+    self->auto$close = CTextStack_auto$close;
     self->open = ctext_open;
     self->close = ctext_close;
-    self->free =  ctext_free;
-    self->self_transform_in_string = ctext_self_transform_in_string;
-    self->restart = ctext_restart;
+    self->free =  CTextStack_free;
+    self->self_transform_in_string = CTextStack_self_transform_in_string;
+    self->restart = CTextStack_restart;
     return self;
 }
 
 
-void ctext_free(struct CTextStack *self){
+void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     free(self->rendered_text);
     free(self);
 }
 
-char * ctext_self_transform_in_string(struct CTextStack *self){
+char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     char *result = self->rendered_text;
     free(self);
     return result;
 }
-void ctext_restart(struct CTextStack *self){
+void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
@@ -241,7 +241,7 @@ void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 
     }
 }
-void ctext_text(struct CTextStack *self, const char *text){
+void CTextStack_text(struct CTextStack *self, const char *text){
 
     if (!text || !text[0]) {
         // Tratar caso de ponteiro nulo ou string vazia
@@ -261,26 +261,26 @@ void ctext_text(struct CTextStack *self, const char *text){
     self->rendered_text[self->rendered_text_size] = '\0';
 }
 
-void private_ctext_segment_char(struct CTextStack *self, char t){
+void private_CTextStack_segment_char(struct CTextStack *self, char t){
     self->rendered_text_size += 1;
     private_ctext_text_double_size_if_reachs(self);
     self->rendered_text[self->rendered_text_size-1] = t;
     self->rendered_text[self->rendered_text_size] = '\0';
 }
 
-void ctext_segment_text(struct CTextStack *self, const char *text){
+void CTextStack_segment_text(struct CTextStack *self, const char *text){
     self->segment(self);
     self->text(self,text);
 }
 
 
-void ctext_format(struct CTextStack *self, const char *format, ...){
+void CTextStack_format(struct CTextStack *self, const char *format, ...){
     va_list  argptr;
     va_start(argptr, format);
     private_ctext_generate_formated_text(self,format,argptr);
 }
 
-void ctext_segment_format(struct CTextStack *self, const char *format, ...){
+void CTextStack_segment_format(struct CTextStack *self, const char *format, ...){
     self->segment(self);
     va_list  argptr;
     va_start(argptr, format);
@@ -288,7 +288,7 @@ void ctext_segment_format(struct CTextStack *self, const char *format, ...){
 }
 
 
-void ctext_segment(struct CTextStack *self){
+void CTextStack_segment(struct CTextStack *self){
 
     self->text(self,self->line_breaker);
 
@@ -300,47 +300,47 @@ void ctext_segment(struct CTextStack *self){
 
 }
 
-void ctext_$open(struct CTextStack *self, const char *tag, const char *format,...){
-    self->segment(self);    
-    private_ctext_segment_char(self,'<');
+void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...){
+    self->segment(self);
+    private_CTextStack_segment_char(self, '<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_ctext_segment_char(self,' ');
+        private_CTextStack_segment_char(self, ' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    private_ctext_segment_char(self,'>');
+    private_CTextStack_segment_char(self, '>');
 
     self->ident_level += 1;
 }
 
-void ctext_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
+void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    private_ctext_segment_char(self,'<');
+    private_CTextStack_segment_char(self, '<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_ctext_segment_char(self,' ');
+        private_CTextStack_segment_char(self, ' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    private_ctext_segment_char(self,'>');
+    private_CTextStack_segment_char(self, '>');
 
 
 }
-void ctext_auto$close(struct CTextStack *self, const char *tag, const char *format,...){
+void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
-    private_ctext_segment_char(self,'<');
+    private_CTextStack_segment_char(self, '<');
     self->text(self,tag);
 
 
     if(format!=NULL){
-        private_ctext_segment_char(self,' ');
+        private_CTextStack_segment_char(self, ' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
@@ -374,7 +374,7 @@ void ctext_close(struct CTextStack *self, const char *tag){
 
     self->text(self,"</");
     self->text(self,tag);
-    private_ctext_segment_char(self,'>');
+    private_CTextStack_segment_char(self, '>');
 }
 
 
@@ -414,7 +414,7 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
-            private_ctext_segment_char(stack,result);
+            private_CTextStack_segment_char(stack, result);
             i+=1;
             continue;
         }

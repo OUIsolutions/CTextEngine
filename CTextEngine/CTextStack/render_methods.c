@@ -2,7 +2,7 @@
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
     
 
-    while(self->rendered_text_size >= (self->rendered_text_alocation_size-2)){
+    while(self->size >= (self->rendered_text_alocation_size - 2)){
       
         self->rendered_text_alocation_size  =  (self->rendered_text_alocation_size  * 2)+2;
         self->rendered_text = (char*)(realloc(
@@ -20,22 +20,22 @@ void CTextStack_text(struct CTextStack *self, const char *text){
 
     size_t text_size = strlen(text);
     
-    self->rendered_text_size += text_size;
+    self->size += text_size;
     private_ctext_text_double_size_if_reachs(self);
     
     memcpy(
-        self->rendered_text + self->rendered_text_size - text_size,
+            self->rendered_text + self->size - text_size,
         text,
         text_size 
     );
-    self->rendered_text[self->rendered_text_size] = '\0';
+    self->rendered_text[self->size] = '\0';
 }
 
 void private_CTextStack_segment_char(struct CTextStack *self, char t){
-    self->rendered_text_size += 1;
+    self->size += 1;
     private_ctext_text_double_size_if_reachs(self);
-    self->rendered_text[self->rendered_text_size-1] = t;
-    self->rendered_text[self->rendered_text_size] = '\0';
+    self->rendered_text[self->size - 1] = t;
+    self->rendered_text[self->size] = '\0';
 }
 
 void CTextStack_segment_text(struct CTextStack *self, const char *text){

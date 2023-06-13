@@ -4,10 +4,10 @@
 #define CTEXT_SEPARATOR "   "
 
 
-struct CTextStack{
+typedef struct CTextStack{
     char *rendered_text;
     size_t rendered_text_alocation_size;
-    size_t rendered_text_size;
+    size_t size;
     
     char *line_breaker;
     char *separator;
@@ -37,42 +37,58 @@ struct CTextStack{
 
     char * (*self_transform_in_string)(struct CTextStack *self);
 
+    struct CTextStack * (*slice)(struct CTextStack *self,int starter,int end);
     void (*restart)(struct CTextStack *self);
 
-};
+}CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
 
 
 void CTextStack_text(struct CTextStack *self, const char *text);
 
+
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
+
 
 void CTextStack_segment_text(struct CTextStack *self, const char *text);
 
+
 void private_CTextStack_segment_char(struct CTextStack *self, char t);
+
 
 void CTextStack_segment(struct CTextStack *self);
 
+
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
+
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
+
 
 void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
 void CTextStack_format(struct CTextStack *self, const char *format, ...);
 
+
 void CTextStack_segment_format(struct CTextStack *self, const char *format, ...);
+
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
+
 void CTextStack_free(struct CTextStack *self);
+
 
 char * CTextStack_self_transform_in_string(struct CTextStack *self);
 
 
 void CTextStack_restart(struct CTextStack *self);
+
+
+//algorithm methods
+struct CTextStack *CTextStack_slice(struct CTextStack *self,int starter,int end);

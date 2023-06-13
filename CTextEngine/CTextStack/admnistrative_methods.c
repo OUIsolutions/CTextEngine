@@ -5,7 +5,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->rendered_text_size = 0;
+    self->size = 0;
     self->ident_level = 0;
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
@@ -23,6 +23,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->free =  CTextStack_free;
     self->self_transform_in_string = CTextStack_self_transform_in_string;
     self->restart = CTextStack_restart;
+    self->slice = CTextStack_slice;
     return self;
 }
 
@@ -46,6 +47,6 @@ void CTextStack_restart(struct CTextStack *self){
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->rendered_text_size = 0;
+    self->size = 0;
     self->ident_level = 0;
 }
