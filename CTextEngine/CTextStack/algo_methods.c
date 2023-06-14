@@ -104,7 +104,6 @@ void CTextStack_self_reverse(struct CTextStack *self){
 
 
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end){
-
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
     long formated_starter = private_CTextStack_transform_index(self,starter);
@@ -119,7 +118,30 @@ struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long en
     return new_element;
 }
 
+
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end){
     CTextStack  *new_stack = self->pop(self, starter, end);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element){
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+
+    long converted_point = private_CTextStack_transform_index(self,point);
+    for(long i = 0; i < converted_point; i++){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    new_element->text(new_element,element);
+    for(long i = converted_point; i < self->size; i++){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    return new_element;
+}
+
+void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element){
+    CTextStack  *new_stack = self->insert_at(self, point,element);
     private_CTextStack_parse_ownership(self,new_stack);
 }

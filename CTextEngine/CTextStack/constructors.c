@@ -34,6 +34,9 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;
 
+    self->insert_at = CTextStack_insert_at;
+    self->self_insert_at  = CTextStack_self_insert_at;
+
     self->index_of = CtextStack_index_of;
     self->reverse = CTextStack_reverse;
     self->self_reverse = CTextStack_self_reverse;

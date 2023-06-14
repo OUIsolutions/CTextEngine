@@ -148,7 +148,9 @@ typedef struct CTextStack{
     struct CTextStack *(*pop)(struct CTextStack *self, long starter, long end);
     void(*self_pop)(struct CTextStack *self, long starter, long end);
 
-    
+
+    struct CTextStack *(*insert_at)(struct CTextStack *self,long point, const char *element);
+
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
@@ -233,7 +235,11 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
 
+struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element);
+
+
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
+
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
 void CTextStack_self_reverse(struct CTextStack *self);
@@ -280,6 +286,8 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
 
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;
+
+    self->insert_at = CTextStack_insert_at;
 
     self->index_of = CtextStack_index_of;
     self->reverse = CTextStack_reverse;
@@ -488,6 +496,22 @@ struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long en
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end){
     CTextStack  *new_stack = self->pop(self, starter, end);
     private_CTextStack_parse_ownership(self,new_stack);
+}
+
+struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element){
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+
+    long converted_point = private_CTextStack_transform_index(self,point);
+    for(long i = 0; i < converted_point; i++){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    new_element->text(new_element,element);
+    for(long i = converted_point; i < self->size; i++){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    return new_element;
 }
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 

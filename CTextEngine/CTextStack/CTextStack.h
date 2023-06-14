@@ -51,7 +51,9 @@ typedef struct CTextStack{
     struct CTextStack *(*pop)(struct CTextStack *self, long starter, long end);
     void(*self_pop)(struct CTextStack *self, long starter, long end);
 
-    
+
+    struct CTextStack *(*insert_at)(struct CTextStack *self,long point, const char *element);
+    void (*self_insert_at)(struct CTextStack *self,long point, const char *element);
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
@@ -128,6 +130,7 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value);
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 
+
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end);
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end);
 
@@ -136,7 +139,13 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
 
+struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element);
+void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
+
+
+
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
+
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
 void CTextStack_self_reverse(struct CTextStack *self);
