@@ -147,6 +147,9 @@ void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *e
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
 
+struct CTextStack *CTextStack_trim(struct CTextStack *self);
+
+
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
 void CTextStack_self_reverse(struct CTextStack *self);
 

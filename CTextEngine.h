@@ -150,7 +150,7 @@ typedef struct CTextStack{
 
 
     struct CTextStack *(*insert_at)(struct CTextStack *self,long point, const char *element);
-
+    void (*self_insert_at)(struct CTextStack *self,long point, const char *element);
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
@@ -227,6 +227,7 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value);
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 
+
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end);
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end);
 
@@ -236,9 +237,14 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 
 
 struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element);
+void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
+
 
 
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
+
+
+struct CTextStack *CTextStack_trim(struct CTextStack *self);
 
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
@@ -288,6 +294,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->self_replace = CTextStack_self_replace;
 
     self->insert_at = CTextStack_insert_at;
+    self->self_insert_at  = CTextStack_self_insert_at;
 
     self->index_of = CtextStack_index_of;
     self->reverse = CTextStack_reverse;
@@ -478,7 +485,6 @@ void CTextStack_self_reverse(struct CTextStack *self){
 
 
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end){
-
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
     long formated_starter = private_CTextStack_transform_index(self,starter);
@@ -493,10 +499,12 @@ struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long en
     return new_element;
 }
 
+
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end){
     CTextStack  *new_stack = self->pop(self, starter, end);
     private_CTextStack_parse_ownership(self,new_stack);
 }
+
 
 struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element){
 
@@ -512,6 +520,11 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
         new_element->format(new_element,"%c",self->rendered_text[i]);
     }
     return new_element;
+}
+
+void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element){
+    CTextStack  *new_stack = self->insert_at(self, point,element);
+    private_CTextStack_parse_ownership(self,new_stack);
 }
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 
