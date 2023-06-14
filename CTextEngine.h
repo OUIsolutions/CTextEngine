@@ -116,7 +116,7 @@ typedef struct CTextStack{
     struct CTextStack *(*clone)(struct CTextStack *self);
     void (*represent)(struct CTextStack *self);
     char *(*self_transform_in_string_and_self_clear)(struct CTextStack *self);
-
+    void (*restart)(struct CTextStack *self);
 
     //render methods
     void (*text)(struct CTextStack *self, const char *element);
@@ -146,11 +146,13 @@ typedef struct CTextStack{
     void  (*self_substr)(struct CTextStack *self, long starter, long end);
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
-
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
 
+    long (*index_of)(struct CTextStack *self, const char *element);
+    struct CTextStack * (*reverse)(struct CTextStack *self);
 
-    void (*restart)(struct CTextStack *self);
+    void(*self_reverse)(struct CTextStack *self);
+
 
 }CTextStack;
 
@@ -158,6 +160,8 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 
 struct CTextStack *newCTextStack_string(const char *starter);
+
+struct CTextStack *newCTextStack_string_getting_ownership(const char *starter);
 
 struct CTextStack *newCTextStack_string_empty();
 
@@ -194,7 +198,7 @@ void ctext_open(struct CTextStack *self, const char *tag);
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
-
+void CTextStack_represent(struct CTextStack *self);
 void CTextStack_free(struct CTextStack *self);
 
 
@@ -213,16 +217,17 @@ void CTextStack_restart(struct CTextStack *self);
 long private_CTextStack_transform_index(struct CTextStack *self, long value);
 
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
+void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
-
-
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
-void CTextStack_represent(struct CTextStack *self);
 
+long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
-void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
+struct CTextStack *CTextStack_reverse(struct CTextStack *self);
+void CTextStack_self_reverse(struct CTextStack *self);
+
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
@@ -261,6 +266,10 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;
 
+    self->index_of = CtextStack_index_of;
+    self->reverse = CTextStack_reverse;
+    self->self_reverse = CTextStack_self_reverse;
+
     return self;
 }
 
@@ -271,7 +280,14 @@ struct CTextStack *newCTextStack_string(const char *starter){
     }
     return self;
 }
-
+struct CTextStack *newCTextStack_string_getting_ownership(const char *starter){
+    CTextStack *self = newCTextStack("","");
+    free(self->rendered_text);
+    self->rendered_text = (char*)starter;
+    self->size = strlen(starter);
+    self->rendered_text_alocation_size = self->size;
+    return self;
+}
 struct CTextStack *newCTextStack_string_empty(){
     return  newCTextStack("","");
 }
@@ -332,6 +348,7 @@ struct CTextStack * CTextStack_clone(struct CTextStack *self){
     new_stack->text(new_stack,self->rendered_text);
     return new_stack;
 }
+
 long private_CTextStack_transform_index(struct CTextStack *self, long value){
     long formated_value = value;
 
@@ -347,6 +364,7 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value){
     }
     return formated_value;
 }
+
 
 struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
@@ -376,12 +394,10 @@ void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
 
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
 
-
-
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
 
-    long element_size = strlen(element);
+    long element_size = (long)strlen(element);
     for(long i = 0; i < self->size;i++){
         CTextStack  *possible_ocurrence  = self->substr(self,i,i+element_size);
 
@@ -399,10 +415,42 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
     }
     return new_element;
 }
+
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
     CTextStack  *new_stack = self->replace(self,element,element_to_replace);
     private_CTextStack_parse_ownership(self,new_stack);
 }
+
+
+long CtextStack_index_of(struct  CTextStack *self,const char *element){
+    long element_size = (long)strlen(element);
+    for(int i = 0; i < self->size; i++){
+        CTextStack  *possible_element = self->substr(self,i,i+element_size);
+        if(strcmp(possible_element->rendered_text,element) == 0){
+            possible_element->free(possible_element);
+            return i;
+        }
+        possible_element->free(possible_element);
+
+    }
+    return -1;
+}
+
+struct CTextStack *CTextStack_reverse(struct CTextStack *self){
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    for(long i = (long)self->size; i >= 0 ; i--){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    return new_element;
+
+}
+
+void CTextStack_self_reverse(struct CTextStack *self){
+    CTextStack *new_stack = self->reverse(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 
     while(self->size >= (self->rendered_text_alocation_size - 2)){

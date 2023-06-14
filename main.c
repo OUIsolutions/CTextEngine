@@ -4,11 +4,17 @@
 
 int main(){
 
-    CTextStack *s = newCTextStack_string("mateus");
-    s->self_reverse(s);
-    printf("%s\n",s->rendered_text);
-    s->self_reverse(s);
-    printf("%s\n",s->rendered_text);
+
+    char *test = strdup("Meu nome é #nome# e minha idade é #idade# ");
+    CTextStack *s = newCTextStack_string_getting_ownership(test);
+
+
+    s->self_replace(s,"#nome#","Mateus");
+    s->self_replace(s,"#idade#","26");
+
+
+    s->represent(s);
 
     s->free(s);
+
 }

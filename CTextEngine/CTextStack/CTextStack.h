@@ -64,6 +64,8 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 struct CTextStack *newCTextStack_string(const char *starter);
 
+struct CTextStack *newCTextStack_string_getting_ownership(const char *starter);
+
 struct CTextStack *newCTextStack_string_empty();
 
 
@@ -127,5 +129,4 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
-
 void CTextStack_self_reverse(struct CTextStack *self);

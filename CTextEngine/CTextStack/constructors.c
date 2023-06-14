@@ -45,7 +45,14 @@ struct CTextStack *newCTextStack_string(const char *starter){
     }
     return self;
 }
-
+struct CTextStack *newCTextStack_string_getting_ownership(const char *starter){
+    CTextStack *self = newCTextStack("","");
+    free(self->rendered_text);
+    self->rendered_text = (char*)starter;
+    self->size = strlen(starter);
+    self->rendered_text_alocation_size = self->size;
+    return self;
+}
 struct CTextStack *newCTextStack_string_empty(){
     return  newCTextStack("","");
 }
