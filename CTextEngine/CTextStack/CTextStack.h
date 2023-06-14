@@ -36,6 +36,8 @@ typedef struct CTextStack{
 
     void (*free)(struct CTextStack *self);
 
+    void (*represent)(struct CTextStack *self);
+
     char *(*self_transform_in_string)(struct CTextStack *self);
 
 
@@ -43,8 +45,10 @@ typedef struct CTextStack{
     struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
     void  (*self_substr)(struct CTextStack *self, long starter, long end);
 
-
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
+
+    void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
+
 
     void (*restart)(struct CTextStack *self);
 
@@ -108,5 +112,11 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value);
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
+
+
+void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
+
+void CTextStack_represent(struct CTextStack *self);
+
 
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);

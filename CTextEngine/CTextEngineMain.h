@@ -29,6 +29,7 @@ SOFTWARE.
 #include "CTextStack/CTextStack.h"
 #include "extras/extras.h"
 
+#include "CTextStack/constructor.c"
 #include "CTextStack/admnistrative_methods.c"
 
 #include "CTextStack/algo_methods.c"

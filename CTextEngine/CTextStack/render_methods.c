@@ -1,16 +1,14 @@
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
-    
 
     while(self->size >= (self->rendered_text_alocation_size - 2)){
-      
         self->rendered_text_alocation_size  =  (self->rendered_text_alocation_size  * 2)+2;
         self->rendered_text = (char*)(realloc(
             self->rendered_text,self->rendered_text_alocation_size
         ));
-
     }
 }
+
 void CTextStack_text(struct CTextStack *self, const char *text){
 
     if (!text || !text[0]) {
@@ -101,6 +99,7 @@ void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *
 
 
 }
+
 void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...){
     self->segment(self);
     self->format(self, "%c",'<');
@@ -118,6 +117,7 @@ void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char 
     self->text(self,"/>");
 
 }
+
 void ctext_open(struct CTextStack *self, const char *tag){
     if(tag ==  NULL){
 

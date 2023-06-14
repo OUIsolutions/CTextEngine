@@ -65,3 +65,7 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
     }
     return new_element;
 }
+void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
+    CTextStack  *new_stack = self->replace(self,element,element_to_replace);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
