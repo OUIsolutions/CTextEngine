@@ -85,3 +85,18 @@ long CtextStack_index_of(struct  CTextStack *self,const char *element){
     }
     return -1;
 }
+
+struct CTextStack *CTextStack_reverse(struct CTextStack *self){
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    for(long i = (long)self->size; i >= 0 ; i--){
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    return new_element;
+}
+
+void CTextStack_self_reverse(struct CTextStack *self){
+    CTextStack *new_stack = self->reverse(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}

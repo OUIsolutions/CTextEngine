@@ -19,7 +19,7 @@ typedef struct CTextStack{
     struct CTextStack *(*clone)(struct CTextStack *self);
     void (*represent)(struct CTextStack *self);
     char *(*self_transform_in_string_and_self_clear)(struct CTextStack *self);
-
+    void (*restart)(struct CTextStack *self);
 
     //render methods
     void (*text)(struct CTextStack *self, const char *element);
@@ -52,9 +52,10 @@ typedef struct CTextStack{
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
 
     long (*index_of)(struct CTextStack *self, const char *element);
+    struct CTextStack * (*reverse)(struct CTextStack *self);
 
+    void(*self_reverse)(struct CTextStack *self);
 
-    void (*restart)(struct CTextStack *self);
 
 }CTextStack;
 
@@ -124,3 +125,7 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 
 
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
+
+struct CTextStack *CTextStack_reverse(struct CTextStack *self);
+
+void CTextStack_self_reverse(struct CTextStack *self);
