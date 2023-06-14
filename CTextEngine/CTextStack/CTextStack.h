@@ -5,6 +5,7 @@
 
 
 typedef struct CTextStack{
+
     char *rendered_text;
     size_t rendered_text_alocation_size;
     size_t size;
@@ -41,6 +42,7 @@ typedef struct CTextStack{
     //algorithm methods
     struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
     void  (*self_substr)(struct CTextStack *self, long starter, long end);
+
 
 
 

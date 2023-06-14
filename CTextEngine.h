@@ -102,6 +102,7 @@ SOFTWARE.
 
 
 typedef struct CTextStack{
+
     char *rendered_text;
     size_t rendered_text_alocation_size;
     size_t size;
@@ -113,7 +114,7 @@ typedef struct CTextStack{
     void (*text)(struct CTextStack *self, const char *element);
 
     void (*segment_text)(struct CTextStack *self, const char *element);
-   
+
     void (*format)(struct CTextStack *self, const char *format, ...);
 
     void (*segment)(struct CTextStack *self);
@@ -132,10 +133,14 @@ typedef struct CTextStack{
 
     void (*free)(struct CTextStack *self);
 
+    char *(*self_transform_in_string)(struct CTextStack *self);
 
-    char * (*self_transform_in_string)(struct CTextStack *self);
 
+    //algorithm methods
     struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
+    void  (*self_substr)(struct CTextStack *self, long starter, long end);
+
+
 
 
     void (*restart)(struct CTextStack *self);
@@ -193,8 +198,14 @@ void CTextStack_restart(struct CTextStack *self);
 
 
 //algorithm methods
+long private_CTextStack_transform_index(struct CTextStack *self, long value);
+
+
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 
+void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_string);
+
+void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
@@ -211,7 +222,6 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->ident_level = 0;
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
-
     self->text = CTextStack_text;
     self->segment_text = CTextStack_segment_text;
     self->format = CTextStack_format;
@@ -226,8 +236,10 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->self_transform_in_string = CTextStack_self_transform_in_string;
     self->restart = CTextStack_restart;
     self->substr = CTextStack_substr;
+    self->self_substr =CTextStack_self_substr;
     return self;
 }
+
 
 struct CTextStack *newCTextStack_string(const char *starter){
     CTextStack *self = newCTextStack("","");
@@ -240,6 +252,7 @@ struct CTextStack *newCTextStack_string(const char *starter){
 struct CTextStack *newCTextStack_string_empty(){
     return  newCTextStack("","");
 }
+
 
 void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
@@ -255,6 +268,7 @@ char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self);
     return result;
 }
+
 void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
@@ -263,18 +277,62 @@ void CTextStack_restart(struct CTextStack *self){
     self->size = 0;
     self->ident_level = 0;
 }
+long private_CTextStack_transform_index(struct CTextStack *self, long value){
+    long formated_value = value;
+
+    if(formated_value >= (long)self->size){
+        formated_value = (long)self->size;
+    }
+
+    if(formated_value  < 0){
+        formated_value = (long)self->size + (formated_value +1);
+    }
+    if(formated_value <0){
+        formated_value = 0;
+    }
+    return formated_value;
+}
 
 struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
 
+    long formated_starter = private_CTextStack_transform_index(self,starter);
+    long formated_end = private_CTextStack_transform_index(self,end);
 
+    if(formated_starter == formated_end){
+        new_element->segment_format(new_element,"%c",self->rendered_text[formated_starter]);
+        return new_element;
+    }
 
-    for(int i =starter; i < end; i++){
+    for(long i =formated_starter; i < formated_end; i++){
         new_element->segment_format(new_element,"%c",self->rendered_text[i]);
     }
 
     return new_element;
+
+}
+void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_stack){
+
+    free(self->line_breaker);
+    free(self->separator);
+    free(self->rendered_text);
+
+    self->rendered_text_alocation_size = new_stack->rendered_text_alocation_size;
+    self->size = new_stack->size;
+    self->ident_level = new_stack->ident_level;
+
+
+    self->line_breaker = new_stack->line_breaker;
+    self->separator = new_stack->separator;
+    self->rendered_text = new_stack->rendered_text;
+    free(new_stack);
+
+
+}
+void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
+    CTextStack *new_stack = self->substr(self,starter,end);
+    private_CTextStack_parse_ownership(self,new_stack);
 
 }
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){

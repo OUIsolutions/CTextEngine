@@ -55,7 +55,23 @@ char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self);
     return result;
 }
+void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_stack){
 
+    free(self->line_breaker);
+    free(self->separator);
+    free(self->rendered_text);
+
+    self->rendered_text_alocation_size = new_stack->rendered_text_alocation_size;
+    self->size = new_stack->size;
+    self->ident_level = new_stack->ident_level;
+
+
+    self->line_breaker = new_stack->line_breaker;
+    self->separator = new_stack->separator;
+    self->rendered_text = new_stack->rendered_text;
+    free(new_stack);
+
+}
 void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
