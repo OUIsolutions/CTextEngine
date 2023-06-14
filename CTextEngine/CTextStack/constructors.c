@@ -31,6 +31,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;
 
+    self->index_of = CtextStack_index_of;
     return self;
 }
 

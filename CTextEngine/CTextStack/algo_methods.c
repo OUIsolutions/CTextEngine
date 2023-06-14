@@ -65,7 +65,23 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
     }
     return new_element;
 }
+
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
     CTextStack  *new_stack = self->replace(self,element,element_to_replace);
     private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+long CtextStack_index_of(struct  CTextStack *self,const char *element){
+    long element_size = strlen(element);
+    for(int i = 0; i < self->size; i++){
+        CTextStack  *possible_element = self->substr(self,i,i+element_size);
+        if(strcmp(possible_element->rendered_text,element) == 0){
+            possible_element->free(possible_element);
+            return i;
+        }
+        possible_element->free(possible_element);
+
+    }
+    return -1;
 }

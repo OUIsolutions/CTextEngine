@@ -10,9 +10,6 @@ int main(){
     s->self_replace(s,"#idade#","26");
     s->represent(s);
 
-    CTextStack *s1 = s->clone(s);
-
-    printf("%s\n",s1->rendered_text);
-    s1->free(s1);
+    printf("index:%i\n",s->index_of(s,"skosmokm"));
     s->free(s);
 }
