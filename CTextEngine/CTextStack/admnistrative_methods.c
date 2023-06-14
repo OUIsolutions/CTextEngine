@@ -9,7 +9,6 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->ident_level = 0;
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
-
     self->text = CTextStack_text;
     self->segment_text = CTextStack_segment_text;
     self->format = CTextStack_format;
@@ -27,6 +26,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     return self;
 }
 
+
 struct CTextStack *newCTextStack_string(const char *starter){
     CTextStack *self = newCTextStack("","");
     if(starter){
@@ -38,6 +38,7 @@ struct CTextStack *newCTextStack_string(const char *starter){
 struct CTextStack *newCTextStack_string_empty(){
     return  newCTextStack("","");
 }
+
 
 void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
@@ -53,6 +54,7 @@ char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self);
     return result;
 }
+
 void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
