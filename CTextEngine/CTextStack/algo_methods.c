@@ -5,8 +5,6 @@ struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, lon
 
 
 
-
-
     for(int i =starter; i < end; i++){
         new_element->segment_format(new_element,"%c",self->rendered_text[i]);
     }

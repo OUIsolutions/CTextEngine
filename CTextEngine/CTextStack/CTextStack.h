@@ -40,11 +40,17 @@ typedef struct CTextStack{
 
     struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
 
+
     void (*restart)(struct CTextStack *self);
 
 }CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
+
+
+struct CTextStack *newCTextStack_string(const char *starter);
+
+struct CTextStack *newCTextStack_string_empty();
 
 
 void CTextStack_text(struct CTextStack *self, const char *text);

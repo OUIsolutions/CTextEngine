@@ -132,14 +132,22 @@ typedef struct CTextStack{
 
     void (*free)(struct CTextStack *self);
 
+
     char * (*self_transform_in_string)(struct CTextStack *self);
 
-    struct CTextStack * (*slice)(struct CTextStack *self,int starter,int end);
+    struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
+
+
     void (*restart)(struct CTextStack *self);
 
 }CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
+
+
+struct CTextStack *newCTextStack_string(const char *starter);
+
+struct CTextStack *newCTextStack_string_empty();
 
 
 void CTextStack_text(struct CTextStack *self, const char *text);
@@ -185,7 +193,7 @@ void CTextStack_restart(struct CTextStack *self);
 
 
 //algorithm methods
-struct CTextStack *CTextStack_slice(struct CTextStack *self,int starter,int end);
+struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
@@ -217,10 +225,21 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->free =  CTextStack_free;
     self->self_transform_in_string = CTextStack_self_transform_in_string;
     self->restart = CTextStack_restart;
-    self->slice = CTextStack_slice;
+    self->substr = CTextStack_substr;
     return self;
 }
 
+struct CTextStack *newCTextStack_string(const char *starter){
+    CTextStack *self = newCTextStack("","");
+    if(starter){
+        self->format(self,starter);
+    }
+    return self;
+}
+
+struct CTextStack *newCTextStack_string_empty(){
+    return  newCTextStack("","");
+}
 
 void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
@@ -245,7 +264,7 @@ void CTextStack_restart(struct CTextStack *self){
     self->ident_level = 0;
 }
 
-struct CTextStack * CTextStack_slice(struct CTextStack *self,int starter,int end){
+struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
 

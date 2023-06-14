@@ -27,6 +27,17 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     return self;
 }
 
+struct CTextStack *newCTextStack_string(const char *starter){
+    CTextStack *self = newCTextStack("","");
+    if(starter){
+        self->format(self,starter);
+    }
+    return self;
+}
+
+struct CTextStack *newCTextStack_string_empty(){
+    return  newCTextStack("","");
+}
 
 void CTextStack_free(struct CTextStack *self){
     free(self->line_breaker);
