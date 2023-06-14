@@ -6,11 +6,7 @@ int main(){
 
     CTextStack *s = newCTextStack("","");
     s->text(s,"mateus");
-
-    CTextStack *s1 = s->substr(s, -50, -2);
-    printf("%s",s1->rendered_text);
-
+    s->self_substr(s,0,2);
+    printf("%s\n",s->rendered_text);
     s->free(s);
-    s1->free(s1);
-
 }

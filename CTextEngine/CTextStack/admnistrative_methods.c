@@ -23,6 +23,7 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->self_transform_in_string = CTextStack_self_transform_in_string;
     self->restart = CTextStack_restart;
     self->substr = CTextStack_substr;
+    self->self_substr =CTextStack_self_substr;
     return self;
 }
 
