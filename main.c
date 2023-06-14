@@ -5,14 +5,9 @@
 int main(){
 
 
-    char *test = strdup("Meu nome é #nome# e minha idade é #idade# ");
+    char *test = strdup("Mateus");
     CTextStack *s = newCTextStack_string_getting_ownership(test);
-
-
-    s->self_replace(s,"#nome#","Mateus");
-    s->self_replace(s,"#idade#","26");
-
-
+    s->self_remove_part(s,-2,-2);
     s->represent(s);
 
     s->free(s);

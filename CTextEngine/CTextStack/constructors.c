@@ -28,6 +28,9 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->substr = CTextStack_substr;
     self->self_substr =CTextStack_self_substr;
 
+    self->remove_part = CTextStack_remove_part;
+    self->self_remove_part =CTextStack_self_remove_part;
+
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;
 
@@ -45,6 +48,7 @@ struct CTextStack *newCTextStack_string(const char *starter){
     }
     return self;
 }
+
 struct CTextStack *newCTextStack_string_getting_ownership(const char *starter){
     CTextStack *self = newCTextStack("","");
     free(self->rendered_text);

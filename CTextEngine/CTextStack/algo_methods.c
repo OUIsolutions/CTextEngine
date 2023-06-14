@@ -100,3 +100,26 @@ void CTextStack_self_reverse(struct CTextStack *self){
     CTextStack *new_stack = self->reverse(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
+
+
+
+struct CTextStack *CTextStack_remove_part(struct CTextStack *self, long starter, long end){
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    long formated_starter = private_CTextStack_transform_index(self,starter);
+    long formated_end = private_CTextStack_transform_index(self,end);
+
+    for(int i =0; i < self->size; i ++){
+        if(i >= formated_starter && i <= formated_end){
+            continue;
+        }
+        new_element->format(new_element,"%c",self->rendered_text[i]);
+    }
+    return new_element;
+}
+
+void  CTextStack_self_remove_part(struct CTextStack *self, long starter, long end){
+    CTextStack  *new_stack = self->remove_part(self,starter,end);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
