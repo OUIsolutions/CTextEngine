@@ -5,7 +5,7 @@
 
 
 
-char * CTextStack_self_transform_in_string(struct CTextStack *self){
+char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     char *result = self->rendered_text;
@@ -48,4 +48,11 @@ void CTextStack_free(struct CTextStack *self){
     free(self->separator);
     free(self->rendered_text);
     free(self);
+}
+
+struct CTextStack * CTextStack_clone(struct CTextStack *self){
+    CTextStack *new_stack = newCTextStack(self->line_breaker,self->separator);
+    new_stack->ident_level = self->ident_level;
+    new_stack->text(new_stack,self->rendered_text);
+    return new_stack;
 }

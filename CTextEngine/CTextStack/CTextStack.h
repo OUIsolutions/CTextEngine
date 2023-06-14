@@ -14,6 +14,14 @@ typedef struct CTextStack{
     char *separator;
     int ident_level;
 
+    //admnistrative methods
+    void (*free)(struct CTextStack *self);
+    struct CTextStack *(*clone)(struct CTextStack *self);
+    void (*represent)(struct CTextStack *self);
+    char *(*self_transform_in_string_and_self_clear)(struct CTextStack *self);
+
+
+    //render methods
     void (*text)(struct CTextStack *self, const char *element);
 
     void (*segment_text)(struct CTextStack *self, const char *element);
@@ -34,11 +42,6 @@ typedef struct CTextStack{
 
     void (*close)(struct CTextStack *self, const char *tag);
 
-    void (*free)(struct CTextStack *self);
-
-    void (*represent)(struct CTextStack *self);
-
-    char *(*self_transform_in_string)(struct CTextStack *self);
 
 
     //algorithm methods
@@ -98,7 +101,10 @@ void ctext_close(struct CTextStack *self, const char *tag);
 void CTextStack_free(struct CTextStack *self);
 
 
-char * CTextStack_self_transform_in_string(struct CTextStack *self);
+struct CTextStack * CTextStack_clone(struct CTextStack *self);
+
+
+char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *self);
 
 void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_string);
 

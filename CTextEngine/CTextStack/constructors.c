@@ -21,8 +21,9 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->open = ctext_open;
     self->close = ctext_close;
     self->free =  CTextStack_free;
+    self->clone = CTextStack_clone;
     self->represent = CTextStack_represent;
-    self->self_transform_in_string = CTextStack_self_transform_in_string;
+    self->self_transform_in_string_and_self_clear = CTextStack_self_transform_in_string_and_self_clear;
     self->restart = CTextStack_restart;
     self->substr = CTextStack_substr;
     self->self_substr =CTextStack_self_substr;

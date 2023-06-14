@@ -69,7 +69,7 @@ void private_ctext_generate_formated_text(
         }
         else if(strcmp(double_test,"%tc") == 0){
             struct CTextStack *new_stack = (struct  CTextStack*)va_arg(argptr,void *);
-            char *result = new_stack->self_transform_in_string(new_stack);
+            char *result = new_stack->self_transform_in_string_and_self_clear(new_stack);
             stack->text(stack,result);
             free(result);
             i+=2;

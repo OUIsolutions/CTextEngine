@@ -111,6 +111,14 @@ typedef struct CTextStack{
     char *separator;
     int ident_level;
 
+    //admnistrative methods
+    void (*free)(struct CTextStack *self);
+    struct CTextStack *(*clone)(struct CTextStack *self);
+    void (*represent)(struct CTextStack *self);
+    char *(*self_transform_in_string_and_self_clear)(struct CTextStack *self);
+
+
+    //render methods
     void (*text)(struct CTextStack *self, const char *element);
 
     void (*segment_text)(struct CTextStack *self, const char *element);
@@ -131,11 +139,6 @@ typedef struct CTextStack{
 
     void (*close)(struct CTextStack *self, const char *tag);
 
-    void (*free)(struct CTextStack *self);
-
-    void (*represent)(struct CTextStack *self);
-
-    char *(*self_transform_in_string)(struct CTextStack *self);
 
 
     //algorithm methods
@@ -195,7 +198,10 @@ void ctext_close(struct CTextStack *self, const char *tag);
 void CTextStack_free(struct CTextStack *self);
 
 
-char * CTextStack_self_transform_in_string(struct CTextStack *self);
+struct CTextStack * CTextStack_clone(struct CTextStack *self);
+
+
+char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *self);
 
 void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_string);
 
@@ -245,8 +251,9 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->open = ctext_open;
     self->close = ctext_close;
     self->free =  CTextStack_free;
+    self->clone = CTextStack_clone;
     self->represent = CTextStack_represent;
-    self->self_transform_in_string = CTextStack_self_transform_in_string;
+    self->self_transform_in_string_and_self_clear = CTextStack_self_transform_in_string_and_self_clear;
     self->restart = CTextStack_restart;
     self->substr = CTextStack_substr;
     self->self_substr =CTextStack_self_substr;
@@ -274,7 +281,7 @@ struct CTextStack *newCTextStack_string_empty(){
 
 
 
-char * CTextStack_self_transform_in_string(struct CTextStack *self){
+char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
     char *result = self->rendered_text;
@@ -319,6 +326,12 @@ void CTextStack_free(struct CTextStack *self){
     free(self);
 }
 
+struct CTextStack * CTextStack_clone(struct CTextStack *self){
+    CTextStack *new_stack = newCTextStack(self->line_breaker,self->separator);
+    new_stack->ident_level = self->ident_level;
+    new_stack->text(new_stack,self->rendered_text);
+    return new_stack;
+}
 long private_CTextStack_transform_index(struct CTextStack *self, long value){
     long formated_value = value;
 
@@ -611,7 +624,7 @@ void private_ctext_generate_formated_text(
         }
         else if(strcmp(double_test,"%tc") == 0){
             struct CTextStack *new_stack = (struct  CTextStack*)va_arg(argptr,void *);
-            char *result = new_stack->self_transform_in_string(new_stack);
+            char *result = new_stack->self_transform_in_string_and_self_clear(new_stack);
             stack->text(stack,result);
             free(result);
             i+=2;
