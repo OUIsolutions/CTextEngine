@@ -4,8 +4,8 @@
 
 int main(){
 
-    CTextStack *s = newCTextStack_string("mateus");
-    s->self_substr(s,0,2);
-    printf("%s\n",s->rendered_text);
+    CTextStack *s = newCTextStack_string("meu nome é #nome# aaaaaa");
+    CTextStack *formated = s->replace(s,"#nome#","mateus");
+    printf("%s\n",formated->rendered_text);
     s->free(s);
 }

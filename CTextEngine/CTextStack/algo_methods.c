@@ -17,7 +17,7 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value){
 struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
-
+    new_element->ident_level = self->ident_level;
     long formated_starter = private_CTextStack_transform_index(self,starter);
     long formated_end = private_CTextStack_transform_index(self,end);
 
@@ -38,4 +38,30 @@ void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
     CTextStack *new_stack = self->substr(self,starter,end);
     private_CTextStack_parse_ownership(self,new_stack);
 
+}
+
+struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
+
+
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+
+    long element_size = strlen(element);
+    for(long i = 0; i < self->size;i++){
+        CTextStack  *possible_ocurrence  = self->substr(self,i,i+element_size);
+
+        if(strcmp(possible_ocurrence->rendered_text,element)== 0){
+            new_element->text(new_element,element_to_replace);
+            i+=element_size -1;
+        }
+
+        else{
+            new_element->format(new_element,"%c",self->rendered_text[i]);
+        }
+
+        possible_ocurrence->free(possible_ocurrence);
+
+    }
+    return new_element;
 }

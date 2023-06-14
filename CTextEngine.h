@@ -141,7 +141,7 @@ typedef struct CTextStack{
     void  (*self_substr)(struct CTextStack *self, long starter, long end);
 
 
-
+    struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
 
     void (*restart)(struct CTextStack *self);
 
@@ -193,6 +193,8 @@ void CTextStack_free(struct CTextStack *self);
 
 char * CTextStack_self_transform_in_string(struct CTextStack *self);
 
+void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_string);
+
 
 void CTextStack_restart(struct CTextStack *self);
 
@@ -200,10 +202,9 @@ void CTextStack_restart(struct CTextStack *self);
 //algorithm methods
 long private_CTextStack_transform_index(struct CTextStack *self, long value);
 
-
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 
-void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_string);
+struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 void private_ctext_generate_formated_text(
@@ -237,6 +238,9 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->restart = CTextStack_restart;
     self->substr = CTextStack_substr;
     self->self_substr =CTextStack_self_substr;
+
+    self->replace = CTextStack_replace;
+
     return self;
 }
 
@@ -268,7 +272,23 @@ char * CTextStack_self_transform_in_string(struct CTextStack *self){
     free(self);
     return result;
 }
+void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_stack){
 
+    free(self->line_breaker);
+    free(self->separator);
+    free(self->rendered_text);
+
+    self->rendered_text_alocation_size = new_stack->rendered_text_alocation_size;
+    self->size = new_stack->size;
+    self->ident_level = new_stack->ident_level;
+
+
+    self->line_breaker = new_stack->line_breaker;
+    self->separator = new_stack->separator;
+    self->rendered_text = new_stack->rendered_text;
+    free(new_stack);
+
+}
 void CTextStack_restart(struct CTextStack *self){
     free(self->rendered_text);
     self->rendered_text = (char*)malloc(2);
@@ -296,45 +316,55 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value){
 struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
-
+    new_element->ident_level = self->ident_level;
     long formated_starter = private_CTextStack_transform_index(self,starter);
     long formated_end = private_CTextStack_transform_index(self,end);
 
     if(formated_starter == formated_end){
-        new_element->segment_format(new_element,"%c",self->rendered_text[formated_starter]);
+        new_element->format(new_element,"%c",self->rendered_text[formated_starter]);
         return new_element;
     }
 
     for(long i =formated_starter; i < formated_end; i++){
-        new_element->segment_format(new_element,"%c",self->rendered_text[i]);
+        new_element->format(new_element,"%c",self->rendered_text[i]);
     }
 
     return new_element;
 
 }
-void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_stack){
 
-    free(self->line_breaker);
-    free(self->separator);
-    free(self->rendered_text);
-
-    self->rendered_text_alocation_size = new_stack->rendered_text_alocation_size;
-    self->size = new_stack->size;
-    self->ident_level = new_stack->ident_level;
-
-
-    self->line_breaker = new_stack->line_breaker;
-    self->separator = new_stack->separator;
-    self->rendered_text = new_stack->rendered_text;
-    free(new_stack);
-
-
-}
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
     CTextStack *new_stack = self->substr(self,starter,end);
     private_CTextStack_parse_ownership(self,new_stack);
 
 }
+
+struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
+
+
+
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+
+    long element_size = strlen(element);
+    for(long i = 0; i < self->size;i++){
+        CTextStack  *possible_ocurrence  = self->substr(self,i,i+element_size);
+
+        if(strcmp(possible_ocurrence->rendered_text,element)== 0){
+            new_element->text(new_element,element_to_replace);
+            i+=element_size -1;
+        }
+
+        else{
+            new_element->format(new_element,"%c",self->rendered_text[i]);
+        }
+
+        possible_ocurrence->free(possible_ocurrence);
+
+    }
+    return new_element;
+}
+
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
     
 
