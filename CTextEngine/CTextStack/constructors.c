@@ -28,8 +28,8 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->substr = CTextStack_substr;
     self->self_substr =CTextStack_self_substr;
 
-    self->remove_part = CTextStack_remove_part;
-    self->self_remove_part =CTextStack_self_remove_part;
+    self->pop = CTextStack_pop;
+    self->self_pop =CTextStack_self_pop;
 
     self->replace = CTextStack_replace;
     self->self_replace = CTextStack_self_replace;

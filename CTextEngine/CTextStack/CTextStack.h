@@ -43,15 +43,15 @@ typedef struct CTextStack{
     void (*close)(struct CTextStack *self, const char *tag);
 
 
-
     //algorithm methods
     struct CTextStack * (*substr)(struct CTextStack *self, long starter, long end);
     void  (*self_substr)(struct CTextStack *self, long starter, long end);
 
 
-    struct CTextStack *(*remove_part)(struct CTextStack *self, long starter, long end);
-    void(*self_remove_part)(struct CTextStack *self, long starter, long end);
+    struct CTextStack *(*pop)(struct CTextStack *self, long starter, long end);
+    void(*self_pop)(struct CTextStack *self, long starter, long end);
 
+    
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
@@ -128,8 +128,8 @@ long private_CTextStack_transform_index(struct CTextStack *self, long value);
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
 
-struct CTextStack *CTextStack_remove_part(struct CTextStack *self, long starter, long end);
-void  CTextStack_self_remove_part(struct CTextStack *self, long starter, long end);
+struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end);
+void  CTextStack_self_pop(struct CTextStack *self, long starter, long end);
 
 
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace);

@@ -103,7 +103,7 @@ void CTextStack_self_reverse(struct CTextStack *self){
 
 
 
-struct CTextStack *CTextStack_remove_part(struct CTextStack *self, long starter, long end){
+struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
@@ -119,7 +119,7 @@ struct CTextStack *CTextStack_remove_part(struct CTextStack *self, long starter,
     return new_element;
 }
 
-void  CTextStack_self_remove_part(struct CTextStack *self, long starter, long end){
-    CTextStack  *new_stack = self->remove_part(self,starter,end);
+void  CTextStack_self_pop(struct CTextStack *self, long starter, long end){
+    CTextStack  *new_stack = self->pop(self, starter, end);
     private_CTextStack_parse_ownership(self,new_stack);
 }
