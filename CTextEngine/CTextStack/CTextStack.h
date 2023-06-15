@@ -62,9 +62,11 @@ typedef struct CTextStack{
     struct CTextStack * (*reverse)(struct CTextStack *self);
     void(*self_reverse)(struct CTextStack *self);
 
+    struct CTextStack * (*trim)(struct CTextStack *self);
+    void(*self_trim)(struct CTextStack *self);
 
     long (*index_of)(struct CTextStack *self, const char *element);
-
+    long (*index_of_char)(struct CTextStack *self, char element);
 }CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
@@ -143,11 +145,13 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
 
 
-
+long CtextStack_index_of_char(struct  CTextStack *self,char element);
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
 
+
 struct CTextStack *CTextStack_trim(struct CTextStack *self);
+void CTextStack_self_trim(struct CTextStack *self);
 
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);

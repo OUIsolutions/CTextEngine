@@ -37,8 +37,14 @@ struct CTextStack * newCTextStack(const char *line_breaker, const char *separato
     self->insert_at = CTextStack_insert_at;
     self->self_insert_at  = CTextStack_self_insert_at;
 
+
     self->index_of = CtextStack_index_of;
+    self->index_of_char = CtextStack_index_of_char;
     self->reverse = CTextStack_reverse;
+
+    self->trim = CTextStack_trim;
+    self->self_trim = CTextStack_self_trim;
+
     self->self_reverse = CTextStack_self_reverse;
 
     return self;

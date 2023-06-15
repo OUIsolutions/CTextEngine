@@ -86,6 +86,15 @@ long CtextStack_index_of(struct  CTextStack *self,const char *element){
     return -1;
 }
 
+long CtextStack_index_of_char(struct  CTextStack *self,char element){
+    for(int i = 0; i < self->size; i++) {
+        if(self->rendered_text[i] == element){
+            return i;
+        }
+    }
+    return -1;
+}
+
 struct CTextStack *CTextStack_reverse(struct CTextStack *self){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
@@ -143,5 +152,40 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
 
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element){
     CTextStack  *new_stack = self->insert_at(self, point,element);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+struct CTextStack *CTextStack_trim(struct CTextStack *self){
+
+    CTextStack  *invalid_elements = newCTextStack_string("\t\r\n ");
+    long start_point = 0;
+    for(int i = 0; i < self->size; i ++){
+        char current_char =self->rendered_text[i];
+        long invalid_point = invalid_elements->index_of_char(invalid_elements,current_char);
+        bool is_invalid = invalid_point != -1;
+        if(!is_invalid){
+            start_point = i;
+            break;
+        }
+    }
+    long end_point = -1;
+    for(long i = (long)self->size -1; i >= 0; i--){
+
+        char current_char =self->rendered_text[i];
+        long invalid_point = invalid_elements->index_of_char(invalid_elements,current_char);
+        bool is_invalid = invalid_point != -1;
+        if(!is_invalid){
+            end_point = i+1;
+            break;
+        }
+    }
+    invalid_elements->free(invalid_elements);
+    return self->substr(self,start_point,end_point);
+
+}
+
+void CTextStack_self_trim(struct CTextStack *self){
+    CTextStack  *new_stack = self->trim(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }

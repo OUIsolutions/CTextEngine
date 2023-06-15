@@ -4,8 +4,10 @@
 
 int main(){
     CTextStack *s = newCTextStack_string_empty();
-    s->text(s,"aaaaaaaaaaa");
-    s->self_insert_at(s,1,"B");
+    s->text(s,"          Mateus            ");
+    s->self_trim(s);
+    printf("%d\n",s->size);
     s->represent(s);
+
     s->free(s);
 }
