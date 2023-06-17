@@ -1,9 +1,10 @@
 
-from CTolkit import *
+from CToolKit import *
+
 
 
 def execute_tests():
-    copile_project_by_comand('gcc exemples/basic_template.c',True,True)    
+    compile_project_by_command('gcc exemples/basic_template.c')    
 
 
 
