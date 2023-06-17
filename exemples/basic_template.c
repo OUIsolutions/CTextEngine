@@ -30,6 +30,8 @@ int main(){
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
+        s->free(s);
+        return 1;
     }
    s->free(s);
 
