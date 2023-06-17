@@ -4,7 +4,8 @@ from CToolKit import *
 
 
 def execute_tests():
-    compile_project('gcc','exemples/basic_template.c')    
+    copile_project('gcc','exemples/basic_template.c')    
+    test_binary_with_valgrind('exemples/basic_template.out')
 
 
 
