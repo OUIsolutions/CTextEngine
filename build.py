@@ -4,7 +4,7 @@ from CToolKit import *
 
 
 def execute_tests():
-    compile_project_by_command('gcc exemples/basic_template.c')    
+    compile_project('gcc','exemples/basic_template.c')    
 
 
 
