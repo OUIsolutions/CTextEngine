@@ -8,5 +8,6 @@
         "extras.h": "c",
         "stdio.h": "c",
         "ctextstack.h": "c"
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic"
 }

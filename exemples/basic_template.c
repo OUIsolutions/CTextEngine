@@ -8,20 +8,20 @@ int main(){
     const char *text = "text exemple";
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->$open(s,HTML,"lang=\"%s\"",lang);
-        s->open(s,HEAD);
+    s->$open(s,CTEXT_HTMLs,"lang=\"%s\"",lang);
+        s->open(s,CTEXT_HEAD);
         
-        s->close(s,HEAD);
-        s->open(s,BODY);
-            s->open(s,H1);
+        s->close(s,CTEXT_HEAD);
+        s->open(s,CTEXT_BODY);
+            s->open(s,CTEXT_H1);
                 s->segment_text(s,"This is a text");
-            s->close(s,H1);
-            s->open(s,P);
+            s->close(s,CTEXT_H1);
+            s->open(s,CTEXT_P);
                 s->segment_format(s,"This is a formated  text  %s",text);
-            s->close(s,P);
+            s->close(s,CTEXT_P);
 
-        s->close(s,BODY);
-    s->close(s,HTML);
+        s->close(s,CTEXT_BODY);
+    s->close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
    int ident_level = s->ident_level;

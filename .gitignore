@@ -7,7 +7,7 @@ doTheWorld.c
 *.obj
 *.elf
 doTheWorld.h
-
+exemples/CTextEngine.h
 # Linker output
 *.ilk
 *.map
