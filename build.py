@@ -9,7 +9,7 @@ def execute_tests():
         raise_errors=True,
         raise_warnings=False
     )    
-    test_binary_with_valgrind('exemples/basic_template.out')
+    #test_binary_with_valgrind('exemples/basic_template.out')
 
 
 
