@@ -3,7 +3,7 @@ from CTolkit import *
 
 
 def execute_tests():
-    copile_project_by_comand('gcc exemples/basic_template.c',True,True,True)    
+    copile_project_by_comand('gcc exemples/basic_template.c',True,True)    
 
 
 

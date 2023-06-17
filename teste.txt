@@ -1,0 +1,6 @@
+exemples/basic_template.c: In function ‘main’:
+exemples/basic_template.c:11:16: error: ‘CTEXT_HTMLs’ undeclared (first use in this function); did you mean ‘CTEXT_HTML’?
+   11 |     s->$open(s,CTEXT_HTMLs,"lang=\"%s\"",lang);
+      |                ^~~~~~~~~~~
+      |                CTEXT_HTML
+exemples/basic_template.c:11:16: note: each undeclared identifier is reported only once for each function it appears in
