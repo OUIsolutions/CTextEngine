@@ -447,7 +447,7 @@ int main(){
     s->free(s);
 }
 ~~~
-fre the alocated memory
+free the alocated memory
 <!--codeof:exemples/free.c-->
 ~~~c
 #include "CTextEngine.h"
@@ -457,4 +457,3 @@ int main(){
 
 }
 ~~~
-
