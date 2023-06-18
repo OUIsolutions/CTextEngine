@@ -95,11 +95,11 @@ Opens an new scope , if tag is NULL it will not render the current tag
 ## $open
 open an new scope but allowing you to pass an formated tag props 
 
-<!-- codeof:exemples/$open.c-->
+<!-- codeof:exemples/open_with_args.c-->
 
 ## only$open 
 Only open an scope , its ideal for "meta" tags 
-<!-- codeof:exemples/only$open.c-->
+<!-- codeof:exemples/only_open_with_args.c.c-->
 
 ## auto$close 
 Implement an autoclose tag 
