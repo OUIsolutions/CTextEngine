@@ -9,21 +9,19 @@ int main(){
 
     const char *names[] = {"name1","name2","name3","name4","name 5"};
 
-
-
-    s->open(s,HTML);
-        s->open(s,HEAD);
+    s->open(s,CTEXT_HTML);
+        s->open(s,CTEXT_HEAD);
      
-        s->close(s,HEAD);
-        s->open(s,BODY);
+        s->close(s,CTEXT_HEAD);
+        s->open(s,CTEXT_BODY);
             for(int i = 0; i < sizeof(names)/ sizeof(char *) ; i++){
-                s->open(s,H1);
+                s->open(s,CTEXT_H1);
                     s->segment_text(s,names[i]);
-                s->close(s,H1);
+                s->close(s,CTEXT_H1);
             }
 
-        s->close(s,BODY);
-    s->close(s,HTML);
+        s->close(s,CTEXT_BODY);
+    s->close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
    int ident_level = s->ident_level;
