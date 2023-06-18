@@ -1,19 +1,32 @@
 
 from CToolKit import *
+from os import listdir,remove
 
 
-
-def execute_tests():
-    copile_project(
+def execute_test_for_file(file:str):
+    result = copile_project(
         'gcc',
-        'exemples/basic_template.c',
+        file,
         raise_errors=True,
         raise_warnings=False
     )    
-    test_binary_with_valgrind('exemples/basic_template.out')
+    try:
+        test_binary_with_valgrind(result)
+        remove(result)
+    except Exception as e:
+        remove(result)
+        raise e
 
 
-
+def test_exemple_folder():
+    files = listdir('exemples')
+    
+    for file in files:
+        if not file.endswith('.c'):
+            continue
+        execute_test_for_file(f'exemples/{file}')
+        print(f'passed: {file}')
+       
 def main():
 
     STARTER  = f'CTextEngine/CTextEngineMain.h'
@@ -22,10 +35,7 @@ def main():
     with open('exemples/CTextEngine.h','w') as f:
         f.write(amalgamated_code)
 
-  
-
-
-    execute_tests()
+    test_exemple_folder()
 
     with open('CTextEngine.h','w') as f:
         f.write(amalgamated_code)
