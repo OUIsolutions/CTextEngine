@@ -35,12 +35,10 @@ int main(){
 
 ## Rendering an basic Template 
 
+<!--codeof:exemples/basic_template.c--->
 ~~~c
 
-
 #include "CTextEngine.h"
-
-
 
 int main(){
     const char *lang = "en";
@@ -79,11 +77,9 @@ int main(){
 ## Controling Scopes
 with the breakline and separator, you can control the size of scopes in te way you want
 these is an exemple of full mimifyed text 
+<!--codeof:exemples/basic_template.c--->
 ~~~c
-
 #include "CTextEngine.h"
-
-
 
 int main(){
     const char *lang = "en";
@@ -256,10 +252,8 @@ int main(){
 ~~~
 
 ## An Sql Insert 
-
-
+<!-- codeof:exemples/inser_sql.c-->
 ~~~c
-
 #include "CTextEngine.h"
 
 
