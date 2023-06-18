@@ -5,7 +5,8 @@ from CToolKit import *
 
 def execute_tests():
     copile_project(
-        'gcc','exemples/basic_template.c',
+        'gcc',
+        'exemples/basic_template.c',
         raise_errors=True,
         raise_warnings=False
     )    
@@ -15,7 +16,7 @@ def execute_tests():
 
 def main():
 
-    STARTER  =f'CTextEngine/CTextEngineMain.h'
+    STARTER  = f'CTextEngine/CTextEngineMain.h'
     amalgamated_code = get_amalgamated_code(STARTER)
 
     with open('exemples/CTextEngine.h','w') as f:
