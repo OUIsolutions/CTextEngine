@@ -7,7 +7,8 @@
         "typeinfo": "c",
         "extras.h": "c",
         "stdio.h": "c",
-        "ctextstack.h": "c"
+        "ctextstack.h": "c",
+        "depencies.h": "c"
     },
     "python.analysis.typeCheckingMode": "basic"
 }

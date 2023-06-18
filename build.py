@@ -10,14 +10,14 @@ def execute_tests():
         raise_errors=True,
         raise_warnings=False
     )    
-    #test_binary_with_valgrind('exemples/basic_template.out')
+    test_binary_with_valgrind('exemples/basic_template.out')
 
 
 
 def main():
 
     STARTER  = f'CTextEngine/CTextEngineMain.h'
-    amalgamated_code = get_amalgamated_code(STARTER)
+    amalgamated_code = generate_amalgamated_code(STARTER)
 
     with open('exemples/CTextEngine.h','w') as f:
         f.write(amalgamated_code)
