@@ -1,6 +1,6 @@
 
 
-typedef struct CTextModule{
+typedef struct CTextStackModule{
 
     //admnistrative methods
     void (*free)(struct CTextStack *self);
@@ -55,6 +55,6 @@ typedef struct CTextModule{
 
     long (*index_of)(struct CTextStack *self, const char *element);
     long (*index_of_char)(struct CTextStack *self, char element);
-}CTextModule;
+}CTextStackModule;
 
-CTextModule newCTextModule();
+CTextStackModule newCTextStackModule();

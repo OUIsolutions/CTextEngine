@@ -1,6 +1,6 @@
 
-CTextModule newCTextModule(){
-    struct CTextModule self = {0};
+CTextStackModule newCTextStackModule(){
+    struct CTextStackModule self = {0};
 
     self.text = CTextStack_text;
     self.segment_text = CTextStack_segment_text;
