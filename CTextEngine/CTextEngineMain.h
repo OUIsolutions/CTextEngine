@@ -26,15 +26,10 @@ SOFTWARE.
 
 #include "depencies.h"
 #include "tags.h"
-#include "CTextStack/CTextStack.h"
-#include "CTexStackModule/CTextStackModule.h"
+#include "CTextStack/declarations.h"
 #include "extras/extras.h"
 
-#include "CTextStack/constructors.c"
-#include "CTextStack/admnistrative_methods.c"
-#include "CTextStack/algo_methods.c"
-#include "CTextStack/render_methods.c"
-#include "CTexStackModule/CTextStackModule.c"
+#include "CTextStack/definitions.h"
 #include "extras/extras.c"
 
 #endif // CTEXTENGINE_H
