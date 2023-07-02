@@ -27,13 +27,14 @@ SOFTWARE.
 #include "depencies.h"
 #include "tags.h"
 #include "CTextStack/CTextStack.h"
+#include "CTexModule/CTextModule.h"
 #include "extras/extras.h"
 
 #include "CTextStack/constructors.c"
 #include "CTextStack/admnistrative_methods.c"
-
 #include "CTextStack/algo_methods.c"
 #include "CTextStack/render_methods.c"
+#include "CTexModule/CTextModule.c"
 #include "extras/extras.c"
 
 #endif // CTEXTENGINE_H
