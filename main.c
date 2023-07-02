@@ -3,14 +3,14 @@
 #include "CTextEngine/CTextEngineMain.h"
 
 int main(){
-    
+
+    CTextStackModule  m = newCTextStackModule();
     CTextStack *s = newCTextStack_string_empty();
-    CTextStack_text(s,"          Mateus            ");
-    CTextStack_self_trim(s);
+    m.text(s,"          Mateus            ");
+    m.self_trim(s);
     //printf("%li\n",s->size);
-    CTextStack_represent(s);
-    
-    CTextStack_free(s);
+    m.represent(s);
+    m.free(s);
     
 
 
