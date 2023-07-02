@@ -1,5 +1,5 @@
 
 
 typedef struct CTextModule{
-    
+
 };
