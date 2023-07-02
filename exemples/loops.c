@@ -25,7 +25,7 @@ int main(){
    m.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
-   int ident_level =m.ident_level;
+   int ident_level =s->ident_level;
    if(ident_level == 0){
         printf("all identation is ok\n");
     }else{

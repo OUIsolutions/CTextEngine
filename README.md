@@ -43,36 +43,38 @@ int main(){
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
+
     const char *lang = "en";
     const char *text = "text exemple";
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
   
-    s->$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
-        s->open(s,CTEXT_HEAD);
+   m.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+       m.open(s,CTEXT_HEAD);
         
-        s->close(s,CTEXT_HEAD);
-        s->open(s,CTEXT_BODY);
-            s->open(s,CTEXT_H1);
-                s->segment_text(s,"This is a text");
-            s->close(s,CTEXT_H1);
-            s->open(s,CTEXT_P);
-                s->segment_format(s,"This is a formated  text  %s",text);
-            s->close(s,CTEXT_P);
+       m.close(s,CTEXT_HEAD);
+       m.open(s,CTEXT_BODY);
+           m.open(s,CTEXT_H1);
+               m.segment_text(s,"This is a text");
+           m.close(s,CTEXT_H1);
+           m.open(s,CTEXT_P);
+               m.segment_format(s,"This is a formated  text  %s",text);
+           m.close(s,CTEXT_P);
 
-        s->close(s,CTEXT_BODY);
-    s->close(s,CTEXT_HTML);
+       m.close(s,CTEXT_BODY);
+   m.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
-   int ident_level = s->ident_level;
+   int ident_level =s->ident_level;
    if(ident_level == 0){
         printf("all identation is ok\n");
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
-        s->free(s);
+       m.free(s);
         return 1;
     }
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -84,36 +86,38 @@ these is an exemple of full mimifyed text
 #include "CTextEngine.h"
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
+
     const char *lang = "en";
     const char *text = "text exemple";
     const char *breakline = "";
     const char *separator = "";
     struct CTextStack *s = newCTextStack(breakline, separator);
 
-    s->$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
-        s->open(s,CTEXT_HEAD);
+   m.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+       m.open(s,CTEXT_HEAD);
      
-        s->close(s,CTEXT_HEAD);
-        s->open(s,CTEXT_BODY);
-            s->open(s,CTEXT_H1);
-                s->segment_text(s,"This is a text");
-            s->close(s,CTEXT_H1);
-            s->open(s,CTEXT_P);
-                s->segment_format(s,"This is a formated  text  %s",text);
-            s->close(s,CTEXT_P);
+       m.close(s,CTEXT_HEAD);
+       m.open(s,CTEXT_BODY);
+           m.open(s,CTEXT_H1);
+               m.segment_text(s,"This is a text");
+           m.close(s,CTEXT_H1);
+           m.open(s,CTEXT_P);
+               m.segment_format(s,"This is a formated  text  %s",text);
+           m.close(s,CTEXT_P);
 
-        s->close(s,CTEXT_BODY);
-    s->close(s,CTEXT_HTML);
+       m.close(s,CTEXT_BODY);
+   m.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
-   int ident_level = s->ident_level;
+   int ident_level =s->ident_level;
    if(ident_level == 0){
         printf("all identation is ok\n");
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
     }
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -125,36 +129,37 @@ int main(){
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
 
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     int age = 15;
 
-    s->open(s,CTEXT_HTML);
-        s->open(s,CTEXT_HEAD);
+   m.open(s,CTEXT_HTML);
+       m.open(s,CTEXT_HEAD);
      
-        s->close(s,CTEXT_HEAD);
-        s->open(s,CTEXT_BODY);
-            s->open(s,CTEXT_H1);
+       m.close(s,CTEXT_HEAD);
+       m.open(s,CTEXT_BODY);
+           m.open(s,CTEXT_H1);
             if(age > 18)
-                s->segment_text(s,"You are an adout");
+               m.segment_text(s,"You are an adout");
             else if (age > 12)
-                s->segment_text(s,"You are a child");
+               m.segment_text(s,"You are a child");
             else 
-                s->segment_text(s,"You are a baby");
-            s->close(s,CTEXT_H1);
-        s->close(s,CTEXT_BODY);
-    s->close(s,CTEXT_HTML);
+               m.segment_text(s,"You are a baby");
+           m.close(s,CTEXT_H1);
+       m.close(s,CTEXT_BODY);
+   m.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
-   int ident_level = s->ident_level;
+   int ident_level =s->ident_level;
    if(ident_level == 0){
         printf("all identation is ok\n");
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
     }
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -166,34 +171,35 @@ int main(){
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
 
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     const char *names[] = {"name1","name2","name3","name4","name 5"};
 
-    s->open(s,CTEXT_HTML);
-        s->open(s,CTEXT_HEAD);
+   m.open(s,CTEXT_HTML);
+       m.open(s,CTEXT_HEAD);
      
-        s->close(s,CTEXT_HEAD);
-        s->open(s,CTEXT_BODY);
+       m.close(s,CTEXT_HEAD);
+       m.open(s,CTEXT_BODY);
             for(int i = 0; i < sizeof(names)/ sizeof(char *) ; i++){
-                s->open(s,CTEXT_H1);
-                    s->segment_text(s,names[i]);
-                s->close(s,CTEXT_H1);
+               m.open(s,CTEXT_H1);
+                   m.segment_text(s,names[i]);
+               m.close(s,CTEXT_H1);
             }
 
-        s->close(s,CTEXT_BODY);
-    s->close(s,CTEXT_HTML);
+       m.close(s,CTEXT_BODY);
+   m.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
-   int ident_level = s->ident_level;
+   int ident_level =s->ident_level;
    if(ident_level == 0){
         printf("all identation is ok\n");
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
     }
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -217,6 +223,7 @@ struct Person {
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
 
     struct Person john;
     john.name = "John";
@@ -226,23 +233,23 @@ int main(){
 
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->format(s,"Name: %s",john.name);
-    s->segment_format(s,"Age: %d",john.age);
-    s->segment_text(s,"Car: ");
-    s->open(s,NULL);
-        s->segment_format(s,"Name: %s",john.car.name);
-        s->segment_format(s,"Year: %d",john.car.year);
-    s->close(s,NULL);
+   m.format(s,"Name: %s",john.name);
+   m.segment_format(s,"Age: %d",john.age);
+   m.segment_text(s,"Car: ");
+   m.open(s,NULL);
+       m.segment_format(s,"Name: %s",john.car.name);
+       m.segment_format(s,"Year: %d",john.car.year);
+   m.close(s,NULL);
   
     printf("%s\n",s->rendered_text);
-    int ident_level = s->ident_level;
+    int ident_level =s->ident_level;
     if(ident_level == 0){
             printf("all identation is ok\n");
         }else{
             printf("identation error\n");
             printf("unclosed tags: %d\n",ident_level);
         }
-    s->free(s);
+   m.free(s);
         
 
 }
@@ -256,43 +263,45 @@ int main(){
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
+
     const char *table = "users";
     const char *columns[] = {"name","email","passord"};
     const char *values[] = {"John","john@email.com","1234"};
 
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->format(s,"INSERT INTO '%s' (",table);
-    s->open(s,NULL);
-        s->segment_format(s,"'%s'",columns[0]);
+   m.format(s,"INSERT INTO '%s' (",table);
+   m.open(s,NULL);
+       m.segment_format(s,"'%s'",columns[0]);
         for(int i = 1; i < sizeof(columns)/ sizeof(char *) ; i++){
-            s->format(s,",'%s'",columns[i]);
+           m.format(s,",'%s'",columns[i]);
         }
-    s->segment_text(s,")");
-    s->close(s,NULL);
+   m.segment_text(s,")");
+   m.close(s,NULL);
 
-    s->segment_text(s,"VALUES (");
-    s->open(s,NULL);    
-        s->segment_format(s,"'%s'",values[0]);
+   m.segment_text(s,"VALUES (");
+   m.open(s,NULL);    
+       m.segment_format(s,"'%s'",values[0]);
         for(int i = 1; i < sizeof(values)/ sizeof(char *) ; i++){
-            s->format(s,",'%s'",values[i]);
+           m.format(s,",'%s'",values[i]);
         }
-    s->segment_text(s,")");
-    s->close(s,NULL);
+   m.segment_text(s,")");
+   m.close(s,NULL);
     
     
 
 
   
     printf("%s\n",s->rendered_text);
-    int ident_level = s->ident_level;
+    int ident_level =s->ident_level;
     if(ident_level == 0){
             printf("all identation is ok\n");
         }else{
             printf("identation error\n");
             printf("unclosed tags: %d\n",ident_level);
         }
-    s->free(s);
+   m.free(s);
         
 
 }
@@ -306,12 +315,13 @@ The **text**, Method is responsable for append new text into the stack
 #include "CTextEngine.h"
 
 int main(){
-    
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->text(s,"test element");
+   m.text(s,"test element");
    printf("%s\n",s->rendered_text);
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -321,10 +331,12 @@ Same as text, but will break an new line
 ~~~c
 #include "CTextEngine.h"
 int main(){
-   struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   s->segment_text(s,"test element");
+    CTextStackModule m = newCTextStackModule();
+
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+  m.segment_text(s,"test element");
    printf("%s\n",s->rendered_text);
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -336,13 +348,14 @@ format has the same function as text, but allow formatations
 #include "CTextEngine.h"
 
 int main(){
-    
-   struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStackModule m = newCTextStackModule();
+
+    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    int age = 20;
    const char *name = "John";
-   s->format(s,"Hes name is %s, he is %i years old ",name,age);
+  m.format(s,"Hes name is %s, he is %i years old ",name,age);
    printf("%s\n",s->rendered_text);
-   s->free(s);
+  m.free(s);
 
 }
 ~~~
@@ -354,13 +367,14 @@ same as format, but breaking an line
 #include "CTextEngine.h"
 
 int main(){
-    
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     int age = 20;
     const char *name = "John";
-    s->segment_format(s,"Hes name is %s, he is %i years old ",name,age);
+   m.segment_format(s,"Hes name is %s, he is %i years old ",name,age);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+   m.free(s);
 }
 ~~~
 Opens an new scope , if tag is NULL it will not render the current tag 
@@ -369,12 +383,13 @@ Opens an new scope , if tag is NULL it will not render the current tag
 ~~~c
 #include "CTextEngine.h"
 int main(){
-    
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    s->open(s,CTEXT_HTML);
-    s->close(s,CTEXT_HTML);
+   m.open(s,CTEXT_HTML);
+   m.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+   m.free(s);
 
 }
 ~~~
@@ -384,13 +399,15 @@ open an new scope but allowing you to pass an formated tag props
 ~~~c
 #include "CTextEngine.h"
 
-int main(){   
+int main(){
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
-    s->$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
-    s->close(s,CTEXT_HTML);
+   m.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
+   m.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+   m.free(s);
 }
 ~~~
 Only open an scope , its ideal for "meta" tags 
@@ -401,17 +418,18 @@ Only open an scope , its ideal for "meta" tags
 #include "CTextEngine.h"
 
 int main(){
-    
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
-    s->only$open(
+   m.only$open(
         s,
         CTEXT_META, 
         "name=\"%s\" content=\"width=device-width, initial-scale=1.0",
         name
     );
     printf("%s\n",s->rendered_text);
-    s->free(s);
+   m.free(s);
 
 }
 ~~~
@@ -423,12 +441,14 @@ Implement an autoclose tag
 
 #include "CTextEngine.h"
 
-int main(){   
+int main(){
+
+    CTextStackModule m = newCTextStackModule();
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
-    s->auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
+    m.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+    m.free(s);
 
 }
 ~~~
@@ -439,12 +459,13 @@ Close the tag passed, if is null will only downcrease the ident
 #include "CTextEngine.h"
 
 int main(){
-    
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    s->open(s,CTEXT_HTML);
-    s->close(s,CTEXT_HTML);
+   m.open(s,CTEXT_HTML);
+   m.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+   m.free(s);
 }
 ~~~
 free the alocated memory
@@ -452,8 +473,10 @@ free the alocated memory
 ~~~c
 #include "CTextEngine.h"
 int main(){
+    CTextStackModule m = newCTextStackModule();
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    s->free(s);
+   m.free(s);
 
 }
 ~~~
