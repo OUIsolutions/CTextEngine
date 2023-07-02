@@ -1,18 +1,15 @@
 
+#include "CTextEngine.h"
 
-#include "CTextEngine/CTextEngineMain.h"
+
 
 int main(){
-
-    CTextStackModule  m = newCTextStackModule();
-    CTextStack *s = newCTextStack_string_empty();
-    m.text(s,"          Mateus            ");
-    m.self_trim(s);
-    //printf("%li\n",s->size);
-    m.represent(s);
-    m.free(s);
+    CTextStackModule m = newCTextStackModule();
+    for(int i = 0; i < 1000;i++){
+        CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+        m.free(s);
+    }
     
-
 
 
 }
