@@ -2,11 +2,13 @@
 
 #include "CTextEngine.h"
 
-int main(){   
+int main(){
+
+    CTextStackModule m = newCTextStackModule();
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
-    s->auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
+    m.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
-    s->free(s);
+    m.free(s);
 
 }

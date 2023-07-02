@@ -16,6 +16,7 @@ struct Person {
 
 
 int main(){
+    CTextStackModule m = newCTextStackModule();
 
     struct Person john;
     john.name = "John";
@@ -25,23 +26,23 @@ int main(){
 
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-    s->format(s,"Name: %s",john.name);
-    s->segment_format(s,"Age: %d",john.age);
-    s->segment_text(s,"Car: ");
-    s->open(s,NULL);
-        s->segment_format(s,"Name: %s",john.car.name);
-        s->segment_format(s,"Year: %d",john.car.year);
-    s->close(s,NULL);
+   m.format(s,"Name: %s",john.name);
+   m.segment_format(s,"Age: %d",john.age);
+   m.segment_text(s,"Car: ");
+   m.open(s,NULL);
+       m.segment_format(s,"Name: %s",john.car.name);
+       m.segment_format(s,"Year: %d",john.car.year);
+   m.close(s,NULL);
   
     printf("%s\n",s->rendered_text);
-    int ident_level = s->ident_level;
+    int ident_level =s->ident_level;
     if(ident_level == 0){
             printf("all identation is ok\n");
         }else{
             printf("identation error\n");
             printf("unclosed tags: %d\n",ident_level);
         }
-    s->free(s);
+   m.free(s);
         
 
 }
