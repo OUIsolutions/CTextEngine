@@ -12,6 +12,7 @@ char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *sel
     free(self);
     return result;
 }
+
 void private_CTextStack_parse_ownership(struct CTextStack *self, struct CTextStack *new_stack){
 
     free(self->line_breaker);
@@ -53,6 +54,6 @@ void CTextStack_free(struct CTextStack *self){
 struct CTextStack * CTextStack_clone(struct CTextStack *self){
     CTextStack *new_stack = newCTextStack(self->line_breaker,self->separator);
     new_stack->ident_level = self->ident_level;
-    new_stack->text(new_stack,self->rendered_text);
+    CTextStack_text(new_stack,self->rendered_text);
     return new_stack;
 }

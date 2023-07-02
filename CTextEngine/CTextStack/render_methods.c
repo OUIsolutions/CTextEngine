@@ -32,8 +32,8 @@ void CTextStack_text(struct CTextStack *self, const char *text){
 
 
 void CTextStack_segment_text(struct CTextStack *self, const char *text){
-    self->segment(self);
-    self->text(self,text);
+    CTextStack_segment(self);
+    CTextStack_text(self,text);
 }
 
 
@@ -44,7 +44,7 @@ void CTextStack_format(struct CTextStack *self, const char *format, ...){
 }
 
 void CTextStack_segment_format(struct CTextStack *self, const char *format, ...){
-    self->segment(self);
+    CTextStack_segment(self);
     va_list  argptr;
     va_start(argptr, format);
     private_ctext_generate_formated_text(self,format,argptr);
@@ -53,10 +53,10 @@ void CTextStack_segment_format(struct CTextStack *self, const char *format, ...)
 
 void CTextStack_segment(struct CTextStack *self){
 
-    self->text(self,self->line_breaker);
+    CTextStack_text(self,self->line_breaker);
 
     for(int i=0;i<self->ident_level;i++){
-        self->text(self,self->separator);
+        CTextStack_text(self,self->separator);
 
     }
 
@@ -64,57 +64,57 @@ void CTextStack_segment(struct CTextStack *self){
 }
 
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...){
-    self->segment(self);
-    self->format(self, "%c",'<');
-    self->text(self,tag);
+    CTextStack_segment(self);
+    CTextStack_format(self, "%c",'<');
+    CTextStack_text(self,tag);
 
 
     if(format!=NULL){
-        self->format(self, "%c",' ');
+        CTextStack_format(self, "%c",' ');
 
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    self->format(self, "%c",'>');
+    CTextStack_format(self, "%c",'>');
 
 
     self->ident_level += 1;
 }
 
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
-    self->segment(self);
-    self->format(self, "%c",'<');
+    CTextStack_segment(self);
+    CTextStack_format(self, "%c",'<');
 
-    self->text(self,tag);
+    CTextStack_text(self,tag);
 
 
     if(format!=NULL){
-        self->format(self, "%c",' ');
+        CTextStack_format(self, "%c",' ');
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    self->format(self, "%c",'>');
+    CTextStack_format(self, "%c",'>');
 
 
 }
 
 void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...){
-    self->segment(self);
-    self->format(self, "%c",'<');
+    CTextStack_segment(self);
+    CTextStack_format(self, "%c",'<');
 
-    self->text(self,tag);
+    CTextStack_text(self,tag);
 
 
     if(format!=NULL){
-        self->format(self, "%c",' ');
+        CTextStack_format(self, "%c",' ');
 
         va_list  argptr;
         va_start(argptr, format);
         private_ctext_generate_formated_text(self,format,argptr);
     }
-    self->text(self,"/>");
+    CTextStack_text(self,"/>");
 
 }
 
@@ -124,8 +124,7 @@ void ctext_open(struct CTextStack *self, const char *tag){
         self->ident_level += 1;
         return;
     }
-
-    self->$open(self, tag, NULL);
+    CTextStack_$open(self, tag, NULL);
 }
 
 
@@ -139,12 +138,12 @@ void ctext_close(struct CTextStack *self, const char *tag){
         return;
     }
     self->ident_level -= 1;
-    self->segment(self);
+    CTextStack_segment(self);
 
 
-    self->text(self,"</");
-    self->text(self,tag);
-    self->format(self, "%c",'>');
+    CTextStack_text(self,"</");
+    CTextStack_text(self,tag);
+    CTextStack_format(self, "%c",'>');
 
 }
 

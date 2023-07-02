@@ -5,12 +5,12 @@
 int main(){
     
     CTextStack *s = newCTextStack_string_empty();
-    s->text(s,"          Mateus            ");
-    s->self_trim(s);
+    CTextStack_text(s,"          Mateus            ");
+    CTextStack_self_trim(s);
     //printf("%li\n",s->size);
-    //s->represent(s);
+    CTextStack_represent(s);
     
-    s->free(s);
+    CTextStack_free(s);
     
 
 

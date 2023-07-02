@@ -24,12 +24,12 @@ struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, lon
     long formated_end = private_CTextStack_transform_index(self,end);
 
     if(formated_starter == formated_end){
-        new_element->format(new_element,"%c",self->rendered_text[formated_starter]);
+        CTextStack_format(new_element,"%c",self->rendered_text[formated_starter]);
         return new_element;
     }
 
     for(long i =formated_starter; i < formated_end; i++){
-        new_element->format(new_element,"%c",self->rendered_text[i]);
+        CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
 
     return new_element;
@@ -37,7 +37,7 @@ struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, lon
 }
 
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
-    CTextStack *new_stack = self->substr(self,starter,end);
+    CTextStack *new_stack = CTextStack_substr(self,starter,end);
     private_CTextStack_parse_ownership(self,new_stack);
 
 }
@@ -49,25 +49,25 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
 
     long element_size = (long)strlen(element);
     for(long i = 0; i < self->size;i++){
-        CTextStack  *possible_ocurrence  = self->substr(self,i,i+element_size);
+        CTextStack  *possible_ocurrence  = CTextStack_substr(self,i,i+element_size);
 
         if(strcmp(possible_ocurrence->rendered_text,element)== 0){
-            new_element->text(new_element,element_to_replace);
+            CTextStack_text(new_element,element_to_replace);
             i+=element_size -1;
         }
 
         else{
-            new_element->format(new_element,"%c",self->rendered_text[i]);
+            CTextStack_format(new_element,"%c",self->rendered_text[i]);
         }
 
-        possible_ocurrence->free(possible_ocurrence);
+        CTextStack_free(possible_ocurrence);
 
     }
     return new_element;
 }
 
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
-    CTextStack  *new_stack = self->replace(self,element,element_to_replace);
+    CTextStack  *new_stack = CTextStack_replace(self,element,element_to_replace);
     private_CTextStack_parse_ownership(self,new_stack);
 }
 
@@ -75,12 +75,12 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 long CtextStack_index_of(struct  CTextStack *self,const char *element){
     long element_size = (long)strlen(element);
     for(int i = 0; i < self->size; i++){
-        CTextStack  *possible_element = self->substr(self,i,i+element_size);
+        CTextStack  *possible_element = CTextStack_substr(self,i,i+element_size);
         if(strcmp(possible_element->rendered_text,element) == 0){
-            possible_element->free(possible_element);
+            CTextStack_free(possible_element);
             return i;
         }
-        possible_element->free(possible_element);
+        CTextStack_free(possible_element);
 
     }
     return -1;
@@ -99,14 +99,14 @@ struct CTextStack *CTextStack_reverse(struct CTextStack *self){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
     for(long i = (long)self->size; i >= 0 ; i--){
-        new_element->format(new_element,"%c",self->rendered_text[i]);
+        CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
     return new_element;
 
 }
 
 void CTextStack_self_reverse(struct CTextStack *self){
-    CTextStack *new_stack = self->reverse(self);
+    CTextStack *new_stack = CTextStack_reverse(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
 
@@ -122,14 +122,14 @@ struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long en
         if(i >= formated_starter && i <= formated_end){
             continue;
         }
-        new_element->format(new_element,"%c",self->rendered_text[i]);
+        CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
     return new_element;
 }
 
 
 void  CTextStack_self_pop(struct CTextStack *self, long starter, long end){
-    CTextStack  *new_stack = self->pop(self, starter, end);
+    CTextStack  *new_stack = CTextStack_pop(self, starter, end);
     private_CTextStack_parse_ownership(self,new_stack);
 }
 
@@ -141,17 +141,17 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
 
     long converted_point = private_CTextStack_transform_index(self,point);
     for(long i = 0; i < converted_point; i++){
-        new_element->format(new_element,"%c",self->rendered_text[i]);
+        CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
-    new_element->text(new_element,element);
+    CTextStack_text(new_element,element);
     for(long i = converted_point; i < self->size; i++){
-        new_element->format(new_element,"%c",self->rendered_text[i]);
+        CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
     return new_element;
 }
 
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element){
-    CTextStack  *new_stack = self->insert_at(self, point,element);
+    CTextStack  *new_stack = CTextStack_insert_at(self, point,element);
     private_CTextStack_parse_ownership(self,new_stack);
 }
 
@@ -162,7 +162,7 @@ struct CTextStack *CTextStack_trim(struct CTextStack *self){
     long start_point = 0;
     for(int i = 0; i < self->size; i ++){
         char current_char =self->rendered_text[i];
-        long invalid_point = invalid_elements->index_of_char(invalid_elements,current_char);
+        long invalid_point = CtextStack_index_of_char(invalid_elements,current_char);
         bool is_invalid = invalid_point != -1;
         if(!is_invalid){
             start_point = i;
@@ -173,19 +173,19 @@ struct CTextStack *CTextStack_trim(struct CTextStack *self){
     for(long i = (long)self->size -1; i >= 0; i--){
 
         char current_char =self->rendered_text[i];
-        long invalid_point = invalid_elements->index_of_char(invalid_elements,current_char);
+        long invalid_point = CtextStack_index_of_char(invalid_elements,current_char);
         bool is_invalid = invalid_point != -1;
         if(!is_invalid){
             end_point = i+1;
             break;
         }
     }
-    invalid_elements->free(invalid_elements);
-    return self->substr(self,start_point,end_point);
+    CTextStack_free(invalid_elements);
+    CTextStack_substr(self,start_point,end_point);
 
 }
 
 void CTextStack_self_trim(struct CTextStack *self){
-    CTextStack  *new_stack = self->trim(self);
+    CTextStack  *new_stack = CTextStack_trim(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
