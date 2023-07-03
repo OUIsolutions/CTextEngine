@@ -33,6 +33,11 @@ SOFTWARE.
 #include <stdio.h>
 
 
+
+#define CTEXT_BY_OWNESHIP 1
+#define CTEXT_BY_COPY 2
+#define CTEXT_BY_REFERENCE 3
+
 //
 // Created by jurandi on 18-04-2023.
 //
@@ -178,7 +183,6 @@ void CTextStack_restart(struct CTextStack *self);
 
 
 //algorithm methods
-long private_CText_transform_index(struct CTextStack *self, long value);
 
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
@@ -272,6 +276,37 @@ typedef struct CTextStackModule{
 
 CTextStackModule newCTextStackModule();
 
+
+
+
+
+typedef struct CTextArray{
+
+    CTextStack **elements;
+    bool *ownership;
+    long size;
+
+}CTextArray;
+
+CTextArray * newCTextArray();
+CTextArray * CTextArray_split(CTextStack *element, char *target);
+void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode);
+
+void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element);
+void CTextArray_append_by_copy(CTextArray *self,CTextStack *element);
+void CTextArray_append_by_reference(CTextArray *self,CTextStack *element);
+
+CTextStack * CTextArray_get_by_ownership(CTextArray *self, int position);
+CTextStack * CTextArray_get_by_copy(CTextArray *self, int position);
+CTextStack * CTextArray_get_by_reference(CTextArray *self, int position);
+
+CTextStack * CTextArray_join(CTextArray *self, char *element);
+
+
+
+
+
+long private_CText_transform_index(long size, long value);
 
 
 void private_ctext_generate_formated_text(
@@ -380,29 +415,14 @@ struct CTextStack * CTextStack_clone(struct CTextStack *self){
 }
 
 
-long private_CText_transform_index(struct CTextStack *self, long value){
-    long formated_value = value;
-
-    if(formated_value >= (long)self->size){
-        formated_value = (long)self->size;
-    }
-
-    if(formated_value  < 0){
-        formated_value = (long)self->size + (formated_value +1);
-    }
-    if(formated_value <0){
-        formated_value = 0;
-    }
-    return formated_value;
-}
 
 
 struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
-    long formated_starter = private_CTextStack_transform_index(self,starter);
-    long formated_end = private_CTextStack_transform_index(self,end);
+    long formated_starter = private_CText_transform_index(self->size, starter);
+    long formated_end = private_CText_transform_index(self->size, end);
 
     if(formated_starter == formated_end){
         CTextStack_format(new_element,"%c",self->rendered_text[formated_starter]);
@@ -496,8 +516,8 @@ void CTextStack_self_reverse(struct CTextStack *self){
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
-    long formated_starter = private_CTextStack_transform_index(self,starter);
-    long formated_end = private_CTextStack_transform_index(self,end);
+    long formated_starter = private_CText_transform_index(self->size, starter);
+    long formated_end = private_CText_transform_index(self->size, end);
 
     for(int i =0; i < self->size; i ++){
         if(i >= formated_starter && i <= formated_end){
@@ -520,7 +540,7 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
 
-    long converted_point = private_CTextStack_transform_index(self,point);
+    long converted_point = private_CText_transform_index(self->size, point);
     for(long i = 0; i < converted_point; i++){
         CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }
@@ -565,6 +585,7 @@ struct CTextStack *CTextStack_trim(struct CTextStack *self){
     CTextStack_substr(self,start_point,end_point);
 
 }
+
 
 void CTextStack_self_trim(struct CTextStack *self){
     CTextStack  *new_stack = CTextStack_trim(self);
@@ -769,6 +790,59 @@ CTextStackModule newCTextStackModule(){
 
 
 
+
+
+CTextArray * newCTextArray(){
+    CTextArray *self =(CTextArray**) malloc(sizeof (CTextArray));
+    self->elements = malloc(0);
+    self->ownership = malloc(0);
+    self->size = 0;
+    return self;
+}
+//CTextArray * CTextArray_split(CTextStack *element, char *target);
+
+void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
+    self->elements = (CTextArray**) realloc(self->elements,(self->size +1)* sizeof (CTextArray*));
+    self->ownership= (bool*) realloc(self->ownership,(self->size+1) *sizeof (bool));
+
+    if(mode == CTEXT_BY_COPY ){
+        self->elements[self->size] = CTextStack_clone(element);
+    }
+    else{
+        self->elements[self->size] = element;
+    }
+
+    self->ownership[self->size] = false;
+    if(mode == CTEXT_BY_COPY || mode == CTEXT_BY_OWNESHIP){
+        self->ownership[self->size] = true;
+    }
+    self->size+=1;
+}
+
+void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element){
+    CTextArray_append_raw(self,element,CTEXT_BY_OWNESHIP);
+}
+
+void CTextArray_append_by_copy(CTextArray *self,CTextStack *element){
+    CTextArray_append_raw(self,element,CTEXT_BY_COPY);
+}
+
+void CTextArray_append_by_reference(CTextArray *self,CTextStack *element){
+    CTextArray_append_raw(self,element,CTEXT_BY_REFERENCE);
+}
+
+CTextStack * CTextArray_get_by_ownership(CTextArray *self, int position){
+    CTextStack  *element = self->elements[position];
+}
+
+CTextStack * CTextArray_get_by_copy(CTextArray *self, int position);
+CTextStack * CTextArray_get_by_reference(CTextArray *self, int position);
+
+CTextStack * CTextArray_join(CTextArray *self, char *element);
+
+
+
+
 void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){
     long  text_size = strlen(format);
@@ -869,6 +943,23 @@ void private_ctext_generate_formated_text(
 
 
     va_end(argptr);
+}
+
+
+long private_CText_transform_index(long size , long value){
+    long formated_value = value;
+
+    if(formated_value >= size){
+        formated_value = size;
+    }
+
+    if(formated_value  < 0){
+        formated_value = size + (formated_value +1);
+    }
+    if(formated_value <0){
+        formated_value = 0;
+    }
+    return formated_value;
 }
 
 #endif // CTEXTENGINE_H
