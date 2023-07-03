@@ -1,7 +1,7 @@
 
 
 CTextArray * newCTextArray(){
-    CTextArray *self =(CTextArray**) malloc(sizeof (CTextArray));
+    CTextArray *self =(CTextArray*) malloc(sizeof (CTextArray));
     self->elements = malloc(0);
     self->ownership = malloc(0);
     self->size = 0;
@@ -10,7 +10,7 @@ CTextArray * newCTextArray(){
 //CTextArray * CTextArray_split(CTextStack *element, char *target);
 
 void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
-    self->elements = (CTextArray**) realloc(self->elements,(self->size +1)* sizeof (CTextArray*));
+    self->elements = (CTextStack**)realloc(self->elements,(self->size +1)* sizeof (CTextStack**));
     self->ownership= (bool*) realloc(self->ownership,(self->size+1) *sizeof (bool));
 
     if(mode == CTEXT_BY_COPY ){
