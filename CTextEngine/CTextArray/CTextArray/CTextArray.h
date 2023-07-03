@@ -10,6 +10,7 @@ typedef struct CTextArray{
 
 CTextArray * newCTextArray();
 CTextArray * CTextArray_split(CTextStack *element, char *target);
+void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode);
 
 void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element);
 void CTextArray_append_by_copy(CTextArray *self,CTextStack *element);

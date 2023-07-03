@@ -25,6 +25,7 @@ SOFTWARE.
 #define CTEXTENGINE_H
 
 #include "depencies.h"
+#include  "constants.h"
 #include "tags.h"
 #include "CTextStack/declarations.h"
 #include "CTextArray/declarations.h"
