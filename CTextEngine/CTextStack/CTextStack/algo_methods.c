@@ -1,5 +1,5 @@
 
-long private_CTextStack_transform_index(struct CTextStack *self, long value){
+long private_CText_transform_index(struct CTextStack *self, long value){
     long formated_value = value;
 
     if(formated_value >= (long)self->size){
@@ -20,8 +20,8 @@ struct CTextStack * CTextStack_substr(struct CTextStack *self, long starter, lon
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
-    long formated_starter = private_CTextStack_transform_index(self,starter);
-    long formated_end = private_CTextStack_transform_index(self,end);
+    long formated_starter = private_CText_transform_index(self, starter);
+    long formated_end = private_CText_transform_index(self, end);
 
     if(formated_starter == formated_end){
         CTextStack_format(new_element,"%c",self->rendered_text[formated_starter]);
@@ -115,8 +115,8 @@ void CTextStack_self_reverse(struct CTextStack *self){
 struct CTextStack *CTextStack_pop(struct CTextStack *self, long starter, long end){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
-    long formated_starter = private_CTextStack_transform_index(self,starter);
-    long formated_end = private_CTextStack_transform_index(self,end);
+    long formated_starter = private_CText_transform_index(self, starter);
+    long formated_end = private_CText_transform_index(self, end);
 
     for(int i =0; i < self->size; i ++){
         if(i >= formated_starter && i <= formated_end){
@@ -139,7 +139,7 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
 
-    long converted_point = private_CTextStack_transform_index(self,point);
+    long converted_point = private_CText_transform_index(self, point);
     for(long i = 0; i < converted_point; i++){
         CTextStack_format(new_element,"%c",self->rendered_text[i]);
     }

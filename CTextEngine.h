@@ -178,7 +178,7 @@ void CTextStack_restart(struct CTextStack *self);
 
 
 //algorithm methods
-long private_CTextStack_transform_index(struct CTextStack *self, long value);
+long private_CText_transform_index(struct CTextStack *self, long value);
 
 struct CTextStack *CTextStack_substr(struct CTextStack *self, long starter, long end);
 void CTextStack_self_substr(struct CTextStack *self, long starter, long end);
@@ -380,7 +380,7 @@ struct CTextStack * CTextStack_clone(struct CTextStack *self){
 }
 
 
-long private_CTextStack_transform_index(struct CTextStack *self, long value){
+long private_CText_transform_index(struct CTextStack *self, long value){
     long formated_value = value;
 
     if(formated_value >= (long)self->size){
