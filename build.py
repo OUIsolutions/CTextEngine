@@ -5,13 +5,10 @@ from os import listdir,remove
 
 
 STARTER  = f'CTextEngine/CTextEngineMain.h'
-amalgamated_code = ct.generate_amalgamated_code(STARTER)
-
-with open('exemples/CTextEngine.h','w') as f:
-    f.write(amalgamated_code)
+ct.generate_amalgamated_code(STARTER,'CTextEngine.h')
 
 
-ct.execute_test_for_folder('clang','exemples')
+ct.execute_test_for_folder('gcc','exemples')
 print('all test passed')
 '''
 
