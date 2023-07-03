@@ -9,7 +9,7 @@ int main(){
         CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
         m.free(s);
     }
-    
+
 
 
 }
