@@ -100,3 +100,20 @@ void private_ctext_generate_formated_text(
 
     va_end(argptr);
 }
+
+
+long private_CText_transform_index(long size , long value){
+    long formated_value = value;
+
+    if(formated_value >= size){
+        formated_value = size;
+    }
+
+    if(formated_value  < 0){
+        formated_value = size + (formated_value +1);
+    }
+    if(formated_value <0){
+        formated_value = 0;
+    }
+    return formated_value;
+}
