@@ -9,9 +9,9 @@ typedef struct CTextArrayModule{
     void (*append_by_reference)(CTextArray *self,CTextStack *element);
 
 
-    CTextStack *(*get_by_ownership)(CTextArray *self, int position);
-    CTextStack * (*get_by_copy)(CTextArray *self, int position);
-    CTextStack * (*get_by_reference)(CTextArray *self, int position);
+    CTextStack *(*get_by_ownership)(CTextArray *self, long position);
+    CTextStack * (*get_by_copy)(CTextArray *self, long position);
+    CTextStack * (*get_by_reference)(CTextArray *self, long position);
     CTextStack * (*join)(CTextArray *self, char *element);
     void (*free)(CTextArray *self);
 
