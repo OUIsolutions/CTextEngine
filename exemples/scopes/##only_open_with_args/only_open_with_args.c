@@ -1,6 +1,6 @@
 
 
-#include "../../CTextEngine.h"
+#include "../../../CTextEngine.h"
 
 int main(){
     CTextStackModule m = newCTextStackModule();
