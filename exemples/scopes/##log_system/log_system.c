@@ -1,5 +1,5 @@
 
-#include "../../CTextEngine.h"
+#include "../../../CTextEngine.h"
 
 
 struct Car {
@@ -35,13 +35,7 @@ int main(){
    m.close(s,NULL);
   
     printf("%s\n",s->rendered_text);
-    int ident_level =s->ident_level;
-    if(ident_level == 0){
-            printf("all identation is ok\n");
-        }else{
-            printf("identation error\n");
-            printf("unclosed tags: %d\n",ident_level);
-        }
+
    m.free(s);
         
 
