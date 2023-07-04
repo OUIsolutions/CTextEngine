@@ -4,15 +4,16 @@
 //#include "../../../CTextEngine.h"
 
 int main(){
+
     CTextStackModule m = newCTextStackModule();
-    CTextStack *s = newCTextStack_string("my string");
 
-    //remove the second char and third times
-    m.self_pop(s,1,2);
-    printf("midle:%s\n",s->rendered_text);
+    CTextStack *s = newCTextStack_string(
+            "my name is @name and my @age"
+    );
 
+    CTextStack *name_replaced  = m.replace(s,"@name","Mateus");
+    CTextStack *age_replaced = m.replace_long(name_replaced,"@age",26);
 
-    m.free(s);
 
 
 }

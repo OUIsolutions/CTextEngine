@@ -87,6 +87,13 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
 
+struct CTextStack *CTextStack_replace_long(struct CTextStack *self,const char *element, long element_to_replace);
+void CTextStack_self_replace_long(struct CTextStack *self,const char *element, long element_to_replace);
+
+struct CTextStack *CTextStack_replace_double(struct CTextStack *self,const char *element, double element_to_replace);
+void CTextStack_self_replace_double(struct CTextStack *self,const char *element, double element_to_replace);
+
+
 struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element);
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
 

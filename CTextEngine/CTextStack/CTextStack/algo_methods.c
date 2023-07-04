@@ -57,6 +57,32 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 }
 
 
+struct CTextStack *CTextStack_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
+    char num_conversion[20] = {0};
+    sprintf("%ld",num_conversion,element_to_replace);
+    return CTextStack_replace(self,element,num_conversion);
+}
+
+void CTextStack_self_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
+    CTextStack  *new_stack = CTextStack_replace_long(self,element,element_to_replace);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+struct CTextStack *CTextStack_replace_double(struct CTextStack *self,const char *element, double element_to_replace){
+    char num_conversion[20] = {0};
+    sprintf("%lf",num_conversion,element_to_replace);
+    return CTextStack_replace(self,element,num_conversion);
+}
+
+
+void CTextStack_self_replace_double(struct CTextStack *self,const char *element, double element_to_replace){
+    CTextStack  *new_stack = CTextStack_replace_double(self,element,element_to_replace);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+
 long CtextStack_index_of(struct  CTextStack *self,const char *element){
     long element_size = (long)strlen(element);
     for(int i = 0; i < self->size; i++){
@@ -70,6 +96,7 @@ long CtextStack_index_of(struct  CTextStack *self,const char *element){
     }
     return -1;
 }
+
 
 long CtextStack_index_of_char(struct  CTextStack *self,char element){
     for(int i = 0; i < self->size; i++) {
