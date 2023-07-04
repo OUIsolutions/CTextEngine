@@ -4,10 +4,10 @@
 int main(){
     CTextStackModule m = newCTextStackModule();
     CTextStack *s = newCTextStack_string("my string");
-    CTextStack *s1 = m.clone(s);
-    printf("%s",s->rendered_text);
-    printf("%s",s1->rendered_text);
-    m.free(s);
-    m.free(s1);
+    printf("%s\n",s->rendered_text);
+
+    char *r = m.self_transform_in_string_and_self_clear(s);
+    printf("%s\n",r);
+    free(r);
 
 }

@@ -93,7 +93,7 @@ int main(){
     const char *text = "text exemple";
     const char *breakline = "";
     const char *separator = "";
-    struct CTextStack *s = newCTextStack(breakline, separator);
+    CTextStack *s = newCTextStack(breakline, separator);
 
    m.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
        m.open(s,CTEXT_HEAD);
@@ -132,7 +132,7 @@ int main(){
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     int age = 15;
 
@@ -232,7 +232,7 @@ int main(){
     john.car.name = "Ferrari";
     john.car.year = 2020;
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
    m.format(s,"Name: %s",john.name);
    m.segment_format(s,"Age: %d",john.age);
@@ -264,8 +264,7 @@ int main(){
     const char *columns[] = {"name","email","passord"};
     const char *values[] = {"John","john@email.com","1234"};
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    m.format(s,"INSERT INTO '%s' (",table);
    m.open(s,NULL);
        m.segment_format(s,"'%s'",columns[0]);
@@ -303,7 +302,7 @@ The **text**, Method is responsable for append new text into the stack
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = newCTextStack_string_empty();
 
    m.text(s,"test element");
    printf("%s\n",s->rendered_text);
@@ -336,7 +335,7 @@ format has the same function as text, but allow formatations
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack("", "");
+    struct CTextStack *s = newCTextStack_string_empty();
     int age = 20;
     const char *name = "John";
     m.format(s,"Hes name is %s, he is %d years old ",name,age);
@@ -371,7 +370,7 @@ Opens an new scope , if tag is NULL it will not render the current tag
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    m.open(s,CTEXT_HTML);
    m.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
@@ -387,8 +386,7 @@ open an new scope but allowing you to pass an formated tag props
 
 int main(){
     CTextStackModule m = newCTextStackModule();
-
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
    m.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
    m.close(s,CTEXT_HTML);
@@ -405,8 +403,7 @@ Only open an scope , its ideal for "meta" tags
 
 int main(){
     CTextStackModule m = newCTextStackModule();
-
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
    m.only$open(
         s,
