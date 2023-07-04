@@ -1,13 +1,14 @@
 
 
 #include "CTextEngine/CTextEngineMain.h"
-//#include "../../../CTextEngine.h"
 
 int main(){
 
     CTextStackModule m = newCTextStackModule();
+    CTextArrayModule v = newCTextArrayModule();
 
+    CTextArray * test = newCTextArray();
 
-
+    
 
 }

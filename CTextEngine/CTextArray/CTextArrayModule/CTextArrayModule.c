@@ -11,6 +11,7 @@ CTextArrayModule newCTextArrayModule(){
     self.get_by_copy =CTextArray_get_by_copy;
     self.get_by_reference = CTextArray_get_by_reference;
     self.get_by_ownership =CTextArray_get_by_ownership;
+    self.join =CTextArray_join;
     self.free = CTextArray_free;
 
 }

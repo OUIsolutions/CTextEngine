@@ -8,6 +8,7 @@ CTextArray * newCTextArray(){
     return self;
 }
 CTextArray * CTextArray_split(CTextStack *element, char *target){
+
 }
 
 void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
@@ -61,7 +62,13 @@ CTextStack * CTextArray_get_by_reference(CTextArray *self, long position){
 }
 
 CTextStack * CTextArray_join(CTextArray *self, char *element){
-    
+    CTextStack  *stack = newCTextStack_string_empty();
+    for(long i = 0; i < self->size; i++){
+        CTextStack_format(stack,"%t",self->elements[i]);
+        if(element){
+            CTextStack_format(stack,"%s",element);
+        }
+    }
 }
 
 
