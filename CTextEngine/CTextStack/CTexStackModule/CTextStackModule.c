@@ -26,6 +26,12 @@ CTextStackModule newCTextStackModule(){
     self.replace = CTextStack_replace;
     self.self_replace = CTextStack_self_replace;
 
+    self.replace_long = CTextStack_replace_long;
+    self.self_replace_long =CTextStack_self_replace_long;
+
+    self.replace_double = CTextStack_replace_double;
+    self.self_replace_double =CTextStack_self_replace_double;
+
     self.insert_at = CTextStack_insert_at;
     self.self_insert_at  = CTextStack_self_insert_at;
 

@@ -59,9 +59,10 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 
 struct CTextStack *CTextStack_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
     char num_conversion[20] = {0};
-    sprintf("%ld",num_conversion,element_to_replace);
+    sprintf(num_conversion,"%ld",element_to_replace);
     return CTextStack_replace(self,element,num_conversion);
 }
+
 
 void CTextStack_self_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
     CTextStack  *new_stack = CTextStack_replace_long(self,element,element_to_replace);
@@ -70,9 +71,11 @@ void CTextStack_self_replace_long(struct CTextStack *self,const char *element, l
 
 
 struct CTextStack *CTextStack_replace_double(struct CTextStack *self,const char *element, double element_to_replace){
-    char num_conversion[20] = {0};
-    sprintf("%lf",num_conversion,element_to_replace);
-    return CTextStack_replace(self,element,num_conversion);
+    CTextStack  *num_formated = newCTextStack_string_empty();
+    CTextStack_format(num_formated,"%f",element_to_replace);
+    CTextStack  *result = CTextStack_replace(self,element,num_formated->rendered_text);
+    CTextStack_free(num_formated);
+    return result;
 }
 
 
