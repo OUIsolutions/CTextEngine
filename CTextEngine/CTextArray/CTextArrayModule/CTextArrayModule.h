@@ -13,6 +13,7 @@ typedef struct CTextArrayModule{
     CTextStack * (*get_by_copy)(CTextArray *self, int position);
     CTextStack * (*get_by_reference)(CTextArray *self, int position);
     CTextStack * (*join)(CTextArray *self, char *element);
+    void (*free)(CTextArray *self);
 
 
 }CTextArrayModule;

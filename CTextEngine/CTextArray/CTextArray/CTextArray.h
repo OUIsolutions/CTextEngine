@@ -21,3 +21,5 @@ CTextStack * CTextArray_get_by_copy(CTextArray *self, int position);
 CTextStack * CTextArray_get_by_reference(CTextArray *self, int position);
 
 CTextStack * CTextArray_join(CTextArray *self, char *element);
+
+void CTextArray_free(CTextArray *self);
