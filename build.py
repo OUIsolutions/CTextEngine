@@ -10,10 +10,18 @@ ct.generate_amalgamated_code(STARTER,'CTextEngine.h')
 
 ct.execute_test_for_folder('gcc','exemples',use_valgrind=True)
 print('all test passed')
-'''
 
-ct.include_code_in_markdown('README.md')
+def modifier(text:str):
+    formated = text
+    targets = [
+        '../../../CTextEngine.h',
+        '../../CTextEngine.h',
+        '../CTextEngine.h'
+    ]
+    for t in targets:
+        formated  = formated.replace(t,'CTextEngine.h')
+    return  formated
 
-with open('CTextEngine.h','w') as f:
-    f.write(amalgamated_code)
-'''
+
+ct.include_code_in_markdown('README.md',save_file=True, modifier=modifier)
+
