@@ -195,6 +195,13 @@ struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *elemen
 void CTextStack_self_replace(struct CTextStack *self,const char *element, const char *element_to_replace);
 
 
+struct CTextStack *CTextStack_replace_long(struct CTextStack *self,const char *element, long element_to_replace);
+void CTextStack_self_replace_long(struct CTextStack *self,const char *element, long element_to_replace);
+
+struct CTextStack *CTextStack_replace_double(struct CTextStack *self,const char *element, double element_to_replace);
+void CTextStack_self_replace_double(struct CTextStack *self,const char *element, double element_to_replace);
+
+
 struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, const char *element);
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
 
@@ -261,6 +268,14 @@ typedef struct CTextStackModule{
 
     struct CTextStack *(*replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
     void (*self_replace)(struct CTextStack *self,const char *element, const char *element_to_replace);
+
+
+    struct CTextStack *(*replace_long)(struct CTextStack *self,const char *element, long element_to_replace);
+    void(*self_replace_long)(struct CTextStack *self,const char *element, long element_to_replace);
+
+
+    struct CTextStack *(*replace_double)(struct CTextStack *self,const char *element, double element_to_replace);
+    void (*self_replace_double)(struct CTextStack *self,const char *element, double element_to_replace);
 
 
     struct CTextStack * (*reverse)(struct CTextStack *self);
@@ -472,6 +487,35 @@ void CTextStack_self_replace(struct CTextStack *self,const char *element, const 
 }
 
 
+struct CTextStack *CTextStack_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
+    char num_conversion[20] = {0};
+    sprintf(num_conversion,"%ld",element_to_replace);
+    return CTextStack_replace(self,element,num_conversion);
+}
+
+
+void CTextStack_self_replace_long(struct CTextStack *self,const char *element, long element_to_replace){
+    CTextStack  *new_stack = CTextStack_replace_long(self,element,element_to_replace);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+struct CTextStack *CTextStack_replace_double(struct CTextStack *self,const char *element, double element_to_replace){
+    CTextStack  *num_formated = newCTextStack_string_empty();
+    CTextStack_format(num_formated,"%f",element_to_replace);
+    CTextStack  *result = CTextStack_replace(self,element,num_formated->rendered_text);
+    CTextStack_free(num_formated);
+    return result;
+}
+
+
+void CTextStack_self_replace_double(struct CTextStack *self,const char *element, double element_to_replace){
+    CTextStack  *new_stack = CTextStack_replace_double(self,element,element_to_replace);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+
+
 long CtextStack_index_of(struct  CTextStack *self,const char *element){
     long element_size = (long)strlen(element);
     for(int i = 0; i < self->size; i++){
@@ -485,6 +529,7 @@ long CtextStack_index_of(struct  CTextStack *self,const char *element){
     }
     return -1;
 }
+
 
 long CtextStack_index_of_char(struct  CTextStack *self,char element){
     for(int i = 0; i < self->size; i++) {
@@ -771,6 +816,12 @@ CTextStackModule newCTextStackModule(){
     self.replace = CTextStack_replace;
     self.self_replace = CTextStack_self_replace;
 
+    self.replace_long = CTextStack_replace_long;
+    self.self_replace_long =CTextStack_self_replace_long;
+
+    self.replace_double = CTextStack_replace_double;
+    self.self_replace_double =CTextStack_self_replace_double;
+
     self.insert_at = CTextStack_insert_at;
     self.self_insert_at  = CTextStack_self_insert_at;
 
@@ -861,17 +912,33 @@ void private_ctext_generate_formated_text(
         }
 
         if(strcmp(single_test,"%d") == 0) {
-            char result[10];
-            sprintf(result,"%d", va_arg(argptr,int));
+            char result[20] ={0};
+            sprintf(result,"%ld", va_arg(argptr,long));
             CTextStack_text(stack,result);
             i+=1;
             continue;
         }
 
         if(strcmp(single_test,"%f") == 0) {
-            char result[10];
-            sprintf(result,"%f", va_arg(argptr,double ));
-            CTextStack_text(stack,result);
+            char result_text[20]= {0};
+
+            sprintf(result_text,"%lf", va_arg(argptr,double ));
+
+            for(int t = 18; t > 0; t--){
+                char current_char = result_text[t];
+                if(current_char != '0' && current_char != '\0'){
+
+                    if(current_char == '.'){
+                        result_text[t+2]  = '\0';
+                    }
+                    else{
+                        result_text[t+1]  = '\0';
+                    }
+
+                    break;
+                }
+            }
+            CTextStack_text(stack,result_text);
             i+=1;
             continue;
         }
