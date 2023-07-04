@@ -1,7 +1,4 @@
-
-
-#include "CTextEngine/CTextEngineMain.h"
-//#include "../../../CTextEngine.h"
+#include "../../../CTextEngine.h"
 
 int main(){
 
@@ -23,4 +20,6 @@ int main(){
     m.free(s);
 
 
-}
+}//
+// Created by jurandi on 04-07-2023.
+//
