@@ -938,9 +938,6 @@ void private_ctext_generate_formated_text(
         CTextStack_text(stack,element);
     }
 
-
-
-
     va_end(argptr);
 }
 

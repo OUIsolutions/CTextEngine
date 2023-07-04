@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "tags.h": "c",
+        "ctextenginemain.h": "c",
+        "ostream": "cpp",
+        "memory": "cpp",
+        "typeinfo": "c",
+        "extras.h": "c",
+        "stdio.h": "c",
+        "ctextstack.h": "c",
+        "depencies.h": "c",
+        "ctextengine.h": "c"
+    },
+    "python.analysis.typeCheckingMode": "basic"
+}
