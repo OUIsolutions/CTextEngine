@@ -11,8 +11,7 @@ int main(){
     const char *columns[] = {"name","email","passord"};
     const char *values[] = {"John","john@email.com","1234"};
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    m.format(s,"INSERT INTO '%s' (",table);
    m.open(s,NULL);
        m.segment_format(s,"'%s'",columns[0]);

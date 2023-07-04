@@ -24,7 +24,7 @@ int main(){
     john.car.name = "Ferrari";
     john.car.year = 2020;
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
    m.format(s,"Name: %s",john.name);
    m.segment_format(s,"Age: %d",john.age);

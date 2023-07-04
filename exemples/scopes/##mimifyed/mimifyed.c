@@ -9,7 +9,7 @@ int main(){
     const char *text = "text exemple";
     const char *breakline = "";
     const char *separator = "";
-    struct CTextStack *s = newCTextStack(breakline, separator);
+    CTextStack *s = newCTextStack(breakline, separator);
 
    m.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
        m.open(s,CTEXT_HEAD);

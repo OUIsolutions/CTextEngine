@@ -6,7 +6,7 @@
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     int age = 15;
 

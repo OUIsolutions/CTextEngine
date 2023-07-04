@@ -2,8 +2,7 @@
 
 int main(){
     CTextStackModule m = newCTextStackModule();
-
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
    m.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
    m.close(s,CTEXT_HTML);
