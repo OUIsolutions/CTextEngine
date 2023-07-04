@@ -31,10 +31,7 @@ int main(){
    m.segment_text(s,")");
    m.close(s,NULL);
     
-    
 
-
-  
     printf("%s\n",s->rendered_text);
     int ident_level =s->ident_level;
     if(ident_level == 0){
