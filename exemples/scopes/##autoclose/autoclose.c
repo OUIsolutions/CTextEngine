@@ -10,7 +10,6 @@ int main(){
     m.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
     m.free(s);
-
    
     
 }
