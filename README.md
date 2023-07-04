@@ -35,7 +35,7 @@ int main(){
 
 ## Rendering an basic Template 
 
-<!--codeof:exemples/basic_template.c-->
+<!--codeof:exemples/scopes/##basic_template/basic_template.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -74,6 +74,7 @@ int main(){
        m.free(s);
         return 1;
     }
+
   m.free(s);
 
 }
@@ -81,7 +82,7 @@ int main(){
 with the breakline and separator, you can control the size of scopes in te way you want
 these is an exemple of full mimifyed text 
 
-<!--codeof:exemples/scopes.c-->
+<!--codeof:exemples/scopes/##scopes/scopes.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -121,7 +122,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/conditions.c-->
+<!--codeof:exemples/scopes/##conditions/conditions.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -163,7 +164,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/loops.c-->
+<!--codeof:exemples/scopes/##loops/loops.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -203,7 +204,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/log_system.c-->
+<!--codeof:exemples/scopes/##log_system/log_system.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -242,19 +243,13 @@ int main(){
    m.close(s,NULL);
   
     printf("%s\n",s->rendered_text);
-    int ident_level =s->ident_level;
-    if(ident_level == 0){
-            printf("all identation is ok\n");
-        }else{
-            printf("identation error\n");
-            printf("unclosed tags: %d\n",ident_level);
-        }
+
    m.free(s);
         
 
 }
 ~~~
-<!--codeof:exemples/insert_sql.c-->
+<!--codeof:exemples/scopes/##insert_sql/insert_sql.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -289,18 +284,9 @@ int main(){
    m.segment_text(s,")");
    m.close(s,NULL);
     
-    
 
-
-  
     printf("%s\n",s->rendered_text);
-    int ident_level =s->ident_level;
-    if(ident_level == 0){
-            printf("all identation is ok\n");
-        }else{
-            printf("identation error\n");
-            printf("unclosed tags: %d\n",ident_level);
-        }
+
    m.free(s);
         
 
@@ -309,7 +295,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/text.c-->
+<!--codeof:exemples/string_manipulation/##text/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -327,7 +313,7 @@ int main(){
 ~~~
 Same as text, but will break an new line 
 
-<!--codeof:exemples/segment_text.c-->
+<!--codeof:exemples/string_manipulation/##segment_text/segment_text.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -342,7 +328,7 @@ int main(){
 ~~~
 format has the same function as text, but allow formatations 
 
-<!--codeof:exemples/format.c-->
+<!--codeof:exemples/string_manipulation/##format/format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -350,18 +336,18 @@ format has the same function as text, but allow formatations
 int main(){
     CTextStackModule m = newCTextStackModule();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   int age = 20;
-   const char *name = "John";
-  m.format(s,"Hes name is %s, he is %i years old ",name,age);
-   printf("%s\n",s->rendered_text);
-  m.free(s);
+    struct CTextStack *s = newCTextStack("", "");
+    int age = 20;
+    const char *name = "John";
+    m.format(s,"Hes name is %s, he is %d years old ",name,age);
+    printf("%s\n",s->rendered_text);
+    m.free(s);
 
 }
 ~~~
 same as format, but breaking an line 
 
-<!--codeof:exemples/segment_format.c-->
+<!--codeof:exemples/string_manipulation/##segment_format/segment_format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -372,14 +358,14 @@ int main(){
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     int age = 20;
     const char *name = "John";
-   m.segment_format(s,"Hes name is %s, he is %i years old ",name,age);
+   m.segment_format(s,"Hes name is %s, he is %d years old ",name,age);
     printf("%s\n",s->rendered_text);
    m.free(s);
 }
 ~~~
 Opens an new scope , if tag is NULL it will not render the current tag 
 
-<!--codeof:exemples/open.c-->
+<!--codeof:exemples/scopes/##open/open.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -395,7 +381,7 @@ int main(){
 ~~~
 open an new scope but allowing you to pass an formated tag props 
 
-<!--codeof:exemples/open_with_args.c-->
+<!--codeof:exemples/scopes/##open_with_args/open_with_args.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -411,7 +397,7 @@ int main(){
 }
 ~~~
 Only open an scope , its ideal for "meta" tags 
-<!--codeof:exemples/only_open_with_args.c-->
+<!--codeof:exemples/scopes/##only_open_with_args/only_open_with_args.c-->
 ~~~c
 
 
@@ -435,7 +421,7 @@ int main(){
 ~~~
 Implement an autoclose tag 
 
-<!--codeof:exemples/autoclose.c-->
+<!--codeof:exemples/scopes/##autoclose/autoclose.c-->
 ~~~c
 
 
@@ -449,14 +435,11 @@ int main(){
     m.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
     m.free(s);
-
+   
+    
 }
 ~~~
 Close the tag passed, if is null will only downcrease the ident 
-
-<!--codeof:exemples/close.c-->
-~~~c
-#include "CTextEngine.h"
 
 int main(){
     CTextStackModule m = newCTextStackModule();
@@ -469,7 +452,7 @@ int main(){
 }
 ~~~
 free the alocated memory
-<!--codeof:exemples/free.c-->
+<!--codeof:exemples/basic/free.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
