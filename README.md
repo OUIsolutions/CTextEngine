@@ -294,7 +294,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/string_manipulation/##text/text.c-->
+<!--codeof:exemples/stack_manipulation/##text/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -312,7 +312,7 @@ int main(){
 ~~~
 Same as text, but will break an new line 
 
-<!--codeof:exemples/string_manipulation/##segment_text/segment_text.c-->
+<!--codeof:exemples/stack_manipulation/##segment_text/segment_text.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -327,7 +327,7 @@ int main(){
 ~~~
 format has the same function as text, but allow formatations 
 
-<!--codeof:exemples/string_manipulation/##format/format.c-->
+<!--codeof:exemples/stack_manipulation/##format/format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -346,7 +346,7 @@ int main(){
 ~~~
 same as format, but breaking an line 
 
-<!--codeof:exemples/string_manipulation/##segment_format/segment_format.c-->
+<!--codeof:exemples/stack_manipulation/##segment_format/segment_format.c-->
 ~~~c
 
 #include "CTextEngine.h"
