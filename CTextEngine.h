@@ -306,7 +306,7 @@ CTextArray * newCTextArray();
 CTextArray * CTextArray_split(CTextStack *element, char *target);
 void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode);
 
-void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element);
+void CTextArray_append_assuming_ownership(CTextArray *self, CTextStack *element);
 void CTextArray_append_by_copy(CTextArray *self,CTextStack *element);
 void CTextArray_append_by_reference(CTextArray *self,CTextStack *element);
 
@@ -869,7 +869,7 @@ void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
     self->size+=1;
 }
 
-void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element){
+void CTextArray_append_assuming_ownership(CTextArray *self, CTextStack *element){
     CTextArray_append_raw(self,element,CTEXT_BY_OWNESHIP);
 }
 

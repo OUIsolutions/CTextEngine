@@ -29,9 +29,17 @@ void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
     self->size+=1;
 }
 
-void CTextArray_append_by_ownership(CTextArray *self,CTextStack *element){
+void CTextArray_append_assuming_ownership(CTextArray *self, CTextStack *element){
     CTextArray_append_raw(self,element,CTEXT_BY_OWNESHIP);
 }
+
+
+void CTextArray_append_string(CTextArray *self,const char *element){
+    CTextStack  *s = newCTextStack_string(element);
+    CTextArray_append_assuming_ownership(self, s);
+
+}
+
 
 void CTextArray_append_by_copy(CTextArray *self,CTextStack *element){
     CTextArray_append_raw(self,element,CTEXT_BY_COPY);
@@ -71,7 +79,11 @@ CTextStack * CTextArray_join(CTextArray *self, char *element){
     }
 }
 
-
+void CTextArray_represent(CTextArray *self){
+    for(long i = 0 ; i < self->size; i++){
+        CTextStack_represent(self->elements[i]);
+    }
+}
 void CTextArray_free(CTextArray *self){
     for(long i = 0 ; i < self->size; i++){
         bool owner = self->ownership[i];

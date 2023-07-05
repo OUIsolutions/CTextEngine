@@ -9,6 +9,6 @@ int main(){
 
     CTextArray * test = newCTextArray();
 
-    
+
 
 }
