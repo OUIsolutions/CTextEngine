@@ -15,5 +15,6 @@ CTextArrayModule newCTextArrayModule(){
     self.join =CTextArray_join;
     self.represent = CTextArray_represent;
     self.free = CTextArray_free;
+    return self;
 
 }
