@@ -11,6 +11,7 @@ from os.path import isdir,dirname
 
 def create_exemples(test_name:str,output:str):
     rmtree('exemples',ignore_errors=True)
+    makedirs('exemples')
     elements = listdir('tests/')
     for e in elements:
         path = f'tests/{e}'
@@ -23,4 +24,3 @@ def create_exemples(test_name:str,output:str):
         
         with open(f'exemples/{e.replace("T_","")}.c','w') as arq2:
             arq2.write(content)
-            
