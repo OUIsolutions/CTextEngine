@@ -9,7 +9,8 @@
         "stdio.h": "c",
         "ctextstack.h": "c",
         "depencies.h": "c",
-        "ctextengine.h": "c"
+        "ctextengine.h": "c",
+        "ctextengine_test.h": "c"
     },
     "python.analysis.typeCheckingMode": "basic"
 }
