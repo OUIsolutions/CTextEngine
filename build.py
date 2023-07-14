@@ -1,20 +1,24 @@
 
-import Build.CToolKit as ct 
-from os import listdir,remove
+import Build.CToolKit as ct
+from Build.exemple_build import create_exemples
+from Build.full_folder_zip import zip_folder
 
 
+STARTER = 'doTheWorld/doTheWorldMain.h'
+TEST_NAME  = 'doTheWorld_test.h'
 
-STARTER  = f'CTextEngine/CTextEngineMain.h'
-amalgamated_code = ct.generate_amalgamated_code(STARTER)
-
-with open('exemples/CTextEngine.h','w') as f:
-    f.write(amalgamated_code)
+OUTPUT_TEST = 'tests/doTheWorld_test.h'
+OUTPUT = 'doTheWorld.h'
+ZIP_NAME ='DoTheWorld'
 
 
-ct.execute_test_for_folder('clang','exemples')
-print('all test passed')
+ct.generate_amalgamated_code(STARTER,OUTPUT_TEST)
+test = ct.FolderTestPreset(folder='tests')
+test.generate_ouptut()
+test.start_test()
+ct.include_code_in_markdown('README.md',save_file=True)
+ct.generate_amalgamated_code(STARTER,OUTPUT)
 
-ct.include_code_in_markdown('README.md')
+create_exemples(TEST_NAME,OUTPUT)
 
-with open('CTextEngine.h','w') as f:
-    f.write(amalgamated_code)
+zip_folder(ZIP_NAME)
