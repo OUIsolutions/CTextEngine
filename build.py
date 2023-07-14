@@ -4,12 +4,12 @@ from Build.exemple_build import create_exemples
 from Build.full_folder_zip import zip_folder
 
 
-STARTER = 'doTheWorld/doTheWorldMain.h'
-TEST_NAME  = 'doTheWorld_test.h'
+STARTER = 'doTheWorld/CTextEngineMain.h'
+TEST_NAME  = 'CTextEngine_test.h'
 
-OUTPUT_TEST = 'tests/doTheWorld_test.h'
-OUTPUT = 'doTheWorld.h'
-ZIP_NAME ='DoTheWorld'
+OUTPUT_TEST = 'tests/CTextEngine_test.h'
+OUTPUT = 'CTextEngine.h'
+ZIP_NAME ='CTextEngine'
 
 
 ct.generate_amalgamated_code(STARTER,OUTPUT_TEST)
