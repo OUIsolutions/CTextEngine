@@ -28,11 +28,10 @@ SOFTWARE.
 #include  "constants.h"
 #include "tags.h"
 #include "CTextStack/declarations.h"
-#include "CTextArray/declarations.h"
 #include "extras/extras.h"
 
 #include "CTextStack/definitions.h"
-#include "CTextArray/definitions.h"
+
 #include "extras/extras.c"
 
 #endif // CTEXTENGINE_H
