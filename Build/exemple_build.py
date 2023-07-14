@@ -18,9 +18,11 @@ def create_exemples(test_name:str,output:str):
 
         if e == 'side_effect':
             continue
+        if e.endswith('.h'):
+            continue
 
         with open(f'{path}/exec.c','r') as arq:
-            content = arq.read()
+            content = arq.read().replace(f'../{test_name}',output)
         
         with open(f'exemples/{e.replace("T_","")}.c','w') as arq2:
             arq2.write(content)
