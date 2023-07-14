@@ -1,5 +1,5 @@
 
-#include "CTextEngine.h"
+#include "../CTextEngineMain_test.h"
 
 int main(){
     

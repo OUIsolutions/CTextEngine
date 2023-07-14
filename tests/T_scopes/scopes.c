@@ -1,4 +1,4 @@
-#include "CTextEngine.h"
+#include "../CTextEngine_test.h"
 
 int main(){
     const char *lang = "en";
