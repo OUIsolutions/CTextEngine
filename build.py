@@ -1,27 +1,24 @@
 
-import CToolKit as ct
-from os import listdir,remove
+import Build.CToolKit as ct
+from Build.exemple_build import create_exemples
+from Build.full_folder_zip import zip_folder
 
 
+STARTER = 'doTheWorld/doTheWorldMain.h'
+TEST_NAME  = 'doTheWorld_test.h'
 
-STARTER  = f'CTextEngine/CTextEngineMain.h'
-ct.generate_amalgamated_code(STARTER,'CTextEngine.h')
-
-
-ct.execute_test_for_folder('gcc','tests')
-print('all test passed')
-
-def modifier(text:str):
-    formated = text
-    targets = [
-        '../../../CTextEngine.h',
-        '../../CTextEngine.h',
-        '../CTextEngine.h'
-    ]
-    for t in targets:
-        formated  = formated.replace(t,'CTextEngine.h')
-    return  formated
+OUTPUT_TEST = 'tests/doTheWorld_test.h'
+OUTPUT = 'doTheWorld.h'
+ZIP_NAME ='DoTheWorld'
 
 
-ct.include_code_in_markdown('README.md',save_file=True, modifier=modifier)
+ct.generate_amalgamated_code(STARTER,OUTPUT_TEST)
+test = ct.FolderTestPreset(folder='tests/main_test',side_effect_folder='tests/target')
+test.generate_ouptut()
+test.start_test()
+ct.include_code_in_markdown('README.md',save_file=True)
+ct.generate_amalgamated_code(STARTER,OUTPUT)
 
+create_exemples(TEST_NAME,OUTPUT)
+
+zip_folder(ZIP_NAME)
