@@ -35,7 +35,7 @@ int main(){
 
 ## Rendering an basic Template 
 
-<!--codeof:exemples/scopes/##basic_template/basic_template.c-->
+<!--codeof:tests/scopes/##basic_template/basic_template.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -82,7 +82,7 @@ int main(){
 with the breakline and separator, you can control the size of scopes in te way you want
 these is an exemple of full mimifyed text 
 
-<!--codeof:exemples/scopes/##scopes/scopes.c-->
+<!--codeof:tests/scopes/##scopes/scopes.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -122,7 +122,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/##conditions/conditions.c-->
+<!--codeof:tests/scopes/##conditions/conditions.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -164,7 +164,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/##loops/loops.c-->
+<!--codeof:tests/scopes/##loops/loops.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -204,7 +204,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/##log_system/log_system.c-->
+<!--codeof:tests/scopes/##log_system/log_system.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -249,7 +249,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/##insert_sql/insert_sql.c-->
+<!--codeof:tests/scopes/##insert_sql/insert_sql.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -294,7 +294,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/stack_manipulation/##text/text.c-->
+<!--codeof:tests/stack_manipulation/##text/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -312,7 +312,7 @@ int main(){
 ~~~
 Same as text, but will break an new line 
 
-<!--codeof:exemples/stack_manipulation/##segment_text/segment_text.c-->
+<!--codeof:tests/stack_manipulation/##segment_text/segment_text.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -327,7 +327,7 @@ int main(){
 ~~~
 format has the same function as text, but allow formatations 
 
-<!--codeof:exemples/stack_manipulation/##format/format.c-->
+<!--codeof:tests/stack_manipulation/##format/format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -346,7 +346,7 @@ int main(){
 ~~~
 same as format, but breaking an line 
 
-<!--codeof:exemples/stack_manipulation/##segment_format/segment_format.c-->
+<!--codeof:tests/stack_manipulation/##segment_format/segment_format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -364,7 +364,7 @@ int main(){
 ~~~
 Opens an new scope , if tag is NULL it will not render the current tag 
 
-<!--codeof:exemples/scopes/##open/open.c-->
+<!--codeof:tests/scopes/##open/open.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -380,7 +380,7 @@ int main(){
 ~~~
 open an new scope but allowing you to pass an formated tag props 
 
-<!--codeof:exemples/scopes/##open_with_args/open_with_args.c-->
+<!--codeof:tests/scopes/##open_with_args/open_with_args.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -395,7 +395,7 @@ int main(){
 }
 ~~~
 Only open an scope , its ideal for "meta" tags 
-<!--codeof:exemples/scopes/##only_open_with_args/only_open_with_args.c-->
+<!--codeof:tests/scopes/##only_open_with_args/only_open_with_args.c-->
 ~~~c
 
 
@@ -418,7 +418,7 @@ int main(){
 ~~~
 Implement an autoclose tag 
 
-<!--codeof:exemples/scopes/##autoclose/autoclose.c-->
+<!--codeof:tests/scopes/##autoclose/autoclose.c-->
 ~~~c
 
 

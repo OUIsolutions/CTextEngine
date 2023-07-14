@@ -8,7 +8,7 @@ STARTER  = f'CTextEngine/CTextEngineMain.h'
 ct.generate_amalgamated_code(STARTER,'CTextEngine.h')
 
 
-ct.execute_test_for_folder('gcc','exemples')
+ct.execute_test_for_folder('gcc','tests')
 print('all test passed')
 
 def modifier(text:str):
