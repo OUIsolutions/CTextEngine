@@ -4,7 +4,7 @@ from Build.exemple_build import create_exemples
 from Build.full_folder_zip import zip_folder
 
 
-STARTER = 'doTheWorld/CTextEngineMain.h'
+STARTER = 'CTextEngine/CTextEngineMain.h'
 TEST_NAME  = 'CTextEngine_test.h'
 
 OUTPUT_TEST = 'tests/CTextEngine_test.h'
