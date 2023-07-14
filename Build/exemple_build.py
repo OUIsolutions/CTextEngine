@@ -36,6 +36,5 @@ def create_exemples(test_name:str,output:str):
     for e in elements:
         path = f'tests/main_test/{e}'
         if isdir(path):
-            dest = f'exemples/{e}'
-            makedirs(dest)
+            dest = f'exemples/'
             move_all_c(dest,path,test_name,output)
