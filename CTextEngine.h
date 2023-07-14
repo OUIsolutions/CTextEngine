@@ -24,11 +24,14 @@ SOFTWARE.
 #ifndef CTEXTENGINE_H
 #define CTEXTENGINE_H
 
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdarg.h>
 #include <stdio.h>
+
+
 //
 // Created by jurandi on 18-04-2023.
 //
@@ -92,6 +95,8 @@ SOFTWARE.
 #define CTEXT_EMBED "embed"
 #define CTEXT_PARAM "param"
     
+
+
 
 
 
@@ -256,11 +261,15 @@ void CTextStack_self_reverse(struct CTextStack *self);
 
 
 
+
+
 void private_ctext_generate_formated_text(
     struct CTextStack *stack,
     const char *format,
     va_list argptr
     );
+
+
 //
 // Created by jurandi on 14-06-2023.
 //
@@ -338,6 +347,8 @@ struct CTextStack *newCTextStack_string_empty(){
 
 
 
+
+
 char * CTextStack_self_transform_in_string_and_self_clear(struct CTextStack *self){
     free(self->line_breaker);
     free(self->separator);
@@ -389,6 +400,8 @@ struct CTextStack * CTextStack_clone(struct CTextStack *self){
     new_stack->text(new_stack,self->rendered_text);
     return new_stack;
 }
+
+
 
 long private_CTextStack_transform_index(struct CTextStack *self, long value){
     long formated_value = value;
@@ -580,6 +593,8 @@ void CTextStack_self_trim(struct CTextStack *self){
     CTextStack  *new_stack = self->trim(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
+
+
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 
     while(self->size >= (self->rendered_text_alocation_size - 2)){
@@ -731,6 +746,8 @@ void ctext_close(struct CTextStack *self, const char *tag){
 
 
 
+
+
 void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){
     long  text_size = strlen(format);
@@ -832,4 +849,5 @@ void private_ctext_generate_formated_text(
 
     va_end(argptr);
 }
+
 #endif // CTEXTENGINE_H

@@ -250,6 +250,8 @@ int main(){
 <!--codeof:exemples/insert_sql.c-->
 ~~~c
 
+
+
 #include "CTextEngine.h"
 
 
@@ -333,7 +335,9 @@ format has the same function as text, but allow formatations
 <!--codeof:exemples/format.c-->
 ~~~c
 
+
 #include "CTextEngine.h"
+
 
 int main(){
     
@@ -450,7 +454,10 @@ int main(){
 free the alocated memory
 <!--codeof:exemples/free.c-->
 ~~~c
+
+
 #include "CTextEngine.h"
+
 int main(){
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     s->free(s);

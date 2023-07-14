@@ -6,6 +6,7 @@ doTheWorld.c
 *.ko
 *.obj
 *.elf
+out_folder
 doTheWorld.h
 exemples/CTextEngine.h
 # Linker output
