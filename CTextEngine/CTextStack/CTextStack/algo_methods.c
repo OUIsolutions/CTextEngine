@@ -121,7 +121,17 @@ bool CtextStack_starts_with(struct  CTextStack *self,const char *element){
     return false;
 }
 
-bool CtextStack_ends_with(struct  CTextStack *self,const char *element){}
+bool CtextStack_ends_with(struct  CTextStack *self,const char *element){
+    long element_size = strlen(element);
+    CTextStack  *separated = CTextStack_substr(self,self->size -element_size,-1);
+
+    if(strcmp(separated->rendered_text,element) == 0){
+        CTextStack_free(separated);
+        return true;
+    }
+    CTextStack_free(separated);
+    return false;
+}
 
 
 

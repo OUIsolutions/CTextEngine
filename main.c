@@ -8,11 +8,11 @@ int main(){
 
 
     CTextStack *s = newCTextStack_string(
-            "myss stringTTT 32"
+            "myss.txt"
     );
 
     m.self_lower(s);
-    printf("%d\n",m.starts_with(s,"my"));
+    printf("%d\n",m.ends_with(s,".json"));
     m.free(s);
 
 }
