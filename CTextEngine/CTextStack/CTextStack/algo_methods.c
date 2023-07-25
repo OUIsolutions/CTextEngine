@@ -110,6 +110,20 @@ long CtextStack_index_of_char(struct  CTextStack *self,char element){
     }
     return -1;
 }
+bool CtextStack_starts_with(struct  CTextStack *self,const char *element){
+    long element_size = strlen(element);
+    CTextStack  *separated = CTextStack_substr(self,0,element_size);
+    if(strcmp(separated->rendered_text,element) == 0){
+        CTextStack_free(separated);
+        return true;
+    }
+    CTextStack_free(separated);
+    return false;
+}
+
+bool CtextStack_ends_with(struct  CTextStack *self,const char *element){}
+
+
 
 struct CTextStack *CTextStack_lower(struct CTextStack *self){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);

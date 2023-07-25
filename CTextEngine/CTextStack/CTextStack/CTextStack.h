@@ -101,6 +101,8 @@ void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *e
 long CtextStack_index_of_char(struct  CTextStack *self,char element);
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
+bool CtextStack_starts_with(struct  CTextStack *self,const char *element);
+bool CtextStack_ends_with(struct  CTextStack *self,const char *element);
 
 
 struct CTextStack *CTextStack_trim(struct CTextStack *self);
