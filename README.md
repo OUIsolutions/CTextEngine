@@ -327,7 +327,7 @@ int main(){
 ~~~
 format has the same function as text, but allow formatations 
 
-<!--codeof:exemples/stack_manipulation/format/format.c-->
+<!--codeof:exemples/stack_manipulation/format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -364,7 +364,7 @@ int main(){
 ~~~
 Opens an new scope , if tag is NULL it will not render the current tag 
 
-<!--codeof:exemples/scopes/open/open.c-->
+<!--codeof:exemples/scopes/open.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -418,7 +418,7 @@ int main(){
 ~~~
 Implement an autoclose tag 
 
-<!--codeof:exemples/scopes/autoclose/autoclose.c-->
+<!--codeof:exemples/scopes/autoclose.c-->
 ~~~c
 
 

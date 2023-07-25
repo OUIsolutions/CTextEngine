@@ -30,6 +30,8 @@ SOFTWARE.
 #include <stdbool.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <ctype.h>
+
 
 
 
@@ -209,10 +211,19 @@ void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *e
 long CtextStack_index_of_char(struct  CTextStack *self,char element);
 long CtextStack_index_of(struct  CTextStack *self,const char *element);
 
+bool CtextStack_starts_with(struct  CTextStack *self,const char *element);
+bool CtextStack_ends_with(struct  CTextStack *self,const char *element);
 
 
 struct CTextStack *CTextStack_trim(struct CTextStack *self);
 void CTextStack_self_trim(struct CTextStack *self);
+
+struct CTextStack *CTextStack_lower(struct CTextStack *self);
+void CTextStack_self_lower(struct CTextStack *self);
+
+struct CTextStack *CTextStack_upper(struct CTextStack *self);
+void CTextStack_self_upper(struct CTextStack *self);
+
 
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
@@ -263,6 +274,7 @@ typedef struct CTextStackModule{
     void(*self_pop)(struct CTextStack *self, long starter, long end);
 
 
+
     struct CTextStack *(*insert_at)(struct CTextStack *self,long point, const char *element);
     void (*self_insert_at)(struct CTextStack *self,long point, const char *element);
 
@@ -278,44 +290,27 @@ typedef struct CTextStackModule{
     void (*self_replace_double)(struct CTextStack *self,const char *element, double element_to_replace);
 
 
+    struct CTextStack * (*lower)(struct CTextStack *self);
+    void(*self_lower)(struct CTextStack *self);
+
+    struct CTextStack * (*upper)(struct CTextStack *self);
+    void(*self_upper)(struct CTextStack *self);
+
+
     struct CTextStack * (*reverse)(struct CTextStack *self);
     void(*self_reverse)(struct CTextStack *self);
 
     struct CTextStack * (*trim)(struct CTextStack *self);
     void(*self_trim)(struct CTextStack *self);
 
+    bool (*starts_with)(struct CTextStack *self, const char *element);
+    bool (*ends_with)(struct CTextStack *self, const char *element);
+
     long (*index_of)(struct CTextStack *self, const char *element);
     long (*index_of_char)(struct CTextStack *self, char element);
 }CTextStackModule;
 
 CTextStackModule newCTextStackModule();
-
-
-
-
-
-typedef struct CTextArray{
-
-    CTextStack **elements;
-    bool *ownership;
-    long size;
-
-}CTextArray;
-
-CTextArray * newCTextArray();
-CTextArray * CTextArray_split(CTextStack *element, char *target);
-void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode);
-
-void CTextArray_append_assuming_ownership(CTextArray *self, CTextStack *element);
-void CTextArray_append_by_copy(CTextArray *self,CTextStack *element);
-void CTextArray_append_by_reference(CTextArray *self,CTextStack *element);
-
-CTextStack * CTextArray_get_by_ownership(CTextArray *self, int position);
-CTextStack * CTextArray_get_by_copy(CTextArray *self, int position);
-CTextStack * CTextArray_get_by_reference(CTextArray *self, int position);
-
-CTextStack * CTextArray_join(CTextArray *self, char *element);
-
 
 
 
@@ -457,6 +452,7 @@ void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
 
 }
 
+
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
@@ -539,6 +535,62 @@ long CtextStack_index_of_char(struct  CTextStack *self,char element){
     }
     return -1;
 }
+bool CtextStack_starts_with(struct  CTextStack *self,const char *element){
+    long element_size = strlen(element);
+    CTextStack  *separated = CTextStack_substr(self,0,element_size);
+    if(strcmp(separated->rendered_text,element) == 0){
+        CTextStack_free(separated);
+        return true;
+    }
+    CTextStack_free(separated);
+    return false;
+}
+
+bool CtextStack_ends_with(struct  CTextStack *self,const char *element){
+    long element_size = strlen(element);
+    CTextStack  *separated = CTextStack_substr(self,self->size -element_size,-1);
+
+    if(strcmp(separated->rendered_text,element) == 0){
+        CTextStack_free(separated);
+        return true;
+    }
+    CTextStack_free(separated);
+    return false;
+}
+
+
+
+struct CTextStack *CTextStack_lower(struct CTextStack *self){
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    for(long i =0; i < self->size; i++){
+        char current = self->rendered_text[i];
+        CTextStack_format(new_element,"%c",tolower(current));
+    }
+    return new_element;
+}
+
+void CTextStack_self_lower(struct CTextStack *self){
+    CTextStack *new_stack = CTextStack_lower(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+struct CTextStack *CTextStack_upper(struct CTextStack *self){
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    for(long i =0; i < self->size; i++){
+        char current = self->rendered_text[i];
+        CTextStack_format(new_element,"%c",toupper(current));
+    }
+    return new_element;
+}
+
+
+void CTextStack_self_upper(struct CTextStack *self){
+    CTextStack *new_stack = CTextStack_upper(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
@@ -819,6 +871,7 @@ CTextStackModule newCTextStackModule(){
     self.replace_long = CTextStack_replace_long;
     self.self_replace_long =CTextStack_self_replace_long;
 
+
     self.replace_double = CTextStack_replace_double;
     self.self_replace_double =CTextStack_self_replace_double;
 
@@ -828,67 +881,25 @@ CTextStackModule newCTextStackModule(){
 
     self.index_of = CtextStack_index_of;
     self.index_of_char = CtextStack_index_of_char;
+
+    self.lower = CTextStack_lower;
+    self.self_lower = CTextStack_self_lower;
+
+    self.upper = CTextStack_upper;
+    self.self_upper = CTextStack_self_upper;
+
+    self.starts_with = CtextStack_starts_with;
+    self.ends_with = CtextStack_ends_with;
+
     self.reverse = CTextStack_reverse;
+    self.self_reverse = CTextStack_self_reverse;
 
     self.trim = CTextStack_trim;
     self.self_trim = CTextStack_self_trim;
 
-    self.self_reverse = CTextStack_self_reverse;
 
     return self;
 }
-
-
-
-
-
-CTextArray * newCTextArray(){
-    CTextArray *self =(CTextArray*) malloc(sizeof (CTextArray));
-    self->elements = malloc(0);
-    self->ownership = malloc(0);
-    self->size = 0;
-    return self;
-}
-//CTextArray * CTextArray_split(CTextStack *element, char *target);
-
-void CTextArray_append_raw(CTextArray *self,CTextStack *element,int mode){
-    self->elements = (CTextStack**)realloc(self->elements,(self->size +1)* sizeof (CTextStack**));
-    self->ownership= (bool*) realloc(self->ownership,(self->size+1) *sizeof (bool));
-
-    if(mode == CTEXT_BY_COPY ){
-        self->elements[self->size] = CTextStack_clone(element);
-    }
-    else{
-        self->elements[self->size] = element;
-    }
-
-    self->ownership[self->size] = false;
-    if(mode == CTEXT_BY_COPY || mode == CTEXT_BY_OWNESHIP){
-        self->ownership[self->size] = true;
-    }
-    self->size+=1;
-}
-
-void CTextArray_append_assuming_ownership(CTextArray *self, CTextStack *element){
-    CTextArray_append_raw(self,element,CTEXT_BY_OWNESHIP);
-}
-
-void CTextArray_append_by_copy(CTextArray *self,CTextStack *element){
-    CTextArray_append_raw(self,element,CTEXT_BY_COPY);
-}
-
-void CTextArray_append_by_reference(CTextArray *self,CTextStack *element){
-    CTextArray_append_raw(self,element,CTEXT_BY_REFERENCE);
-}
-
-CTextStack * CTextArray_get_by_ownership(CTextArray *self, int position){
-    CTextStack  *element = self->elements[position];
-}
-
-CTextStack * CTextArray_get_by_copy(CTextArray *self, int position);
-CTextStack * CTextArray_get_by_reference(CTextArray *self, int position);
-
-CTextStack * CTextArray_join(CTextArray *self, char *element);
 
 
 
