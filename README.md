@@ -294,7 +294,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/scopes/text/text.c-->
+<!--codeof:exemples/stack_manipulation/text/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -312,7 +312,7 @@ int main(){
 ~~~
 Same as text, but will break an new line 
 
-<!--codeof:tests/stack_manipulation/##segment_text/segment_text.c-->
+<!--codeof:exemples/stack_manipulation/segment_text.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -327,7 +327,7 @@ int main(){
 ~~~
 format has the same function as text, but allow formatations 
 
-<!--codeof:tests/stack_manipulation/##format/format.c-->
+<!--codeof:exemples/stack_manipulation/format/format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -346,7 +346,7 @@ int main(){
 ~~~
 same as format, but breaking an line 
 
-<!--codeof:tests/stack_manipulation/##segment_format/segment_format.c-->
+<!--codeof:exemples/stack_manipulation/segment_format.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -364,7 +364,7 @@ int main(){
 ~~~
 Opens an new scope , if tag is NULL it will not render the current tag 
 
-<!--codeof:tests/scopes/##open/open.c-->
+<!--codeof:exemples/scopes/open/open.c-->
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -380,7 +380,7 @@ int main(){
 ~~~
 open an new scope but allowing you to pass an formated tag props 
 
-<!--codeof:tests/scopes/##open_with_args/open_with_args.c-->
+<!--codeof:exemples/scopes/open_with_args.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -395,7 +395,7 @@ int main(){
 }
 ~~~
 Only open an scope , its ideal for "meta" tags 
-<!--codeof:tests/scopes/##only_open_with_args/only_open_with_args.c-->
+<!--codeof:exemples/scopes/only_open_with_args.c-->
 ~~~c
 
 
@@ -418,7 +418,7 @@ int main(){
 ~~~
 Implement an autoclose tag 
 
-<!--codeof:tests/scopes/##autoclose/autoclose.c-->
+<!--codeof:exemples/scopes/autoclose/autoclose.c-->
 ~~~c
 
 
