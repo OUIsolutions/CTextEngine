@@ -27,6 +27,7 @@ void CTextStack_self_substr(struct CTextStack *self, long starter, long end){
 
 }
 
+
 struct CTextStack *CTextStack_replace(struct CTextStack *self,const char *element, const char *element_to_replace){
 
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
@@ -134,6 +135,7 @@ struct CTextStack *CTextStack_upper(struct CTextStack *self){
     }
     return new_element;
 }
+
 
 void CTextStack_self_upper(struct CTextStack *self){
     CTextStack *new_stack = CTextStack_upper(self);

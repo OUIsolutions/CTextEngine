@@ -40,6 +40,7 @@ typedef struct CTextStackModule{
     void(*self_pop)(struct CTextStack *self, long starter, long end);
 
 
+
     struct CTextStack *(*insert_at)(struct CTextStack *self,long point, const char *element);
     void (*self_insert_at)(struct CTextStack *self,long point, const char *element);
 
@@ -61,11 +62,15 @@ typedef struct CTextStackModule{
     struct CTextStack * (*upper)(struct CTextStack *self);
     void(*self_upper)(struct CTextStack *self);
 
+
     struct CTextStack * (*reverse)(struct CTextStack *self);
     void(*self_reverse)(struct CTextStack *self);
 
     struct CTextStack * (*trim)(struct CTextStack *self);
     void(*self_trim)(struct CTextStack *self);
+
+    bool (*starts_with)(struct CTextStack *self, const char *element);
+    bool (*ends_with)(struct CTextStack *self, const char *element);
 
     long (*index_of)(struct CTextStack *self, const char *element);
     long (*index_of_char)(struct CTextStack *self, char element);
