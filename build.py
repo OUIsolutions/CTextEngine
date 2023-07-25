@@ -14,9 +14,9 @@ ZIP_NAME ='CTextEngine'
 
 ct.generate_amalgamated_code(STARTER,OUTPUT_TEST)
 test = ct.FolderTestPreset(folder='tests/main_test',side_effect_folder='tests/side_effect')
-#test.generate_ouptut()
-#test.start_test()
-#create_exemples(TEST_NAME,OUTPUT)
+test.generate_ouptut()
+test.start_test()
+create_exemples(TEST_NAME,OUTPUT)
 
 ct.include_code_in_markdown('README.md',save_file=True)
 
