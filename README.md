@@ -35,7 +35,7 @@ int main(){
 
 ## Rendering an basic Template 
 
-<!--codeof:tests/scopes/##basic_template/basic_template.c-->
+<!--codeof:exemples/scopes/basic_template.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -82,7 +82,7 @@ int main(){
 with the breakline and separator, you can control the size of scopes in te way you want
 these is an exemple of full mimifyed text 
 
-<!--codeof:tests/scopes/##scopes/scopes.c-->
+<!--codeof:exemples/scopes/scopes.c-->
 ~~~c
 #include "CTextEngine.h"
 
@@ -122,7 +122,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:tests/scopes/##conditions/conditions.c-->
+<!--codeof:exemples/scopes/conditions.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -164,7 +164,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:tests/scopes/##loops/loops.c-->
+<!--codeof:exemples/scopes/loops.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -204,7 +204,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:tests/scopes/##log_system/log_system.c-->
+<!--codeof:exemples/scopes/log_system.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -249,7 +249,7 @@ int main(){
 
 }
 ~~~
-<!--codeof:tests/scopes/##insert_sql/insert_sql.c-->
+<!--codeof:exemples/scopes/insert_sql.c-->
 ~~~c
 
 #include "CTextEngine.h"
@@ -294,7 +294,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:tests/stack_manipulation/##text/text.c-->
+<!--codeof:exemples/scopes/text/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
