@@ -11,6 +11,7 @@ doTheWorld.h
 out_folder
 tests/CTextEngine.h
 # Linker output
+main.c
 *.ilk
 *.map
 *.exp
