@@ -54,7 +54,7 @@ typedef struct CTextStackModule{
     struct CTextStack *(*replace_double)(struct CTextStack *self,const char *element, double element_to_replace);
     void (*self_replace_double)(struct CTextStack *self,const char *element, double element_to_replace);
 
-
+    
     struct CTextStack * (*reverse)(struct CTextStack *self);
     void(*self_reverse)(struct CTextStack *self);
 
