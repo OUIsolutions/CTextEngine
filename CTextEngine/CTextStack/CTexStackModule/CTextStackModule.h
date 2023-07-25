@@ -58,6 +58,8 @@ typedef struct CTextStackModule{
     struct CTextStack * (*lower)(struct CTextStack *self);
     void(*self_lower)(struct CTextStack *self);
 
+    struct CTextStack * (*upper)(struct CTextStack *self);
+    void(*self_upper)(struct CTextStack *self);
 
     struct CTextStack * (*reverse)(struct CTextStack *self);
     void(*self_reverse)(struct CTextStack *self);

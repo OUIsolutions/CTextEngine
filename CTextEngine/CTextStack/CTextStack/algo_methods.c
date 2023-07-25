@@ -109,6 +109,7 @@ long CtextStack_index_of_char(struct  CTextStack *self,char element){
     }
     return -1;
 }
+
 struct CTextStack *CTextStack_lower(struct CTextStack *self){
     CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
     new_element->ident_level = self->ident_level;
@@ -121,6 +122,21 @@ struct CTextStack *CTextStack_lower(struct CTextStack *self){
 
 void CTextStack_self_lower(struct CTextStack *self){
     CTextStack *new_stack = CTextStack_lower(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
+struct CTextStack *CTextStack_upper(struct CTextStack *self){
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    for(long i =0; i < self->size; i++){
+        char current = self->rendered_text[i];
+        CTextStack_format(new_element,"%c",toupper(current));
+    }
+    return new_element;
+}
+
+void CTextStack_self_upper(struct CTextStack *self){
+    CTextStack *new_stack = CTextStack_upper(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
 
