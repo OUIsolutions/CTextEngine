@@ -17,7 +17,7 @@ test = ct.FolderTestPreset(folder='tests/main_test',side_effect_folder='tests/si
 test.generate_ouptut()
 test.start_test()
 create_exemples(TEST_NAME,OUTPUT)
-
+a
 ct.include_code_in_markdown('README.md',save_file=True)
 
 ct.generate_amalgamated_code(STARTER,OUTPUT)
