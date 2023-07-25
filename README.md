@@ -294,7 +294,7 @@ int main(){
 
 ## text
 The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/stack_manipulation/text/text.c-->
+<!--codeof:exemples/stack_manipulation/text.c-->
 ~~~c
 
 #include "CTextEngine.h"
