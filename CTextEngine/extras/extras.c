@@ -18,17 +18,33 @@ void private_ctext_generate_formated_text(
         }
 
         if(strcmp(single_test,"%d") == 0) {
-            char result[10];
-            sprintf(result,"%d", va_arg(argptr,int));
-            stack->text(stack,result);
+            char result[20] ={0};
+            sprintf(result,"%ld", va_arg(argptr,long));
+            CTextStack_text(stack,result);
             i+=1;
             continue;
         }
 
         if(strcmp(single_test,"%f") == 0) {
-            char result[10];
-            sprintf(result,"%f", va_arg(argptr,double ));
-            stack->text(stack,result);
+            char result_text[20]= {0};
+
+            sprintf(result_text,"%lf", va_arg(argptr,double ));
+
+            for(int t = 18; t > 0; t--){
+                char current_char = result_text[t];
+                if(current_char != '0' && current_char != '\0'){
+
+                    if(current_char == '.'){
+                        result_text[t+2]  = '\0';
+                    }
+                    else{
+                        result_text[t+1]  = '\0';
+                    }
+
+                    break;
+                }
+            }
+            CTextStack_text(stack,result_text);
             i+=1;
             continue;
         }
@@ -36,7 +52,7 @@ void private_ctext_generate_formated_text(
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
             char element[2] = {result,'\0'};
-            stack->text(stack,element);
+            CTextStack_text(stack,element);
             i+=1;
             continue;
         }
@@ -45,9 +61,9 @@ void private_ctext_generate_formated_text(
         else if(strcmp(single_test,"%b") == 0){
             bool value = va_arg(argptr,int);
             if(value){
-                stack->text(stack,"true");
+                CTextStack_text(stack,"true");
             }else{
-                stack->text(stack,"false");
+                CTextStack_text(stack,"false");
             }
             i+=1;
             continue;
@@ -55,7 +71,7 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(double_test,"%sc") == 0){
             char *value = va_arg(argptr,char*);
-            stack->text(stack,value);
+            CTextStack_text(stack,value);
             free(value);
             i+=2;
             continue;
@@ -63,14 +79,14 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%s") == 0){
             const char *value = va_arg(argptr,const char*);
-            stack->text(stack,value);
+            CTextStack_text(stack,value);
             i+=1;
             continue;
         }
         else if(strcmp(double_test,"%tc") == 0){
             struct CTextStack *new_stack = (struct  CTextStack*)va_arg(argptr,void *);
-            char *result = new_stack->self_transform_in_string_and_self_clear(new_stack);
-            stack->text(stack,result);
+            char *result = CTextStack_self_transform_in_string_and_self_clear(new_stack);
+            CTextStack_text(stack,result);
             free(result);
             i+=2;
             continue;
@@ -78,13 +94,13 @@ void private_ctext_generate_formated_text(
 
         else if(strcmp(single_test,"%t") == 0){
             struct CTextStack *new_stack = (struct  CTextStack*)va_arg(argptr,void *);
-            stack->text(stack,new_stack->rendered_text);
+            CTextStack_text(stack,new_stack->rendered_text);
             i+=1;
             continue;
         }
 
         char element[2] = {format[i],'\0'};
-        stack->text(stack,element);
+        CTextStack_text(stack,element);
 
         }
 
@@ -92,11 +108,25 @@ void private_ctext_generate_formated_text(
 
     if(text_size > 0 && text_size> i){
         char element[2] = {format[text_size-1],'\0'};
-        stack->text(stack,element);
+        CTextStack_text(stack,element);
     }
 
-
-
-
     va_end(argptr);
+}
+
+
+long private_CText_transform_index(long size , long value){
+    long formated_value = value;
+
+    if(formated_value >= size){
+        formated_value = size;
+    }
+
+    if(formated_value  < 0){
+        formated_value = size + (formated_value +1);
+    }
+    if(formated_value <0){
+        formated_value = 0;
+    }
+    return formated_value;
 }

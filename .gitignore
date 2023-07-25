@@ -8,7 +8,8 @@ doTheWorld.c
 *.elf
 out_folder
 doTheWorld.h
-exemples/CTextEngine.h
+out_folder
+tests/CTextEngine.h
 # Linker output
 *.ilk
 *.map

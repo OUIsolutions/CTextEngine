@@ -1,1 +1,1 @@
-CMakeLists.txt not found in /home/jurandi/Documentos/Oui/CTextEngine Select CMakeLists.txt
+CMakeLists.txt not found in /home/mateusmoutinho/Documentos/OUI/CTextEngine Select CMakeLists.txt
