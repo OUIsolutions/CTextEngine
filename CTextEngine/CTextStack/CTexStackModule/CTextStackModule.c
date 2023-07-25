@@ -29,6 +29,7 @@ CTextStackModule newCTextStackModule(){
     self.replace_long = CTextStack_replace_long;
     self.self_replace_long =CTextStack_self_replace_long;
 
+
     self.replace_double = CTextStack_replace_double;
     self.self_replace_double =CTextStack_self_replace_double;
 
@@ -38,12 +39,16 @@ CTextStackModule newCTextStackModule(){
 
     self.index_of = CtextStack_index_of;
     self.index_of_char = CtextStack_index_of_char;
+
+    self.lower = CTextStack_lower;
+    self.self_lower = CTextStack_self_lower;
+
     self.reverse = CTextStack_reverse;
+    self.self_reverse = CTextStack_self_reverse;
 
     self.trim = CTextStack_trim;
     self.self_trim = CTextStack_self_trim;
 
-    self.self_reverse = CTextStack_self_reverse;
 
     return self;
 }
