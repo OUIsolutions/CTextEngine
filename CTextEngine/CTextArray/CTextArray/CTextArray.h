@@ -19,3 +19,5 @@ CTextStack * CTextArray_join(CTextArray *self,char *separator);
 
 
 void  CTextArray_free(CTextArray *self);
+
+void CTextArray_represent(CTextArray *self);

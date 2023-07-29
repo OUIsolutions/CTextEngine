@@ -13,6 +13,7 @@ void CTextArray_append(CTextArray *self,CTextStack *element){
             );
 
     self->stacks[self->size] = element;
+    self->size+=1;
 }
 
 
@@ -28,10 +29,15 @@ CTextStack * CTextArray_join(CTextArray *self,char *separator){
 
 
 void  CTextArray_free(CTextArray *self){
-    for(int i = 0 ; i < self->size; i++){
+    for(int i = 0; i < self->size; i++){
             CTextStack_free(self->stacks[i]);
     }
     free(self->stacks);
     free(self);
 }
 
+void CTextArray_represent(CTextArray *self){
+    for(int i =0; i < self->size; i++){
+        CTextStack_represent(self->stacks[i]);
+    }
+}
