@@ -34,13 +34,26 @@ void CTextArray_append(CTextArray *self,CTextStack *element,int mode){
 }
 
 
-void CTextArray_get(CTextArray *self,int point,int mode){
-    
+CTextStack * CTextArray_get(CTextArray *self,long point,int mode){
+    long converted_point = private_CText_transform_index(self->size,point);
+    if(mode == CTEXT_BY_VALUE){
+        return CTextStack_clone(self->stacks[converted_point]);
+    }
+    if(mode == CTEXT_BY_OWNERSHIP){
+        self->ownership[converted_point] = false;
+        return self->stacks[converted_point];
+    }
+    return self->stacks[converted_point];
+
 }
 
-void CTextArray_append_string(CTextArray *self,char *element);
+void CTextArray_append_string(CTextArray *self,char *element){}
 
-CTextStack * CTextArray_join(CTextArray *self,char *separator);
+CTextStack * CTextArray_join(CTextArray *self,char *separator){
+    return NULL;
+}
 
 
-void  CTextArray_free(CTextArray *self);
+void  CTextArray_free(CTextArray *self){
+    
+}

@@ -17,7 +17,7 @@ CTextArray * newCTextArray();
 
 void CTextArray_append(CTextArray *self,CTextStack *element,int mode);
 
-void CTextArray_get(CTextArray *self,int point,int mode);
+CTextStack *CTextArray_get(CTextArray *self,long point,int mode);
 
 void CTextArray_append_string(CTextArray *self,char *element);
 
