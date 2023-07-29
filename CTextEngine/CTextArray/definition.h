@@ -1,2 +1,3 @@
-#include "CTextArrayModule/CTextArrayModule.c"
+
 #include "CTextArray/CTextArray.c"
+#include "CTextArrayModule/CTextArrayModule.c"

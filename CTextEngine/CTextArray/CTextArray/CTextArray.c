@@ -18,13 +18,17 @@ void CTextArray_append(CTextArray *self,CTextStack *element){
 
 
 
-void CTextArray_append_string(CTextArray *self,char *element){
+void CTextArray_append_string(CTextArray *self,const char *element){
     CTextStack *new_element = newCTextStack_string(element);
     CTextArray_append(self,new_element);
 }
 
-CTextStack * CTextArray_join(CTextArray *self,char *separator){
-    return NULL;
+CTextStack * CTextArray_join(CTextArray *self,const char *separator){
+    CTextStack  *result  = newCTextStack_string_empty();
+    for(int i = 0; i < self->size; i++){
+        CTextStack_format(result,"%t%s",self->stacks[i],separator);
+    }
+    return result;
 }
 
 
