@@ -26,7 +26,14 @@ void CTextArray_append_string(CTextArray *self,const char *element){
 CTextStack * CTextArray_join(CTextArray *self,const char *separator){
     CTextStack  *result  = newCTextStack_string_empty();
     for(int i = 0; i < self->size; i++){
-        CTextStack_format(result,"%t%s",self->stacks[i],separator);
+        if(i < self->size -1){
+            CTextStack_format(result,"%t%s",self->stacks[i],separator);
+        }
+        else{
+            CTextStack_format(result,"%t",self->stacks[i]);
+
+        }
+
     }
     return result;
 }
