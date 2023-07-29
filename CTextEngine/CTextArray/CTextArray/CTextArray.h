@@ -1,0 +1,6 @@
+
+
+typedef struct CTextArray{
+
+
+}CTextArray;
