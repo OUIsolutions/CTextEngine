@@ -29,9 +29,11 @@ SOFTWARE.
 #include "tags.h"
 #include "CTextStack/declarations.h"
 #include "extras/extras.h"
+#include "CTextArray/declaration.h"
 
 #include "CTextStack/definitions.h"
 
 #include "extras/extras.c"
+#include "CTextArray/definition.h"
 
 #endif // CTEXTENGINE_H
