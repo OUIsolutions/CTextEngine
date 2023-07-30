@@ -49,8 +49,10 @@ CTextArray *CTextArray_split(const char *element,const char *target){
         if(CTextStack_equal(possible_division,target)){
             CTextArray_append(self,acumulated);
             acumulated = newCTextStack_string_empty();
+            CTextStack_free(possible_division);
             continue;
         }
+        CTextStack_free(possible_division);
 
         CTextStack_format(acumulated,"%c",text->rendered_text[i]);
     }
