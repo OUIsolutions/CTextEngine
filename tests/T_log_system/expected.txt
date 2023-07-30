@@ -1,7 +1,0 @@
- 
-Name: John
-Age: 20
-Car: 
-   Name: Ferrari
-   Year: 2020
-all identation is ok
