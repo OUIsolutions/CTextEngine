@@ -3,7 +3,7 @@
 #define CTEXT_LINE_BREAKER "\n"
 #define CTEXT_SEPARATOR "   "
 
-#define CTEXT_INTEGER 1
+#define CTEXT_LONG 1
 #define CTEXT_DOUBLE 2
 #define CTEXT_BOOL 3
 #define CTEXT_STRING 4
@@ -121,6 +121,10 @@ void CTextStack_self_upper(struct CTextStack *self);
 
 int CTextStack_typeof(struct CTextStack *self);
 const char * CTextStack_typeof_in_str(struct CTextStack *self);
+bool  CTextStack_parse_to_bool(struct CTextStack *self);
+long  CTextStack_parse_to_integer(struct CTextStack *self);
+double  CTextStack_parse_to_double(struct CTextStack *self);
+
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
 void CTextStack_self_reverse(struct CTextStack *self);

@@ -53,6 +53,13 @@ CTextStackModule newCTextStackModule(){
     self.reverse = CTextStack_reverse;
     self.self_reverse = CTextStack_self_reverse;
 
+
+    self.typeof_element = CTextStack_typeof;
+    self.typeof_in_str = CTextStack_typeof_in_str;
+    self.parse_to_bool = CTextStack_parse_to_bool;
+    self.parse_to_integer = CTextStack_parse_to_integer;
+    self.parse_to_double = CTextStack_parse_to_double;
+
     self.trim = CTextStack_trim;
     self.self_trim = CTextStack_self_trim;
 

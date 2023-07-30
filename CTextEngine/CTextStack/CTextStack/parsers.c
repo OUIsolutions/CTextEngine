@@ -14,7 +14,7 @@ int CTextStack_typeof(struct CTextStack *self){
         return CTEXT_STRING;
     }
     if(CTextStack_index_of(self,".") == -1){
-        return CTEXT_INTEGER;
+        return CTEXT_LONG;
     }
     return CTEXT_DOUBLE;
 
@@ -33,10 +33,35 @@ const char * CTextStack_typeof_in_str(struct CTextStack *self){
     if(current_type == CTEXT_STRING){
         return "string";
     }
-    if(current_type == CTEXT_INTEGER){
-        return "integer";
+    if(current_type == CTEXT_LONG){
+        return "long";
     }
     if(current_type == CTEXT_DOUBLE){
         return "double";
     }
+}
+
+bool  CTextStack_parse_to_bool(struct CTextStack *self){
+    if(CTextStack_equal(self,"true")){
+        return true;
+    }
+    return false;
+}
+
+long  CTextStack_parse_to_integer(struct CTextStack *self){
+    long value;
+    int result = sscanf(self->rendered_text,"%ld",&value);
+    if(!result){
+        return -1;
+    }
+    return value;
+}
+
+double  CTextStack_parse_to_double(struct CTextStack *self){
+    double value;
+    int result = sscanf(self->rendered_text,"%lf",&value);
+    if(!result){
+        return -1;
+    }
+    return value;
 }
