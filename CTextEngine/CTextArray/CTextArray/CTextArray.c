@@ -101,6 +101,15 @@ void  CTextArray_foreach(CTextArray *self, void (*caller)(CTextStack* element)){
         caller(self->stacks[i]);
     }
 }
+bool CTextArray_includes(CTextArray *self,const char *element){
+    for(int i = 0 ; i < self->size;i++){
+        if(CTextStack_equal(self->stacks[i],element)){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 void CTextArray_represent(CTextArray *self){
     for(int i =0; i < self->size; i++){

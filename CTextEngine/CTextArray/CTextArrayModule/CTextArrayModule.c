@@ -9,6 +9,7 @@ CTextArrayModule newCTextArrayModule(){
     module.filter = CTextArray_filter;
     module.foreach = CTextArray_foreach;
     module.represent = CTextArray_represent;
+    module.includes = CTextArray_includes;
     module.free = CTextArray_free;
     return module;
 }

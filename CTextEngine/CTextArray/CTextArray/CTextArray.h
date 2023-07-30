@@ -26,6 +26,7 @@ CTextArray * CTextArray_filter(CTextArray *self, bool (caller)(CTextStack* eleme
 
 void  CTextArray_foreach(CTextArray *self, void (*caller)(CTextStack* element));
 
+bool CTextArray_includes(CTextArray *self,const char *element);
 
 void  CTextArray_free(CTextArray *self);
 
