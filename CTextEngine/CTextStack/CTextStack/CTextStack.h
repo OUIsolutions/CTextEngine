@@ -3,6 +3,11 @@
 #define CTEXT_LINE_BREAKER "\n"
 #define CTEXT_SEPARATOR "   "
 
+#define CTEXT_INTEGER 1
+#define CTEXT_DOUBLE 2
+#define CTEXT_BOOL 3
+#define CTEXT_STRING 4
+#define CTEXT_NULL -1
 
 typedef struct CTextStack{
 
@@ -115,6 +120,7 @@ void CTextStack_self_lower(struct CTextStack *self);
 struct CTextStack *CTextStack_upper(struct CTextStack *self);
 void CTextStack_self_upper(struct CTextStack *self);
 
+int CTextStack_typeof(struct CTextStack *self);
 
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);

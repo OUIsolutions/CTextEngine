@@ -74,6 +74,7 @@ void  CTextArray_free(CTextArray *self){
     free(self->stacks);
     free(self);
 }
+
 CTextArray * CTextArray_map(CTextArray *self, CTextStack *(caller)(CTextStack* element)){
     CTextArray *new_array  = newCTextArray();
     for(int i = 0; i < self->size; i++){
@@ -101,6 +102,7 @@ void  CTextArray_foreach(CTextArray *self, void (*caller)(CTextStack* element)){
         caller(self->stacks[i]);
     }
 }
+
 bool CTextArray_includes(CTextArray *self,const char *element){
     for(int i = 0 ; i < self->size;i++){
         if(CTextStack_equal(self->stacks[i],element)){
