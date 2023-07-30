@@ -74,6 +74,33 @@ void  CTextArray_free(CTextArray *self){
     free(self->stacks);
     free(self);
 }
+CTextArray * CTextArray_map(CTextArray *self, CTextStack *(caller)(CTextStack* element)){
+    CTextArray *new_array  = newCTextArray();
+    for(int i = 0; i < self->size; i++){
+        CTextStack *result = caller(self->stacks[i]);
+        CTextArray_append(new_array,result);
+    }
+    return new_array;
+}
+
+
+CTextArray * CTextArray_filter(CTextArray *self, bool (caller)(CTextStack* element)){
+    CTextArray *new_array  = newCTextArray();
+
+    for(int i = 0; i < self->size; i++){
+        if(caller(self->stacks[i])){
+            CTextArray_append(new_array,self->stacks[i]);
+        }
+    }
+
+    return new_array;
+}
+
+void  CTextArray_foreach(CTextArray *self, void (*caller)(CTextStack* element)){
+    for(int i = 0; i < self->size; i++){
+        caller(self->stacks[i]);
+    }
+}
 
 void CTextArray_represent(CTextArray *self){
     for(int i =0; i < self->size; i++){
