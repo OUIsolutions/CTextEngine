@@ -18,7 +18,7 @@ void CTextArray_append_string(CTextArray *self,const char *element);
 
 CTextStack * CTextArray_join(CTextArray *self,const char *separator);
 
-CTextArray *CTextArray_split(const char *element,const char *target);
+CTextArray * CTextArray_split(const char *element,const char *target);
 
 CTextArray * CTextArray_map(CTextArray *self, CTextStack *(caller)(CTextStack* element));
 
