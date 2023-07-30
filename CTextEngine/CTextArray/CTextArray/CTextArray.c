@@ -38,6 +38,24 @@ CTextStack * CTextArray_join(CTextArray *self,const char *separator){
     return result;
 }
 
+CTextArray *CTextArray_split(const char *element,const char *target){
+    CTextArray *self = newCTextArray();
+    CTextStack *text = newCTextStack_string(element);
+    long target_size = (long)strlen(target);
+    for(int i = 0; i <text->size; i++){
+        CTextStack  *possible_division = CTextStack_substr(text,i,target_size + i);
+        if(strcmp(possible_division->rendered_text,target) == 0){
+
+        }
+    }
+    CTextStack_free(text);
+    return self;
+}
+
+bool CTextStack_equal(struct  CTextStack *self,const char *element){
+    return strcmp(self->rendered_text,element) == 0;
+}
+
 
 void  CTextArray_free(CTextArray *self){
     for(int i = 0; i < self->size; i++){

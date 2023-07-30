@@ -87,7 +87,7 @@ void CTextStack_self_replace_double(struct CTextStack *self,const char *element,
 
 
 
-long CtextStack_index_of(struct  CTextStack *self,const char *element){
+long CTextStack_index_of(struct  CTextStack *self, const char *element){
     long element_size = (long)strlen(element);
     for(int i = 0; i < self->size; i++){
         CTextStack  *possible_element = CTextStack_substr(self,i,i+element_size);
@@ -102,7 +102,7 @@ long CtextStack_index_of(struct  CTextStack *self,const char *element){
 }
 
 
-long CtextStack_index_of_char(struct  CTextStack *self,char element){
+long CTextStack_index_of_char(struct  CTextStack *self, char element){
     for(int i = 0; i < self->size; i++) {
         if(self->rendered_text[i] == element){
             return i;
@@ -110,7 +110,7 @@ long CtextStack_index_of_char(struct  CTextStack *self,char element){
     }
     return -1;
 }
-bool CtextStack_starts_with(struct  CTextStack *self,const char *element){
+bool CTextStack_starts_with(struct  CTextStack *self, const char *element){
     long element_size = strlen(element);
     CTextStack  *separated = CTextStack_substr(self,0,element_size);
     if(strcmp(separated->rendered_text,element) == 0){
@@ -121,7 +121,7 @@ bool CtextStack_starts_with(struct  CTextStack *self,const char *element){
     return false;
 }
 
-bool CtextStack_ends_with(struct  CTextStack *self,const char *element){
+bool CTextStack_ends_with(struct  CTextStack *self, const char *element){
     long element_size = strlen(element);
     CTextStack  *separated = CTextStack_substr(self,self->size -element_size,-1);
 
@@ -234,7 +234,7 @@ struct CTextStack *CTextStack_trim(struct CTextStack *self){
     long start_point = 0;
     for(int i = 0; i < self->size; i ++){
         char current_char =self->rendered_text[i];
-        long invalid_point = CtextStack_index_of_char(invalid_elements,current_char);
+        long invalid_point = CTextStack_index_of_char(invalid_elements, current_char);
         bool is_invalid = invalid_point != -1;
         if(!is_invalid){
             start_point = i;
@@ -245,7 +245,7 @@ struct CTextStack *CTextStack_trim(struct CTextStack *self){
     for(long i = (long)self->size -1; i >= 0; i--){
 
         char current_char =self->rendered_text[i];
-        long invalid_point = CtextStack_index_of_char(invalid_elements,current_char);
+        long invalid_point = CTextStack_index_of_char(invalid_elements, current_char);
         bool is_invalid = invalid_point != -1;
         if(!is_invalid){
             end_point = i+1;

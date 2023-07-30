@@ -37,8 +37,8 @@ CTextStackModule newCTextStackModule(){
     self.self_insert_at  = CTextStack_self_insert_at;
 
 
-    self.index_of = CtextStack_index_of;
-    self.index_of_char = CtextStack_index_of_char;
+    self.index_of = CTextStack_index_of;
+    self.index_of_char = CTextStack_index_of_char;
 
     self.lower = CTextStack_lower;
     self.self_lower = CTextStack_self_lower;
@@ -46,9 +46,10 @@ CTextStackModule newCTextStackModule(){
     self.upper = CTextStack_upper;
     self.self_upper = CTextStack_self_upper;
 
-    self.starts_with = CtextStack_starts_with;
-    self.ends_with = CtextStack_ends_with;
+    self.starts_with = CTextStack_starts_with;
+    self.ends_with = CTextStack_ends_with;
 
+    self.equal = CTextStack_equal;
     self.reverse = CTextStack_reverse;
     self.self_reverse = CTextStack_self_reverse;
 

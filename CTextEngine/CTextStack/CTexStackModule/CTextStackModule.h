@@ -72,6 +72,8 @@ typedef struct CTextStackModule{
     bool (*starts_with)(struct CTextStack *self, const char *element);
     bool (*ends_with)(struct CTextStack *self, const char *element);
 
+    bool (*equal)(struct  CTextStack *self,const char *element);
+
     long (*index_of)(struct CTextStack *self, const char *element);
     long (*index_of_char)(struct CTextStack *self, char element);
 }CTextStackModule;

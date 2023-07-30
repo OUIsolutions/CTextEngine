@@ -98,12 +98,13 @@ struct CTextStack *CTextStack_insert_at(struct CTextStack *self,long point, cons
 void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *element);
 
 
-long CtextStack_index_of_char(struct  CTextStack *self,char element);
-long CtextStack_index_of(struct  CTextStack *self,const char *element);
+long CTextStack_index_of_char(struct  CTextStack *self, char element);
+long CTextStack_index_of(struct  CTextStack *self, const char *element);
 
-bool CtextStack_starts_with(struct  CTextStack *self,const char *element);
-bool CtextStack_ends_with(struct  CTextStack *self,const char *element);
+bool CTextStack_starts_with(struct  CTextStack *self, const char *element);
+bool CTextStack_ends_with(struct  CTextStack *self, const char *element);
 
+bool CTextStack_equal(struct  CTextStack *self,const char *element);
 
 struct CTextStack *CTextStack_trim(struct CTextStack *self);
 void CTextStack_self_trim(struct CTextStack *self);
