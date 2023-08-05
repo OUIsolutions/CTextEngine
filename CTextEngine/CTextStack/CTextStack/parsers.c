@@ -36,14 +36,17 @@ const char * CTextStack_typeof_in_str(struct CTextStack *self){
         return "bool";
     }
 
-    if(current_type == CTEXT_STRING){
+    else if(current_type == CTEXT_STRING){
         return "string";
     }
-    if(current_type == CTEXT_LONG){
+    else if(current_type == CTEXT_LONG){
         return "long";
     }
-    if(current_type == CTEXT_DOUBLE){
+    else if(current_type == CTEXT_DOUBLE){
         return "double";
+    }
+    else{
+        return "invalid";
     }
 }
 
