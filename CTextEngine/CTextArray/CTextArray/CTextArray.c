@@ -90,7 +90,8 @@ CTextArray * CTextArray_filter(CTextArray *self, bool (caller)(CTextStack* eleme
 
     for(int i = 0; i < self->size; i++){
         if(caller(self->stacks[i])){
-            CTextArray_append(new_array,self->stacks[i]);
+
+            CTextArray_append(new_array, CTextStack_clone(self->stacks[i]));
         }
     }
 
