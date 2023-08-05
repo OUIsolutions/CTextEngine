@@ -230,6 +230,10 @@ struct CTextStack *CTextStack_upper(struct CTextStack *self);
 void CTextStack_self_upper(struct CTextStack *self);
 
 int CTextStack_typeof(struct CTextStack *self);
+
+bool CTextStack_is_a_num(struct CTextStack *self);
+
+
 const char * CTextStack_typeof_in_str(struct CTextStack *self);
 bool  CTextStack_parse_to_bool(struct CTextStack *self);
 long  CTextStack_parse_to_integer(struct CTextStack *self);
@@ -318,6 +322,8 @@ typedef struct CTextStackModule{
 
     bool (*equal)(struct  CTextStack *self,const char *element);
     int (*typeof_element)(struct CTextStack *self);
+    bool (*is_a_num)(struct CTextStack *self);
+
     const char * (*typeof_in_str)(struct CTextStack *self);
     bool  (*parse_to_bool)(struct CTextStack *self);
     long  (*parse_to_integer)(struct CTextStack *self);
@@ -935,7 +941,13 @@ int CTextStack_typeof(struct CTextStack *self){
 
 
 }
-
+bool CTextStack_is_a_num(struct CTextStack *self){
+    int type = CTextStack_typeof(self);
+    if(type == CTEXT_DOUBLE || type == CTEXT_LONG){
+        return true;
+    }
+    return false;
+}
 
 
 const char * CTextStack_typeof_in_str(struct CTextStack *self){
@@ -1040,6 +1052,7 @@ CTextStackModule newCTextStackModule(){
 
 
     self.typeof_element = CTextStack_typeof;
+    self.is_a_num = CTextStack_is_a_num;
     self.typeof_in_str = CTextStack_typeof_in_str;
     self.parse_to_bool = CTextStack_parse_to_bool;
     self.parse_to_integer = CTextStack_parse_to_integer;
@@ -1281,7 +1294,8 @@ CTextArray * CTextArray_filter(CTextArray *self, bool (caller)(CTextStack* eleme
 
     for(int i = 0; i < self->size; i++){
         if(caller(self->stacks[i])){
-            CTextArray_append(new_array,self->stacks[i]);
+
+            CTextArray_append(new_array, CTextStack_clone(self->stacks[i]));
         }
     }
 

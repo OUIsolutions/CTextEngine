@@ -10,16 +10,13 @@ int main(){
     array.append_string(e,"aaaaa");
     array.append_string(e,"aaaaa");
 
-    for(int i = 0;  i < e->size; i++){
-        CTextStack *s = e->stacks[i];
-        stack.self_upper(s);
-    }
+    CTextArray *upper_array = array.map(e,stack.upper);
 
-
-    CTextStack *formated = array.join(e,",");
+    CTextStack *formated = array.join(upper_array,",");
     stack.represent(formated);
     stack.free(formated);
 
+    array.free(upper_array);
     array.free(e);
 
 }

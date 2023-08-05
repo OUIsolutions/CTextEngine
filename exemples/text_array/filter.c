@@ -6,20 +6,17 @@ int main(){
     CTextArray  *e = newCTextArray();
 
     array.append_string(e,"aaaaa");
+    array.append_string(e,"123");
     array.append_string(e,"aaaaa");
-    array.append_string(e,"aaaaa");
-    array.append_string(e,"aaaaa");
+    array.append_string(e,"444");
 
-    for(int i = 0;  i < e->size; i++){
-        CTextStack *s = e->stacks[i];
-        stack.self_upper(s);
-    }
+    CTextArray *num_array = array.filter(e,stack.is_a_num);
 
-
-    CTextStack *formated = array.join(e,",");
+    CTextStack *formated = array.join(num_array,",");
     stack.represent(formated);
     stack.free(formated);
 
+    array.free(num_array);
     array.free(e);
 
 }
