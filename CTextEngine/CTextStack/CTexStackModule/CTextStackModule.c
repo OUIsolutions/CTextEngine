@@ -55,6 +55,7 @@ CTextStackModule newCTextStackModule(){
 
 
     self.typeof_element = CTextStack_typeof;
+    self.is_a_num = CTextStack_is_a_num;
     self.typeof_in_str = CTextStack_typeof_in_str;
     self.parse_to_bool = CTextStack_parse_to_bool;
     self.parse_to_integer = CTextStack_parse_to_integer;

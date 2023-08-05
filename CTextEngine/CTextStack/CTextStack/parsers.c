@@ -20,7 +20,13 @@ int CTextStack_typeof(struct CTextStack *self){
 
 
 }
-
+bool CTextStack_is_a_num(struct CTextStack *self){
+    int type = CTextStack_typeof(self);
+    if(type == CTEXT_DOUBLE || type == CTEXT_LONG){
+        return true;
+    }
+    return false;
+}
 
 
 const char * CTextStack_typeof_in_str(struct CTextStack *self){

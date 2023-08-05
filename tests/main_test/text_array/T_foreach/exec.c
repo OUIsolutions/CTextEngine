@@ -10,11 +10,7 @@ int main(){
     array.append_string(e,"aaaaa");
     array.append_string(e,"aaaaa");
 
-    for(int i = 0;  i < e->size; i++){
-        CTextStack *s = e->stacks[i];
-        stack.self_upper(s);
-    }
-
+    array.foreach(e,stack.self_upper);
 
     CTextStack *formated = array.join(e,",");
     stack.represent(formated);

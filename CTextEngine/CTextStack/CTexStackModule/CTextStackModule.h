@@ -74,6 +74,8 @@ typedef struct CTextStackModule{
 
     bool (*equal)(struct  CTextStack *self,const char *element);
     int (*typeof_element)(struct CTextStack *self);
+    bool (*is_a_num)(struct CTextStack *self);
+
     const char * (*typeof_in_str)(struct CTextStack *self);
     bool  (*parse_to_bool)(struct CTextStack *self);
     long  (*parse_to_integer)(struct CTextStack *self);
