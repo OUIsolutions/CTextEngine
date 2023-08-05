@@ -1227,6 +1227,7 @@ void CTextArray_append_string(CTextArray *self,const char *element){
     CTextArray_append(self,new_element);
 }
 
+
 CTextStack * CTextArray_join(CTextArray *self,const char *separator){
     CTextStack  *result  = newCTextStack_string_empty();
     for(int i = 0; i < self->size; i++){
