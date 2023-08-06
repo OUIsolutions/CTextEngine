@@ -27,13 +27,18 @@ SOFTWARE.
 #include "depencies.h"
 #include  "constants.h"
 #include "tags.h"
-#include "CTextStack/declarations.h"
+#include "CTextStack/CTextStack.h"
 #include "extras/extras.h"
-#include "CTextArray/declaration.h"
+#include "CTextArray/CTextArray.h"
 
-#include "CTextStack/definitions.h"
+#include "CTextStack/admnistrative_methods.c"
+#include "CTextStack/algo_methods.c"
+#include "CTextStack/constructors.c"
+#include "CTextStack/parsers.c"
+#include "CTextStack/render_methods.c"
+
 
 #include "extras/extras.c"
-#include "CTextArray/definition.h"
+#include "CTextArray/CTextArray.c"
 
 #endif // CTEXTENGINE_H
