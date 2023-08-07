@@ -4,12 +4,14 @@
 
 int main(){
 
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
-    m.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
+    stack.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
-    m.free(s);
+    stack.free(s);
    
     
 }

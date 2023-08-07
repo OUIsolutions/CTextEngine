@@ -4,10 +4,12 @@
 #include "CTextEngine.h"
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
 
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+    
     struct CTextStack *s = newCTextStack_string_empty();
-    m.text(s,"my text");
+   stack.text(s,"my text");
     printf("%s",s->rendered_text);
-    m.free(s);
+   stack.free(s);
 }

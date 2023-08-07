@@ -2,7 +2,9 @@
 
 int main(){
 
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+    
     char *name  = "Mateus";
     int age = 26;
     double height = 1.81;
@@ -12,12 +14,12 @@ int main(){
             "my name is @name and my @age and I am @height"
     );
 
-    m.self_replace(s,"@name",name);
-    m.self_replace_long(s,"@age",age);
-    m.self_replace_double(s,"@height",height);
+   stack.self_replace(s,"@name",name);
+   stack.self_replace_long(s,"@age",age);
+   stack.self_replace_double(s,"@height",height);
     printf("%s",s->rendered_text);
 
-    m.free(s);
+   stack.free(s);
 
 
 }//
