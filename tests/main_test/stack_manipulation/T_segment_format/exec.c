@@ -2,12 +2,13 @@
 #include "../../../CTextEngine.h"
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
 
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     int age = 20;
     const char *name = "John";
-   m.segment_format(s,"Hes name is %s, he is %d years old ",name,age);
+  stack.segment_format(s,"Hes name is %s, he is %d years old ",name,age);
     printf("%s\n",s->rendered_text);
-   m.free(s);
+  stack.free(s);
 }

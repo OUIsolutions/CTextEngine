@@ -2,14 +2,15 @@
 
 int main(){
 
-    CTextStackModule m = newCTextStackModule();
-
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+    
 
     CTextStack *s = newCTextStack_string(
             "       my string       "
     );
 
-    m.self_upper(s);
+   stack.self_upper(s);
     printf("%s\n",s->rendered_text);
-    m.free(s);
+   stack.free(s);
 }

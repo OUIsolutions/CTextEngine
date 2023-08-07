@@ -2,12 +2,14 @@
 #include "../../../CTextEngine.h"
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
 
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+    
     struct CTextStack *s = newCTextStack_string_empty();
 
-   m.text(s,"test element");
+  stack.text(s,"test element");
    printf("%s\n",s->rendered_text);
-  m.free(s);
+ stack.free(s);
 
 }

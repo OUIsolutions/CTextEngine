@@ -2,14 +2,15 @@
 
 int main(){
 
-    CTextStackModule m = newCTextStackModule();
-
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+    
 
     CTextStack *s = newCTextStack_string(
             "my string"
     );
 
-    m.self_insert_at(s,2,"aaaaaa");
+   stack.self_insert_at(s,2,"aaaaaa");
     printf("%s\n",s->rendered_text);
-    m.free(s);
+   stack.free(s);
 }
