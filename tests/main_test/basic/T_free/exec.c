@@ -1,8 +1,8 @@
 #include "../../../CTextEngine.h"
 int main(){
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   m.free(s);
+    struct CTextStack *s = ctext.stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    ctext.stack.free(s);
 
 }

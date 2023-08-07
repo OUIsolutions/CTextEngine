@@ -6,7 +6,7 @@
 int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     const char *names[] = {"name1","name2","name3","name4","name 5"};
 

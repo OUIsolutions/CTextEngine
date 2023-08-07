@@ -3,7 +3,7 @@
 int main(){
     CTextNamespace ctext = newCTextNamespace();
 
-    CTextArray  *e = newCTextArray();
+    CTextArray  *e = ctext.array.newArray();
 
     ctext.array.append_string(e,"aaaaa");
     ctext.array.append_string(e,"aaaaa");

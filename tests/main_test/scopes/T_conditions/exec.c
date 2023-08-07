@@ -7,7 +7,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     int age = 15;
 

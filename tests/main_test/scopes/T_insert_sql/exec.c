@@ -12,7 +12,7 @@ int main(){
     const char *columns[] = {"name","email","passord"};
     const char *values[] = {"John","john@email.com","1234"};
 
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    stack.format(s,"INSERT INTO '%s' (",table);
    stack.open(s,NULL);
        stack.segment_format(s,"'%s'",columns[0]);

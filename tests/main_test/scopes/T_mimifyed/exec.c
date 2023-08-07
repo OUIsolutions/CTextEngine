@@ -10,7 +10,7 @@ int main(){
     const char *text = "text exemple";
     const char *breakline = "";
     const char *separator = "";
-    CTextStack *s = newCTextStack(breakline, separator);
+    CTextStack *s = stack.newStack(breakline, separator);
 
   stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
       stack.open(s,CTEXT_HEAD);

@@ -5,7 +5,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     int age = 20;
     const char *name = "John";
   stack.segment_format(s,"Hes name is %s, he is %d years old ",name,age);
