@@ -16,8 +16,9 @@ struct Person {
 
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
 
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
     struct Person john;
     john.name = "John";
     john.age = 20;
@@ -26,17 +27,17 @@ int main(){
 
     CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
-   m.format(s,"Name: %s",john.name);
-   m.segment_format(s,"Age: %d",john.age);
-   m.segment_text(s,"Car: ");
-   m.open(s,NULL);
-       m.segment_format(s,"Name: %s",john.car.name);
-       m.segment_format(s,"Year: %d",john.car.year);
-   m.close(s,NULL);
+  stack.format(s,"Name: %s",john.name);
+  stack.segment_format(s,"Age: %d",john.age);
+  stack.segment_text(s,"Car: ");
+  stack.open(s,NULL);
+      stack.segment_format(s,"Name: %s",john.car.name);
+      stack.segment_format(s,"Year: %d",john.car.year);
+  stack.close(s,NULL);
   
     printf("%s\n",s->rendered_text);
 
-   m.free(s);
+  stack.free(s);
         
 
 }

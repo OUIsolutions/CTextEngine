@@ -1,11 +1,15 @@
 #include "../../../CTextEngine.h"
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
+
+
+    CTextNamespace ctext = newCTextNamespace();
+    CTextStackModule stack = ctext.stack;
+
     CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
-   m.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
-   m.close(s,CTEXT_HTML);
+  stack.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
+  stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
-   m.free(s);
+  stack.free(s);
 }
