@@ -30,7 +30,7 @@ SOFTWARE.
 #include "CTextStack/CTextStack.h"
 #include "extras/extras.h"
 #include "CTextArray/CTextArray.h"
-#include "CTextNameSpaces/declaration.h"
+#include "CTextNamespace/declaration.h"
 #include "CTextStack/admnistrative_methods.c"
 #include "CTextStack/algo_methods.c"
 #include "CTextStack/constructors.c"
@@ -40,6 +40,6 @@ SOFTWARE.
 
 #include "extras/extras.c"
 #include "CTextArray/CTextArray.c"
-#include "CTextNameSpaces/definition.h"
+#include "CTextNamespace/definition.h"
 
 #endif // CTEXTENGINE_H

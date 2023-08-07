@@ -3,7 +3,8 @@
 typedef struct CTextNamespace{
 
     CTextArrayModule array;
-    CTextStack stack;
+    CTextStackModule stack;
 
 }CTextNamespace;
 
+CTextNamespace newCTextNamespace();
