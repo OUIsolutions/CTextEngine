@@ -3,6 +3,11 @@
 typedef struct CTextStackModule{
 
     //admnistrative methods
+    CTextStack  *(*newStack)(const char *line_breaker, const char *separator);
+    CTextStack *(*newStack_string)(const char *starter);
+    CTextStack *(*newStack_string_getting_ownership)(const char *starter);
+    CTextStack *(*newStack_string_empty)();
+
     void (*free)(struct CTextStack *self);
     struct CTextStack *(*clone)(struct CTextStack *self);
     void (*represent)(struct CTextStack *self);

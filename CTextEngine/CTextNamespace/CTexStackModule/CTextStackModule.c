@@ -1,7 +1,10 @@
 
 CTextStackModule newCTextStackModule(){
     struct CTextStackModule self = {0};
-
+    self.newStack = newCTextStack;
+    self.newStack_string = newCTextStack_string;
+    self.newStack_string_empty = newCTextStack_string_empty;
+    self.newStack_string_getting_ownership = newCTextStack_string_getting_ownership;
     self.text = CTextStack_text;
     self.segment_text = CTextStack_segment_text;
     self.format = CTextStack_format;

@@ -1,6 +1,6 @@
 
 typedef struct CTextArrayModule{
-
+    CTextArray *(*newArray)();
     void (*append)(CTextArray *self,CTextStack *element);
     void (*append_string)(CTextArray *self,const char *element);
     CTextStack * (*join)(CTextArray *self,const char *separator);
