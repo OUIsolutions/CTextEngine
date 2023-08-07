@@ -4,26 +4,26 @@
 
 
 int main(){
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
 
     const char *lang = "en";
     const char *text = "text exemple";
     struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
   
-   m.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
-       m.open(s,CTEXT_HEAD);
+   ctext.stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+       ctext.stack.open(s,CTEXT_HEAD);
         
-       m.close(s,CTEXT_HEAD);
-       m.open(s,CTEXT_BODY);
-           m.open(s,CTEXT_H1);
-               m.segment_text(s,"This is a text");
-           m.close(s,CTEXT_H1);
-           m.open(s,CTEXT_P);
-               m.segment_format(s,"This is a formated  text  %s",text);
-           m.close(s,CTEXT_P);
+       ctext.stack.close(s,CTEXT_HEAD);
+       ctext.stack.open(s,CTEXT_BODY);
+           ctext.stack.open(s,CTEXT_H1);
+               ctext.stack.segment_text(s,"This is a text");
+           ctext.stack.close(s,CTEXT_H1);
+           ctext.stack.open(s,CTEXT_P);
+               ctext.stack.segment_format(s,"This is a formated  text  %s",text);
+           ctext.stack.close(s,CTEXT_P);
 
-       m.close(s,CTEXT_BODY);
-   m.close(s,CTEXT_HTML);
+       ctext.stack.close(s,CTEXT_BODY);
+   ctext.stack.close(s,CTEXT_HTML);
 
    printf("%s\n",s->rendered_text);
    int ident_level =s->ident_level;
@@ -32,10 +32,10 @@ int main(){
     }else{
         printf("identation error\n");
         printf("unclosed tags: %d\n",ident_level);
-       m.free(s);
+       ctext.stack.free(s);
         return 1;
     }
 
-  m.free(s);
+  ctext.stack.free(s);
 
 }
