@@ -10,7 +10,7 @@ int main(){
     double height = 1.81;
 
 
-    CTextStack *s = newCTextStack_string(
+    CTextStack *s = stack.newStack_string(
             "my name is @name and my @age and I am @height"
     );
 

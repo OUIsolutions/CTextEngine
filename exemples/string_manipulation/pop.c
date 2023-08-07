@@ -5,7 +5,7 @@ int main(){
     CTextStackModule stack = ctext.stack;
     
 
-    CTextStack *s = newCTextStack_string("my string");
+    CTextStack *s = stack.newStack_string("my string");
     //remove the first char
     CTextStack *start =stack.pop(s,0,0);
     printf("start:%s\n",start->rendered_text);

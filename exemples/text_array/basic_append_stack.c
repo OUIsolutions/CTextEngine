@@ -4,10 +4,10 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
 
-    CTextArray  *e = newCTextArray();
+    CTextArray  *e = ctext.array.newArray();
 
-    CTextStack *first = newCTextStack_string("aaa");
-    CTextStack *second = newCTextStack_string("bbb");
+    CTextStack *first = ctext.stack.newStack_string("aaa");
+    CTextStack *second = ctext.stack.newStack_string("bbb");
 
     ctext.array.append(e,first);
     ctext.array.append(e,second);

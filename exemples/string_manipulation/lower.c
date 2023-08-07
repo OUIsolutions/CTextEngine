@@ -5,7 +5,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
 
-    CTextStack *s = newCTextStack_string(
+    CTextStack *s = stack.newStack_string(
             "    My String      "
     );
 

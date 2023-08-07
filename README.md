@@ -47,7 +47,7 @@ int main(){
     CTextStackModule stack = ctext.stack;
     const char *lang = "en";
     const char *text = "text exemple";
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
   
    stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
        stack.open(s,CTEXT_HEAD);
@@ -96,7 +96,7 @@ int main(){
     const char *text = "text exemple";
     const char *breakline = "";
     const char *separator = "";
-    CTextStack *s = newCTextStack(breakline, separator);
+    CTextStack *s = stack.newStack(breakline, separator);
 
   stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
       stack.open(s,CTEXT_HEAD);
@@ -136,7 +136,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     int age = 15;
 
@@ -178,7 +178,7 @@ int main(){
 int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
     const char *names[] = {"name1","name2","name3","name4","name 5"};
 
@@ -237,7 +237,7 @@ int main(){
     john.car.name = "Ferrari";
     john.car.year = 2020;
 
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
 
   stack.format(s,"Name: %s",john.name);
   stack.segment_format(s,"Age: %d",john.age);
@@ -270,7 +270,7 @@ int main(){
     const char *columns[] = {"name","email","passord"};
     const char *values[] = {"John","john@email.com","1234"};
 
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    stack.format(s,"INSERT INTO '%s' (",table);
    stack.open(s,NULL);
        stack.segment_format(s,"'%s'",columns[0]);
@@ -310,7 +310,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
     
-    struct CTextStack *s = newCTextStack_string_empty();
+    struct CTextStack *s = stack.newStack_string_empty();
 
   stack.text(s,"test element");
    printf("%s\n",s->rendered_text);
@@ -326,7 +326,7 @@ Same as text, but will break an new line
 int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
  stack.segment_text(s,"test element");
    printf("%s\n",s->rendered_text);
  stack.free(s);
@@ -344,7 +344,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack_string_empty();
+    struct CTextStack *s = stack.newStack_string_empty();
     int age = 20;
     const char *name = "John";
    stack.format(s,"Hes name is %s, he is %d years old ",name,age);
@@ -364,7 +364,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     int age = 20;
     const char *name = "John";
   stack.segment_format(s,"Hes name is %s, he is %d years old ",name,age);
@@ -381,7 +381,7 @@ int main(){
 
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
   stack.open(s,CTEXT_HTML);
   stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
@@ -401,7 +401,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
 
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
   stack.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
   stack.close(s,CTEXT_HTML);
@@ -421,7 +421,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
 
-    CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
   stack.only$open(
         s,
@@ -447,7 +447,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
     stack.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
@@ -473,10 +473,10 @@ free the alocated memory
 ~~~c
 #include "CTextEngine.h"
 int main(){
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   m.free(s);
+    struct CTextStack *s = ctext.stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    ctext.stack.free(s);
 
 }
 ~~~

@@ -8,7 +8,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
     
-    struct CTextStack *s = newCTextStack_string_empty();
+    struct CTextStack *s = stack.newStack_string_empty();
    stack.text(s,"my text");
     printf("%s",s->rendered_text);
    stack.free(s);
