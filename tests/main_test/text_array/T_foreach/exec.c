@@ -1,21 +1,21 @@
 #include "../../../CTextEngine.h"
 
 int main(){
-    CTextArrayModule array = newCTextArrayModule();
-    CTextStackModule stack = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
+
     CTextArray  *e = newCTextArray();
 
-    array.append_string(e,"aaaaa");
-    array.append_string(e,"aaaaa");
-    array.append_string(e,"aaaaa");
-    array.append_string(e,"aaaaa");
+    ctext.array.append_string(e,"aaaaa");
+    ctext.array.append_string(e,"aaaaa");
+    ctext.array.append_string(e,"aaaaa");
+    ctext.array.append_string(e,"aaaaa");
 
-    array.foreach(e,stack.self_upper);
+    ctext.array.foreach(e,ctext.stack.self_upper);
 
-    CTextStack *formated = array.join(e,",");
-    stack.represent(formated);
-    stack.free(formated);
+    CTextStack *formated = ctext.array.join(e,",");
+    ctext.stack.represent(formated);
+    ctext.stack.free(formated);
 
-    array.free(e);
+    ctext.array.free(e);
 
 }
