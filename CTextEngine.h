@@ -25,6 +25,7 @@ SOFTWARE.
 #define CTEXTENGINE_H
 
 
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -414,6 +415,9 @@ typedef struct CTextNamespace{
 }CTextNamespace;
 
 CTextNamespace newCTextNamespace();
+
+
+
 
 
 
@@ -1368,6 +1372,7 @@ CTextNamespace newCTextNamespace(){
     self.array = newCTextArrayModule();
     return self;
 }
+
 
 
 #endif // CTEXTENGINE_H

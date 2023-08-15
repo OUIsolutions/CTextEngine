@@ -10,7 +10,9 @@
         "ctextstack.h": "c",
         "depencies.h": "c",
         "ctextengine.h": "c",
-        "ctextengine_test.h": "c"
+        "ctextengine_test.h": "c",
+        "parsers.c": "cpp",
+        "algo_methods.c": "cpp"
     },
     "python.analysis.typeCheckingMode": "basic"
 }

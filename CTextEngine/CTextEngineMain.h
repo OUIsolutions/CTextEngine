@@ -24,22 +24,7 @@ SOFTWARE.
 #ifndef CTEXTENGINE_H
 #define CTEXTENGINE_H
 
-#include "depencies.h"
-#include  "constants.h"
-#include "tags.h"
-#include "CTextStack/CTextStack.h"
-#include "extras/extras.h"
-#include "CTextArray/CTextArray.h"
-#include "CTextNamespace/declaration.h"
-#include "CTextStack/admnistrative_methods.c"
-#include "CTextStack/algo_methods.c"
-#include "CTextStack/constructors.c"
-#include "CTextStack/parsers.c"
-#include "CTextStack/render_methods.c"
-
-
-#include "extras/extras.c"
-#include "CTextArray/CTextArray.c"
-#include "CTextNamespace/definition.h"
+#include "declaration.h"
+#include "definition.h"
 
 #endif // CTEXTENGINE_H
