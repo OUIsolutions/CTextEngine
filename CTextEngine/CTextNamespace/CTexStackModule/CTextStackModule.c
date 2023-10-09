@@ -49,6 +49,9 @@ CTextStackModule newCTextStackModule(){
     self.upper = CTextStack_upper;
     self.self_upper = CTextStack_self_upper;
 
+    self.captalize = CTextStack_captalize;
+    self.self_captalize = CTextStack_self_captalize;
+
     self.starts_with = CTextStack_starts_with;
     self.ends_with = CTextStack_ends_with;
 
