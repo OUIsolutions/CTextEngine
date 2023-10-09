@@ -116,6 +116,9 @@ void CTextStack_self_trim(struct CTextStack *self);
 struct CTextStack *CTextStack_lower(struct CTextStack *self);
 void CTextStack_self_lower(struct CTextStack *self);
 
+struct CTextStack *CTextStack_captalize(struct CTextStack *self);
+void CTextStack_self_captalize(struct CTextStack *self);
+
 struct CTextStack *CTextStack_upper(struct CTextStack *self);
 void CTextStack_self_upper(struct CTextStack *self);
 

@@ -160,6 +160,37 @@ struct CTextStack *CTextStack_upper(struct CTextStack *self){
     return new_element;
 }
 
+struct CTextStack *CTextStack_captalize(struct CTextStack *self){
+    CTextStack *new_element = newCTextStack(self->line_breaker,self->separator);
+    new_element->ident_level = self->ident_level;
+    if(self->size  ==0){
+        return  new_element;
+    }
+
+    CTextStack_format(new_element,"%c", toupper(self->rendered_text[0]));
+
+    for(long i =1; i < self->size; i++){
+        char  last = self->rendered_text[i-1];
+        char current = self->rendered_text[i];
+
+
+        if(last == ' '){
+            CTextStack_format(new_element,"%c",toupper(current));
+        }
+        else{
+            CTextStack_format(new_element,"%c", tolower(current));
+
+        }
+
+    }
+    return new_element;
+}
+
+void CTextStack_self_captalize(struct CTextStack *self){
+    CTextStack *new_stack = CTextStack_captalize(self);
+    private_CTextStack_parse_ownership(self,new_stack);
+}
+
 
 void CTextStack_self_upper(struct CTextStack *self){
     CTextStack *new_stack = CTextStack_upper(self);
