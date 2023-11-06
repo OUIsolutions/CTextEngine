@@ -317,6 +317,8 @@ typedef struct CTextStackModule{
     //admnistrative methods
     CTextStack  *(*newStack)(const char *line_breaker, const char *separator);
     CTextStack *(*newStack_string)(const char *starter);
+    CTextStack *(*newStack_string_format)(const char *format, ...);
+
     CTextStack *(*newStack_string_getting_ownership)(const char *starter);
     CTextStack *(*newStack_string_empty)();
 
@@ -1337,6 +1339,7 @@ CTextStackModule newCTextStackModule(){
     struct CTextStackModule self = {0};
     self.newStack = newCTextStack;
     self.newStack_string = newCTextStack_string;
+    self.newStack_string_format = newCTextStack_string_format;
     self.newStack_string_empty = newCTextStack_string_empty;
     self.newStack_string_getting_ownership = newCTextStack_string_getting_ownership;
     self.text = CTextStack_text;

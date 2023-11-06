@@ -5,6 +5,8 @@ typedef struct CTextStackModule{
     //admnistrative methods
     CTextStack  *(*newStack)(const char *line_breaker, const char *separator);
     CTextStack *(*newStack_string)(const char *starter);
+    CTextStack *(*newStack_string_format)(const char *format, ...);
+
     CTextStack *(*newStack_string_getting_ownership)(const char *starter);
     CTextStack *(*newStack_string_empty)();
 
