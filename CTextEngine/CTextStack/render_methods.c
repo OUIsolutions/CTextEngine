@@ -82,34 +82,7 @@ void CTextStack_$open(struct CTextStack *self, const char *tag, const char *form
     self->ident_level += 1;
 }
 
-bool privateCTextStack_$smart_scope(struct CTextStack *self, const char *tag, const char *format, ...){
 
-
-    if(!self->scope_already_opended){
-        CTextStack_segment(self);
-        CTextStack_format(self, "%c",'<');
-        CTextStack_text(self,tag);
-
-
-        if(format!=NULL){
-            CTextStack_format(self, "%c",' ');
-
-            va_list  argptr;
-            va_start(argptr, format);
-            private_ctext_generate_formated_text(self,format,argptr);
-        }
-        CTextStack_format(self, "%c",'>');
-
-        self->scope_already_opended = true;
-        self->ident_level += 1;
-        return true;
-    }
-
-    if(self->scope_already_opended){
-        ctext_close(self,tag);
-        return false;
-    }
-}
 
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
     CTextStack_segment(self);
@@ -157,19 +130,6 @@ void ctext_open(struct CTextStack *self, const char *tag){
 }
 
 
-bool privateCTextStack_smart_scope(struct CTextStack *self, const char *tag){
-
-    if(!self->scope_already_opended){
-        ctext_open(self,tag);
-        self->scope_already_opended = true;
-        return  true;
-    }
-    if(self->scope_already_opended){
-        ctext_close(self,tag);
-    }
-    return false;
-
-}
 
 void ctext_close(struct CTextStack *self, const char *tag){
 
