@@ -25,6 +25,8 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 struct CTextStack *newCTextStack_string(const char *starter);
 
+struct CTextStack *newCTextStack_string_format(const char *format, ...);
+
 struct CTextStack *newCTextStack_string_getting_ownership(const char *starter);
 
 struct CTextStack *newCTextStack_string_empty();

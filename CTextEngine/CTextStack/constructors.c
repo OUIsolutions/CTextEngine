@@ -23,6 +23,14 @@ struct CTextStack *newCTextStack_string(const char *starter){
     return self;
 }
 
+struct CTextStack *newCTextStack_string_format(const char *format, ...){
+    CTextStack *self = newCTextStack("","");
+    va_list  argptr;
+    va_start(argptr, format);
+    private_ctext_generate_formated_text(self,format,argptr);
+    return self;
+}
+
 struct CTextStack *newCTextStack_string_getting_ownership(const char *starter){
     CTextStack *self = newCTextStack("","");
     free(self->rendered_text);
