@@ -1,8 +1,8 @@
 
 
 #define CTextScope(s,t)\
-ctext_open(s, t);\
-for(int i = 0; i < 1; ctext_close(s, t), ++i)
+while(ctext_smart_scope(s, t))\
+
 
 #define CText$Scope(s,t, ...)\
 CTextStack_$open(s,t,__VA_ARGS__);\

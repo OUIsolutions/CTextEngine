@@ -14,7 +14,7 @@ typedef struct CTextStack{
     size_t rendered_text_alocation_size;
     size_t size;
 
-    bool closed;
+    bool scope_already_opended;
     char *line_breaker;
     char *separator;
     int ident_level;
@@ -48,6 +48,7 @@ void CTextStack_segment(struct CTextStack *self);
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
+
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
@@ -62,6 +63,7 @@ void CTextStack_segment_format(struct CTextStack *self, const char *format, ...)
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
+bool ctext_smart_scope(struct CTextStack *self, const char *tag);
 
 void ctext_close(struct CTextStack *self, const char *tag);
 

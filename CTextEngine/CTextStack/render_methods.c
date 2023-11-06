@@ -128,7 +128,20 @@ void ctext_open(struct CTextStack *self, const char *tag){
 }
 
 
+bool ctext_smart_scope(struct CTextStack *self, const char *tag){
 
+    if(!self->scope_already_opended){
+        ctext_open(self,tag);
+        ctext_close(self,tag);
+        self->scope_already_opended = true;
+        return  true;
+    }
+    if(self->scope_already_opended){
+        ctext_close(self,tag);
+    }
+    return false;
+
+}
 
 void ctext_close(struct CTextStack *self, const char *tag){
 
