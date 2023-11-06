@@ -49,15 +49,15 @@ int main(){
     const char *text = "text exemple";
     struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
   
-   stack.$scope_already_opended(s,CTEXT_HTML,"lang=\"%s\"",lang);
-       stack.scope_already_opended(s,CTEXT_HEAD);
+   stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+       stack.open(s,CTEXT_HEAD);
         
        stack.close(s,CTEXT_HEAD);
-       stack.scope_already_opended(s,CTEXT_BODY);
-           stack.scope_already_opended(s,CTEXT_H1);
+       stack.open(s,CTEXT_BODY);
+           stack.open(s,CTEXT_H1);
                stack.segment_text(s,"This is a text");
            stack.close(s,CTEXT_H1);
-           stack.scope_already_opended(s,CTEXT_P);
+           stack.open(s,CTEXT_P);
                stack.segment_format(s,"This is a formated  text  %s",text);
            stack.close(s,CTEXT_P);
 
@@ -98,15 +98,15 @@ int main(){
     const char *separator = "";
     CTextStack *s = stack.newStack(breakline, separator);
 
-  stack.$scope_already_opended(s,CTEXT_HTML,"lang=\"%s\"",lang);
-      stack.scope_already_opended(s,CTEXT_HEAD);
+  stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+      stack.open(s,CTEXT_HEAD);
      
       stack.close(s,CTEXT_HEAD);
-      stack.scope_already_opended(s,CTEXT_BODY);
-          stack.scope_already_opended(s,CTEXT_H1);
+      stack.open(s,CTEXT_BODY);
+          stack.open(s,CTEXT_H1);
               stack.segment_text(s,"This is a text");
           stack.close(s,CTEXT_H1);
-          stack.scope_already_opended(s,CTEXT_P);
+          stack.open(s,CTEXT_P);
               stack.segment_format(s,"This is a formated  text  %s",text);
           stack.close(s,CTEXT_P);
 
@@ -140,12 +140,12 @@ int main(){
 
     int age = 15;
 
-   stack.scope_already_opended(s,CTEXT_HTML);
-       stack.scope_already_opended(s,CTEXT_HEAD);
+   stack.open(s,CTEXT_HTML);
+       stack.open(s,CTEXT_HEAD);
      
        stack.close(s,CTEXT_HEAD);
-       stack.scope_already_opended(s,CTEXT_BODY);
-           stack.scope_already_opended(s,CTEXT_H1);
+       stack.open(s,CTEXT_BODY);
+           stack.open(s,CTEXT_H1);
             if(age > 18)
                stack.segment_text(s,"You are an adout");
             else if (age > 12)
@@ -182,13 +182,13 @@ int main(){
 
     const char *names[] = {"name1","name2","name3","name4","name 5"};
 
-  stack.scope_already_opended(s,CTEXT_HTML);
-      stack.scope_already_opended(s,CTEXT_HEAD);
+  stack.open(s,CTEXT_HTML);
+      stack.open(s,CTEXT_HEAD);
      
       stack.close(s,CTEXT_HEAD);
-      stack.scope_already_opended(s,CTEXT_BODY);
+      stack.open(s,CTEXT_BODY);
             for(int i = 0; i < sizeof(names)/ sizeof(char *) ; i++){
-              stack.scope_already_opended(s,CTEXT_H1);
+              stack.open(s,CTEXT_H1);
                   stack.segment_text(s,names[i]);
               stack.close(s,CTEXT_H1);
             }
@@ -242,7 +242,7 @@ int main(){
   stack.format(s,"Name: %s",john.name);
   stack.segment_format(s,"Age: %d",john.age);
   stack.segment_text(s,"Car: ");
-  stack.scope_already_opended(s,NULL);
+  stack.open(s,NULL);
       stack.segment_format(s,"Name: %s",john.car.name);
       stack.segment_format(s,"Year: %d",john.car.year);
   stack.close(s,NULL);
@@ -272,7 +272,7 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
    stack.format(s,"INSERT INTO '%s' (",table);
-   stack.scope_already_opended(s,NULL);
+   stack.open(s,NULL);
        stack.segment_format(s,"'%s'",columns[0]);
         for(int i = 1; i < sizeof(columns)/ sizeof(char *) ; i++){
            stack.format(s,",'%s'",columns[i]);
@@ -281,7 +281,7 @@ int main(){
    stack.close(s,NULL);
 
    stack.segment_text(s,"VALUES (");
-   stack.scope_already_opended(s,NULL);    
+   stack.open(s,NULL);    
        stack.segment_format(s,"'%s'",values[0]);
         for(int i = 1; i < sizeof(values)/ sizeof(char *) ; i++){
            stack.format(s,",'%s'",values[i]);
@@ -382,7 +382,7 @@ int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-  stack.scope_already_opended(s,CTEXT_HTML);
+  stack.open(s,CTEXT_HTML);
   stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
   stack.free(s);
@@ -403,7 +403,7 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
-  stack.$scope_already_opended(s,CTEXT_HTML, "lang=\"%s\"",lang);
+  stack.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
   stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
   stack.free(s);
@@ -423,7 +423,7 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
-  stack.only$scope_already_opended(
+  stack.only$open(
         s,
         CTEXT_META, 
         "name=\"%s\" content=\"width=device-width, initial-scale=1.0",

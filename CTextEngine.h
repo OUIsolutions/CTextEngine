@@ -36,6 +36,16 @@ SOFTWARE.
 
 
 
+#define CTextScope(s,t)\
+ctext_open(s, t);\
+for(int i = 0; i < 1; ctext_close(s, t), ++i)
+
+#define CText$Scope(s,t, ...)\
+CTextStack_$open(s,t,__VA_ARGS__);\
+for(int i = 0; i < 1; ctext_close(s, t), ++i)
+
+
+
 #define CTEXT_BY_OWNESHIP 1
 #define CTEXT_BY_COPY 2
 #define CTEXT_BY_REFERENCE 3
@@ -123,7 +133,7 @@ typedef struct CTextStack{
     char *rendered_text;
     size_t rendered_text_alocation_size;
     size_t size;
-    
+
     char *line_breaker;
     char *separator;
     int ident_level;
@@ -134,6 +144,8 @@ struct CTextStack *newCTextStack(const char *line_breaker, const char *separator
 
 
 struct CTextStack *newCTextStack_string(const char *starter);
+
+struct CTextStack *newCTextStack_string_format(const char *format, ...);
 
 struct CTextStack *newCTextStack_string_getting_ownership(const char *starter);
 
@@ -155,6 +167,7 @@ void CTextStack_segment(struct CTextStack *self);
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
+
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
@@ -168,6 +181,7 @@ void CTextStack_segment_format(struct CTextStack *self, const char *format, ...)
 
 
 void ctext_open(struct CTextStack *self, const char *tag);
+
 
 
 void ctext_close(struct CTextStack *self, const char *tag);
@@ -786,11 +800,11 @@ void CTextStack_self_trim(struct CTextStack *self){
 //
 struct CTextStack * newCTextStack(const char *line_breaker, const char *separator){
     struct CTextStack *self = (struct CTextStack*)malloc(sizeof(struct CTextStack));
+    *self = (CTextStack){0};
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->size = 0;
-    self->ident_level = 0;
+
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
 
@@ -803,6 +817,14 @@ struct CTextStack *newCTextStack_string(const char *starter){
     if(starter){
         CTextStack_format(self,"%s", starter);
     }
+    return self;
+}
+
+struct CTextStack *newCTextStack_string_format(const char *format, ...){
+    CTextStack *self = newCTextStack("","");
+    va_list  argptr;
+    va_start(argptr, format);
+    private_ctext_generate_formated_text(self,format,argptr);
     return self;
 }
 
@@ -983,6 +1005,8 @@ void CTextStack_$open(struct CTextStack *self, const char *tag, const char *form
     self->ident_level += 1;
 }
 
+
+
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
     CTextStack_segment(self);
     CTextStack_format(self, "%c",'<');
@@ -1027,7 +1051,6 @@ void ctext_open(struct CTextStack *self, const char *tag){
     }
     CTextStack_$open(self, tag, NULL);
 }
-
 
 
 
