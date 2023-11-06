@@ -47,6 +47,7 @@ void CTextStack_segment(struct CTextStack *self);
 
 void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
 
+bool privateCTextStack_$smart_scope(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
 void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
@@ -63,7 +64,8 @@ void CTextStack_segment_format(struct CTextStack *self, const char *format, ...)
 
 void ctext_open(struct CTextStack *self, const char *tag);
 
-bool ctext_smart_scope(struct CTextStack *self, const char *tag);
+bool privateCTextStack_smart_scope(struct CTextStack *self, const char *tag);
+
 
 void ctext_close(struct CTextStack *self, const char *tag);
 
