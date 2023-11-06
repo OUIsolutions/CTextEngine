@@ -1,4 +1,5 @@
 #include "depencies.h"
+#include "macros.h"
 #include  "constants.h"
 #include "tags.h"
 #include "CTextStack/CTextStack.h"
