@@ -13,7 +13,8 @@ typedef struct CTextStack{
     char *rendered_text;
     size_t rendered_text_alocation_size;
     size_t size;
-    
+
+    bool closed;
     char *line_breaker;
     char *separator;
     int ident_level;

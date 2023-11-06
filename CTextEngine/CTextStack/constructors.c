@@ -3,11 +3,11 @@
 //
 struct CTextStack * newCTextStack(const char *line_breaker, const char *separator){
     struct CTextStack *self = (struct CTextStack*)malloc(sizeof(struct CTextStack));
+    *self = (CTextStack){0};
     self->rendered_text = (char*)malloc(2);
     strcpy(self->rendered_text,"\0");
     self->rendered_text_alocation_size = 2;
-    self->size = 0;
-    self->ident_level = 0;
+
     self->line_breaker = strdup(line_breaker);
     self->separator = strdup(separator);
 
