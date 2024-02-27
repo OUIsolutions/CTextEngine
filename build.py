@@ -23,4 +23,3 @@ ct.include_code_in_markdown('README.md',save_file=True)
 ct.generate_amalgamated_code(STARTER,OUTPUT)
 
 
-zip_folder(ZIP_NAME)

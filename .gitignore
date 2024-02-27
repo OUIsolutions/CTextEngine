@@ -5,6 +5,7 @@ doTheWorld.c
 *.o
 *.ko
 *.obj
+bin
 *.elf
 out_folder
 doTheWorld.h
