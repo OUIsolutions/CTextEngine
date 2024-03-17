@@ -17,15 +17,33 @@ void private_ctext_generate_formated_text(
 
         }
 
-        if(strcmp(single_test,"%d") == 0) {
+        if(strcmp(single_test,"%d") == 0 || strcmp(single_test,"%i") == 0) {
+            int value = va_arg(argptr,int);
             char result[20] ={0};
-            sprintf(result,"%ld", va_arg(argptr,long));
+            sprintf(result,"%d", value);
+
+
+
             CTextStack_text(stack,result);
+
             i+=1;
             continue;
         }
 
-        if(strcmp(single_test,"%f") == 0) {
+        else if(strcmp(double_test,"%ld") == 0 ) {
+
+            int value = va_arg(argptr,int);
+            char result[20] ={0};
+            sprintf(result,"%d", value);
+
+            CTextStack_text(stack,result);
+
+            i+=2;
+            continue;
+        }
+
+
+        else if(strcmp(single_test,"%f") == 0 ) {
             char result_text[20]= {0};
 
             sprintf(result_text,"%lf", va_arg(argptr,double ));
@@ -49,6 +67,29 @@ void private_ctext_generate_formated_text(
             continue;
         }
 
+        else if(strcmp(double_test,"%lf") == 0 ) {
+            char result_text[20]= {0};
+
+            sprintf(result_text,"%lf", va_arg(argptr,double ));
+
+            for(int t = 18; t > 0; t--){
+                char current_char = result_text[t];
+                if(current_char != '0' && current_char != '\0'){
+
+                    if(current_char == '.'){
+                        result_text[t+2]  = '\0';
+                    }
+                    else{
+                        result_text[t+1]  = '\0';
+                    }
+
+                    break;
+                }
+            }
+            CTextStack_text(stack,result_text);
+            i+=2;
+            continue;
+        }
         else if(strcmp(single_test,"%c") == 0){
             char result = va_arg(argptr,int);
             char element[2] = {result,'\0'};
