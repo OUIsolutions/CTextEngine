@@ -72,3 +72,5 @@ void CTextStack_self_insert_at(struct CTextStack *self,long point, const char *e
 CTextStack *CTextStack_trim(struct CTextStack *self);
 
 void CTextStack_self_trim(struct CTextStack *self);
+
+bool CTextStack_equal(  CTextStack *self,const char *element);

@@ -294,3 +294,8 @@ void CTextStack_self_trim(struct CTextStack *self){
     CTextStack  *new_stack = CTextStack_trim(self);
     private_CTextStack_parse_ownership(self,new_stack);
 }
+
+
+bool CTextStack_equal(  CTextStack *self,const char *element){
+    return strcmp(self->rendered_text,element) == 0;
+}

@@ -63,9 +63,6 @@ CTextArray *CTextArray_split(const char *element,const char *target){
     return self;
 }
 
-bool CTextStack_equal(struct  CTextStack *self,const char *element){
-    return strcmp(self->rendered_text,element) == 0;
-}
 
 
 void  CTextArray_free(CTextArray *self){
