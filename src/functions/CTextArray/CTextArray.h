@@ -1,13 +1,5 @@
 
 
-typedef struct CTextArray{
-
-    CTextStack **stacks;
-    long size;
-
-
-}CTextArray;
-
 CTextArray * newCTextArray();
 
 

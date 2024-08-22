@@ -8,17 +8,7 @@
 #define CTEXT_BOOL 3
 #define CTEXT_STRING 4
 
-typedef struct CTextStack{
 
-    char *rendered_text;
-    size_t rendered_text_alocation_size;
-    size_t size;
-
-    char *line_breaker;
-    char *separator;
-    int ident_level;
-
-}CTextStack;
 
 struct CTextStack *newCTextStack(const char *line_breaker, const char *separator);
 
@@ -139,5 +129,3 @@ double  CTextStack_parse_to_double(struct CTextStack *self);
 
 struct CTextStack *CTextStack_reverse(struct CTextStack *self);
 void CTextStack_self_reverse(struct CTextStack *self);
-
-
