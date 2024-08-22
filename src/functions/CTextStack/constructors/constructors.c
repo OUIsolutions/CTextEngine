@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
  CTextStack * newCTextStack(const char *line_breaker, const char *separator){
     struct CTextStack *self = (struct CTextStack*)malloc(sizeof(struct CTextStack));

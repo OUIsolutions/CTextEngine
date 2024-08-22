@@ -1,5 +1,6 @@
 
 
+#include "../unique.definition_requirements.h"
 
  CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end){
 

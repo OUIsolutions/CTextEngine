@@ -1,4 +1,5 @@
 
+#include "../unique.definition_requirements.h"
 
 CTextArrayModule newCTextArrayModule(){
     CTextArrayModule module = {0};

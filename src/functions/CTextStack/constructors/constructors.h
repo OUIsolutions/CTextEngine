@@ -1,3 +1,4 @@
+#include "../unique.declaration_requirements.h"
 
  CTextStack * newCTextStack(const char *line_breaker, const char *separator);
 

@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
 int CTextStack_typeof(struct CTextStack *self){
     if(self->size == 0){
@@ -43,11 +44,11 @@ const char * CTextStack_typeof_in_str(struct CTextStack *self){
     else if(current_type == CTEXT_LONG){
         return "long";
     }
-    
+
     else if(current_type == CTEXT_DOUBLE){
         return "double";
     }
-    
+
     else{
         return "invalid";
     }

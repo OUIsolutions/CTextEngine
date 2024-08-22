@@ -2,3 +2,4 @@
 #include "constants/all.h"
 #include "macros/all.h"
 #include "types/all.h"
+#include "functions/declaration.h"

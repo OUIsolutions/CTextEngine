@@ -1,2 +1,2 @@
 #include "declaration.h"
-#include "functions/definitions.c"
+#include "functions/definition.c"

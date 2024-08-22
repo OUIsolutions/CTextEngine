@@ -1,4 +1,5 @@
 
+#include "../unique.definition_requirements.h"
 
 CTextNamespace newCTextNamespace(){
     CTextNamespace self  = {0};

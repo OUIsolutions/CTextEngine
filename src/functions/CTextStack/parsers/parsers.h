@@ -1,3 +1,4 @@
+#include "../unique.declaration_requirements.h"
 
 int CTextStack_typeof(struct CTextStack *self);
 

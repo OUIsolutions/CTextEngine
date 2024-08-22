@@ -1,4 +1,5 @@
 
+#include "../unique.declaration_requirements.h"
 
 CTextArray * newCTextArray();
 

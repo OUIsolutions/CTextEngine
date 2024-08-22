@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
 void private_ctext_generate_formated_text(
         struct CTextStack *stack,const char *format,va_list argptr){

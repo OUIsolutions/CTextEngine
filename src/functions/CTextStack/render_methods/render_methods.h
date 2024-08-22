@@ -1,3 +1,4 @@
+#include "../unique.declaration_requirements.h"
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
 

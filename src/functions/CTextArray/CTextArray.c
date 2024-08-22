@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
 CTextArray * newCTextArray(){
     CTextArray  *self = (CTextArray*) malloc(sizeof (CTextArray));

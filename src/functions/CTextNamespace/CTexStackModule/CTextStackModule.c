@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
 CTextStackModule newCTextStackModule(){
     struct CTextStackModule self = {0};

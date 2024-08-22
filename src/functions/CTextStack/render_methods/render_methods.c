@@ -1,3 +1,4 @@
+#include "../unique.definition_requirements.h"
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self){
 
@@ -17,14 +18,14 @@ void CTextStack_text(struct CTextStack *self, const char *text){
     }
 
     size_t text_size = strlen(text);
-    
+
     self->size += text_size;
     private_ctext_text_double_size_if_reachs(self);
-    
+
     memcpy(
             self->rendered_text + self->size - text_size,
         text,
-        text_size 
+        text_size
     );
     self->rendered_text[self->size] = '\0';
 }
@@ -156,5 +157,3 @@ void ctext_close(struct CTextStack *self, const char *tag){
     CTextStack_format(self, "%c",'>');
 
 }
-
-
