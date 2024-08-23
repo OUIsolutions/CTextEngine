@@ -30,11 +30,11 @@ typedef struct CTextStackModule{
 
     void (*segment_format)(struct CTextStack *self, const char *format, ...);
 
-    void (*$open)(struct CTextStack *self, const char *tag, const char *format,...);
+    void (*open_format)(struct CTextStack *self, const char *tag, const char *format,...);
 
-    void (*only$open)(struct CTextStack *self, const char *tag, const char *format,...);
+    void (*only_open_format)(struct CTextStack *self, const char *tag, const char *format,...);
 
-    void (*auto$close)(struct CTextStack *self, const char *tag, const char *format,...);
+    void (*auto_close_format)(struct CTextStack *self, const char *tag, const char *format,...);
 
     void (*open)(struct CTextStack *self, const char *tag);
 

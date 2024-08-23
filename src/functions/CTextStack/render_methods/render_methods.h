@@ -20,15 +20,15 @@ void CTextStack_segment_format(struct CTextStack *self, const char *format, ...)
 void CTextStack_segment(struct CTextStack *self);
 
 
-void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...);
+void CTextStack_open_format(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
 
 
-void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...);
+void CTextStack_only_open_format(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
-void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...);
+void CTextStack_auto_close_format(struct CTextStack *self, const char *tag, const char *format, ...);
 
 
 void ctext_open(struct CTextStack *self, const char *tag);

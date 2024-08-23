@@ -12,9 +12,9 @@ CTextStackModule newCTextStackModule(){
     self.format = CTextStack_format;
     self.segment = CTextStack_segment;
     self.segment_format = CTextStack_segment_format;
-    self.$open = CTextStack_$open;
-    self.only$open =CTextStack_only$open;
-    self.auto$close = CTextStack_auto$close;
+    self.open_format = CTextStack_open_format;
+    self.only_open_format =CTextStack_only_open_format;
+    self.auto_close_format = CTextStack_auto_close_format;
     self.open = ctext_open;
     self.close = ctext_close;
     self.free =  CTextStack_free;

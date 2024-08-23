@@ -68,7 +68,7 @@ void CTextStack_segment(struct CTextStack *self){
 
 }
 
-void CTextStack_$open(struct CTextStack *self, const char *tag, const char *format, ...){
+void CTextStack_open_format(struct CTextStack *self, const char *tag, const char *format, ...){
     CTextStack_segment(self);
     CTextStack_format(self, "%c",'<');
     CTextStack_text(self,tag);
@@ -91,7 +91,7 @@ void CTextStack_$open(struct CTextStack *self, const char *tag, const char *form
 
 
 
-void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *format, ...){
+void CTextStack_only_open_format(struct CTextStack *self, const char *tag, const char *format, ...){
     CTextStack_segment(self);
     CTextStack_format(self, "%c",'<');
 
@@ -111,7 +111,7 @@ void CTextStack_only$open(struct CTextStack *self, const char *tag, const char *
 
 }
 
-void CTextStack_auto$close(struct CTextStack *self, const char *tag, const char *format, ...){
+void CTextStack_auto_close_format(struct CTextStack *self, const char *tag, const char *format, ...){
     CTextStack_segment(self);
     CTextStack_format(self, "%c",'<');
 
@@ -136,7 +136,7 @@ void ctext_open(struct CTextStack *self, const char *tag){
         self->ident_level += 1;
         return;
     }
-    CTextStack_$open(self, tag, NULL);
+    CTextStack_open_format(self, tag, NULL);
 }
 
 
