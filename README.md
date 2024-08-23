@@ -1,14 +1,13 @@
 
 # CTextEngine
 
-CTextEngine its an full scope_already_opended source single header C/C++ text engine for general propose focused  on html/xml documents, with CTextEngine you can generate
-various kinds of documents with easy steps
-
+CTextEngine its single file C/C++ text engine for general propose, focused  on html/xml
+documents, with CTextEngine you can generate various kinds of documents with easy steps
 
 # Instalation
 ## Single File
 As Others OUI Products, these lib is made to bee dumb as possible,so for instalation
-you can just copy the **CTextEngine.h** file  to your project and start using
+you can just copy the [CTextEngine.h](https://github.com/OUIsolutions/CTextEngine/releases/download/v2.000/CTextEngine.h) file  to your project and start using
 
 if these runs, it means it working
 ~~~c
@@ -21,11 +20,10 @@ int main(){
 
 
 ## Full Folder
-You also can run by full folder , just copy the entire folder i **CTextEngine** in your project
+You also can run by full folder , just copy the entire folder **src** in your project
 than run with:
 ~~~c
-#include "CTextEngine/CTextEngineMain.h"
-
+#include "src/one.c"
 
 int main(){
 
