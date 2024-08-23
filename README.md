@@ -511,17 +511,19 @@ int main(){
 
 ~~~
 
-Close the tag passed, if is null will only downcrease the ident
 
+free the alocated memory
+
+~~~c
+#include "CTextEngine.h"
 int main(){
-    CTextStackModule m = newCTextStackModule();
+    CTextNamespace ctext = newCTextNamespace();
 
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   m.scope_already_opended(s,CTEXT_HTML);
-   m.close(s,CTEXT_HTML);
-    printf("%s\n",s->rendered_text);
-   m.free(s);
+    struct CTextStack *s = ctext.stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
+    ctext.stack.free(s);
+
 }
 ~~~
 
-free the alocated memory
+
+

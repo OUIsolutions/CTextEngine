@@ -88,18 +88,10 @@ Implement an autoclose tag
 
 codeof:exemples/scopes/autoclose.c
 
-Close the tag passed, if is null will only downcrease the ident
-
-int main(){
-    CTextStackModule m = newCTextStackModule();
-
-    struct CTextStack *s = newCTextStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-   m.scope_already_opended(s,CTEXT_HTML);
-   m.close(s,CTEXT_HTML);
-    printf("%s\n",s->rendered_text);
-   m.free(s);
-}
-~~~
 
 free the alocated memory
 codeof:exemples/basic/free.c
+
+
+
+
