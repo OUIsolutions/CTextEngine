@@ -12,9 +12,9 @@ int main(){
     const char *separator = "";
     CTextStack *s = stack.newStack(breakline, separator);
 
-  stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+  stack.open_format(s,CTEXT_HTML,"lang=\"%s\"",lang);
       stack.open(s,CTEXT_HEAD);
-     
+
       stack.close(s,CTEXT_HEAD);
       stack.open(s,CTEXT_BODY);
           stack.open(s,CTEXT_H1);

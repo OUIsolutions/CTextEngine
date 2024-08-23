@@ -9,9 +9,9 @@ int main(){
 
     struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
-    stack.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
+    stack.auto_close_format(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
     stack.free(s);
-   
-    
+
+
 }

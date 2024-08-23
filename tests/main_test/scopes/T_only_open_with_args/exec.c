@@ -9,9 +9,9 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
-  stack.only$open(
+  stack.only_open_format(
         s,
-        CTEXT_META, 
+        CTEXT_META,
         "name=\"%s\" content=\"width=device-width, initial-scale=1.0",
         name
     );

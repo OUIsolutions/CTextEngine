@@ -46,7 +46,7 @@ main.c
 *.su
 *.idb
 *.pdb
-
+side_effect_copy
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -55,3 +55,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+!build.out
+!build.exe

@@ -1,6 +1,7 @@
+
 # CTextEngine
 
-CTextEngine its an full scope_already_opended source single header C/C++ text engine for general propose focused  on html/xml documents, with CTextEngine you can generate 
+CTextEngine its an full scope_already_opended source single header C/C++ text engine for general propose focused  on html/xml documents, with CTextEngine you can generate
 various kinds of documents with easy steps
 
 
@@ -20,7 +21,7 @@ int main(){
 
 
 ## Full Folder
-You also can run by full folder , just copy the entire folder i **CTextEngine** in your project 
+You also can run by full folder , just copy the entire folder i **CTextEngine** in your project
 than run with:
 ~~~c
 #include "CTextEngine/CTextEngineMain.h"
@@ -31,11 +32,11 @@ int main(){
 }
 ~~~
 
-# Usage 
+# Usage
 
-## Rendering an basic Template 
+## Rendering an basic Template
 
-<!--codeof:exemples/scopes/basic_template.c-->
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -48,10 +49,10 @@ int main(){
     const char *lang = "en";
     const char *text = "text exemple";
     struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-  
-   stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+
+   stack.open_format(s,CTEXT_HTML,"lang=\"%s\"",lang);
        stack.open(s,CTEXT_HEAD);
-        
+
        stack.close(s,CTEXT_HEAD);
        stack.open(s,CTEXT_BODY);
            stack.open(s,CTEXT_H1);
@@ -78,11 +79,12 @@ int main(){
   stack.free(s);
 
 }
+
 ~~~
 
 ## Rendering an basic Template with scope mode
 
-<!--codeof:exemples/macros/scope_macro.c-->
+
 ~~~c
 #include "CTextEngine.h"
 
@@ -94,7 +96,7 @@ int main(){
 
     const char *lang = "en";
     const char *text = "text exemple";
-    CText$Scope(s, CTEXT_HTML,"lang=\"%s\"",lang){
+    CTextScope_format(s, CTEXT_HTML,"lang=\"%s\"",lang){
         CTextScope(s,CTEXT_HEAD){}
         CTextScope(s,CTEXT_BODY){
             CTextScope(s,CTEXT_H1){
@@ -111,12 +113,14 @@ int main(){
 
     stack.free(s);
 }
+
 ~~~
 
-with the breakline and separator, you can control the size of scopes in te way you want
-these is an exemple of full mimifyed text 
 
-<!--codeof:exemples/scopes/scopes.c-->
+with the breakline and separator, you can control the size of scopes in te way you want
+these is an exemple of full mimifyed text
+
+
 ~~~c
 #include "CTextEngine.h"
 
@@ -132,9 +136,9 @@ int main(){
     const char *separator = "";
     CTextStack *s = stack.newStack(breakline, separator);
 
-  stack.$open(s,CTEXT_HTML,"lang=\"%s\"",lang);
+  stack.open_format(s,CTEXT_HTML,"lang=\"%s\"",lang);
       stack.open(s,CTEXT_HEAD);
-     
+
       stack.close(s,CTEXT_HEAD);
       stack.open(s,CTEXT_BODY);
           stack.open(s,CTEXT_H1);
@@ -158,8 +162,11 @@ int main(){
  stack.free(s);
 
 }
+
 ~~~
-<!--codeof:exemples/scopes/conditions.c-->
+
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -202,7 +209,8 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/loops.c-->
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -242,7 +250,9 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/log_system.c-->
+
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -288,7 +298,8 @@ int main(){
 
 }
 ~~~
-<!--codeof:exemples/scopes/insert_sql.c-->
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -333,8 +344,9 @@ int main(){
 ~~~
 
 ## text
-The **text**, Method is responsable for append new text into the stack 
-<!--codeof:exemples/stack_manipulation/text.c-->
+The **text**, Method is responsable for append new text into the stack
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -352,9 +364,10 @@ int main(){
 
 }
 ~~~
-Same as text, but will break an new line 
 
-<!--codeof:exemples/stack_manipulation/segment_text.c-->
+Same as text, but will break an new line
+
+
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -367,9 +380,10 @@ int main(){
 
 }
 ~~~
-format has the same function as text, but allow formatations 
 
-<!--codeof:exemples/stack_manipulation/format.c-->
+format has the same function as text, but allow formatations
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -387,9 +401,10 @@ int main(){
 
 }
 ~~~
-same as format, but breaking an line 
 
-<!--codeof:exemples/stack_manipulation/segment_format.c-->
+same as format, but breaking an line
+
+
 ~~~c
 
 #include "CTextEngine.h"
@@ -406,9 +421,10 @@ int main(){
   stack.free(s);
 }
 ~~~
-Opens an new scope , if tag is NULL it will not render the current tag 
 
-<!--codeof:exemples/scopes/open.c-->
+Opens an new scope , if tag is NULL it will not render the current tag
+
+
 ~~~c
 #include "CTextEngine.h"
 int main(){
@@ -423,9 +439,10 @@ int main(){
 
 }
 ~~~
-scope_already_opended an new scope but allowing you to pass an formated tag props 
 
-<!--codeof:exemples/scopes/open_with_args.c-->
+scope_already_opended an new scope but allowing you to pass an formated tag props
+
+
 ~~~c
 #include "CTextEngine.h"
 
@@ -437,14 +454,16 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
-  stack.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
+  stack.open_format(s,CTEXT_HTML, "lang=\"%s\"",lang);
   stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
   stack.free(s);
 }
+
 ~~~
-Only scope_already_opended an scope , its ideal for "meta" tags 
-<!--codeof:exemples/scopes/only_open_with_args.c-->
+
+Only scope_already_opended an scope , its ideal for "meta" tags
+
 ~~~c
 
 
@@ -457,9 +476,9 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *name = "viewport";
-  stack.only$open(
+  stack.only_open_format(
         s,
-        CTEXT_META, 
+        CTEXT_META,
         "name=\"%s\" content=\"width=device-width, initial-scale=1.0",
         name
     );
@@ -467,10 +486,12 @@ int main(){
   stack.free(s);
 
 }
-~~~
-Implement an autoclose tag 
 
-<!--codeof:exemples/scopes/autoclose.c-->
+~~~
+
+Implement an autoclose tag
+
+
 ~~~c
 
 
@@ -483,14 +504,16 @@ int main(){
 
     struct CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *src = "img.com";
-    stack.auto$close(s,CTEXT_IMG,"src=\"%s\"",src);
+    stack.auto_close_format(s,CTEXT_IMG,"src=\"%s\"",src);
     printf("%s\n",s->rendered_text);
     stack.free(s);
-   
-    
+
+
 }
+
 ~~~
-Close the tag passed, if is null will only downcrease the ident 
+
+Close the tag passed, if is null will only downcrease the ident
 
 int main(){
     CTextStackModule m = newCTextStackModule();
@@ -502,15 +525,5 @@ int main(){
    m.free(s);
 }
 ~~~
+
 free the alocated memory
-<!--codeof:exemples/basic/free.c-->
-~~~c
-#include "CTextEngine.h"
-int main(){
-    CTextNamespace ctext = newCTextNamespace();
-
-    struct CTextStack *s = ctext.stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    ctext.stack.free(s);
-
-}
-~~~

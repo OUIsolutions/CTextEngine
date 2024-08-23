@@ -8,7 +8,7 @@ int main(){
 
     CTextStack *s = stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
     const char *lang = "en";
-  stack.$open(s,CTEXT_HTML, "lang=\"%s\"",lang);
+  stack.open_format(s,CTEXT_HTML, "lang=\"%s\"",lang);
   stack.close(s,CTEXT_HTML);
     printf("%s\n",s->rendered_text);
   stack.free(s);
