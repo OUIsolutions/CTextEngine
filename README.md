@@ -7,7 +7,7 @@ documents, with CTextEngine you can generate various kinds of documents with eas
 # Instalation
 ## Single File
 As Others OUI Products, these lib is made to bee dumb as possible,so for instalation
-you can just copy the [CTextEngine.h](https://github.com/OUIsolutions/CTextEngine/releases/download/v2.000/CTextEngine.h) file  to your project and start using
+you can just copy the [CTextEngine.h](https://github.com/OUIsolutions/CTextEngine/releases/download/v2.001/CTextEngine.h) file  to your project and start using
 
 if these runs, it means it working
 ~~~c
@@ -513,17 +513,3 @@ int main(){
 
 
 free the alocated memory
-
-~~~c
-#include "CTextEngine.h"
-int main(){
-    CTextNamespace ctext = newCTextNamespace();
-
-    struct CTextStack *s = ctext.stack.newStack(CTEXT_LINE_BREAKER, CTEXT_SEPARATOR);
-    ctext.stack.free(s);
-
-}
-~~~
-
-
-
