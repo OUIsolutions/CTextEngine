@@ -4,11 +4,15 @@ doTheWorld.c
 # Object files
 *.o
 *.ko
+cache2
 *.obj
 bin
 *.elf
+output_test
+teste.c
 release
 out_folder
+cache
 doTheWorld.h
 out_folder
 tests/CTextEngine.h
