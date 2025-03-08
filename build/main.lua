@@ -6,7 +6,7 @@ function main()
         src = "src",
         tags = { "native_imports", "macros", "types","consts", "fdeclare", "fdefine" },
         implement_main = false,
-        project_shortcut="CTextEngine",
+        project_short_cut="CTextEngine",
     })
 
     if darwin.argv.one_of_args_exist("only_silverchain") then

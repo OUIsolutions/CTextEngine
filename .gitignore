@@ -12,6 +12,7 @@ output_test
 teste.c
 release
 out_folder
+src/imports
 cache
 doTheWorld.h
 out_folder
