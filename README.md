@@ -34,7 +34,7 @@ darwin run_blueprint build/  --mode folder
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 
 
@@ -81,7 +81,7 @@ int main(){
 
 
 ~~~c
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
     CTextNamespace ctext = newCTextNamespace();
@@ -117,7 +117,7 @@ these is an exemple of full mimifyed text
 
 
 ~~~c
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -164,7 +164,7 @@ int main(){
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 
 
@@ -208,7 +208,7 @@ int main(){
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 
 
@@ -250,7 +250,7 @@ int main(){
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 
 struct Car {
@@ -297,7 +297,7 @@ int main(){
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 
 
@@ -344,7 +344,7 @@ The **text**, Method is responsable for append new text into the stack
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -364,7 +364,7 @@ Same as text, but will break an new line
 
 
 ~~~c
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 int main(){
     CTextNamespace ctext = newCTextNamespace();
     CTextStackModule stack = ctext.stack;
@@ -381,7 +381,7 @@ format has the same function as text, but allow formatations
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -402,7 +402,7 @@ same as format, but breaking an line
 
 ~~~c
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -421,7 +421,7 @@ Opens an new scope , if tag is NULL it will not render the current tag
 
 
 ~~~c
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 int main(){
 
     CTextNamespace ctext = newCTextNamespace();
@@ -439,7 +439,7 @@ scope_already_opended an new scope but allowing you to pass an formated tag prop
 
 
 ~~~c
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -462,7 +462,7 @@ Only scope_already_opended an scope , its ideal for "meta" tags
 ~~~c
 
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
@@ -490,7 +490,7 @@ Implement an autoclose tag
 ~~~c
 
 
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
 
