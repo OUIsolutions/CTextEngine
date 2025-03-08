@@ -1,4 +1,4 @@
-#include "CTextEngine.h"
+#include "CTextEngineOne.c"
 
 int main(){
     CTextNamespace ctext = newCTextNamespace();
