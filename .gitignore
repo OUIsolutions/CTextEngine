@@ -2,6 +2,7 @@
 *.d
 doTheWorld.c
 # Object files
+release
 *.o
 *.ko
 cache2
