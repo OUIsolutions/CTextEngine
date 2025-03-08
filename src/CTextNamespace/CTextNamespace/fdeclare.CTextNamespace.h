@@ -1,0 +1,3 @@
+
+
+CTextNamespace newCTextNamespace();

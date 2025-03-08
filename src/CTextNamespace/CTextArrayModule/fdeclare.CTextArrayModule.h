@@ -1,0 +1,4 @@
+
+
+
+CTextArrayModule newCTextArrayModule();

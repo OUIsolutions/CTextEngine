@@ -4,8 +4,9 @@ function main()
 
     darwin.silverchain.generate({
         src = "src",
-        tags = { "dep_declare", "macros", "types","consts", "fdeclare", "fdefine" },
-        implement_main = false
+        tags = { "native_imports", "macros", "types","consts", "fdeclare", "fdefine" },
+        implement_main = false,
+        project_shortcut="CTextEngine",
     })
 
     if darwin.argv.one_of_args_exist("only_silverchain") then
