@@ -4,7 +4,6 @@
 //mannaged by SilverChain: https://github.com/OUIsolutions/SilverChain
 #include "../imports/imports.macros.h"
 //silver_chain_scope_end
-#include "../imports.h"
 
 #ifndef PRIVATE_CTEXT_STACK_TYPE_H
 #define PRIVATE_CTEXT_STACK_TYPE_H

@@ -6,7 +6,6 @@
 //silver_chain_scope_end
 
 
-#include "../unique.declaration_requirements.h"
 
  CTextStack * CTextStack_substr(struct CTextStack *self, long starter, long end);
 

@@ -4,7 +4,6 @@
 //mannaged by SilverChain: https://github.com/OUIsolutions/SilverChain
 #include "../../imports/imports.types.h"
 //silver_chain_scope_end
-#include "../CTextArray.h"
 #ifndef PRIVATE_CTEXT_ARRAY_NAMESPACE_MODULE
 #define PRIVATE_CTEXT_ARRAY_NAMESPACE_MODULE
 typedef struct CTextArrayModule{
