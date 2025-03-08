@@ -6,8 +6,7 @@
 //silver_chain_scope_end
 
 
-#ifndef  PRIVATE_CTEXT_ARRAY_TYPE_H
-#define PRIVATE_CTEXT_ARRAY_TYPE_H
+
 typedef struct CTextArray{
 
     CTextStack **stacks;
@@ -16,4 +15,3 @@ typedef struct CTextArray{
 
 }CTextArray;
 
-#endif

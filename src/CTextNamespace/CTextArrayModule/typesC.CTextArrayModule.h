@@ -4,8 +4,7 @@
 //mannaged by SilverChain: https://github.com/OUIsolutions/SilverChain
 #include "../../imports/imports.typesB.h"
 //silver_chain_scope_end
-#ifndef PRIVATE_CTEXT_ARRAY_NAMESPACE_MODULE
-#define PRIVATE_CTEXT_ARRAY_NAMESPACE_MODULE
+
 typedef struct CTextArrayModule{
     CTextArray *(*newArray)();
     void (*append)(CTextArray *self,CTextStack *element);
@@ -20,4 +19,3 @@ typedef struct CTextArrayModule{
     void (*free)(CTextArray *self);
 
 }CTextArrayModule;
-#endif

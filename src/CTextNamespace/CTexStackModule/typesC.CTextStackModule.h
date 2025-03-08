@@ -5,8 +5,7 @@
 #include "../../imports/imports.typesB.h"
 //silver_chain_scope_end
 
-#ifndef  PRIVATE_CTEXT_STACK_NAMESPACE_MODULE
-#define PRIVATE_CTEXT_STACK_NAMESPACE_MODULE
+
 
 typedef struct CTextStackModule{
 
@@ -103,4 +102,3 @@ typedef struct CTextStackModule{
 }CTextStackModule;
 
 
-#endif
