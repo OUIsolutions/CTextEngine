@@ -2,8 +2,9 @@
 //DONT MODIFY THIS COMMENT
 //this import is computationally generated
 //mannaged by SilverChain: https://github.com/OUIsolutions/SilverChain
-#include "../../imports/imports.consts.h"
+#include "../imports/imports.typesb.h"
 //silver_chain_scope_end
 
-
-CTextNamespace newCTextNamespace();
+#define CTEXT_BY_OWNESHIP 1
+#define CTEXT_BY_COPY 2
+#define CTEXT_BY_REFERENCE 3

@@ -2,7 +2,7 @@
 //DONT MODIFY THIS COMMENT
 //this import is computationally generated
 //mannaged by SilverChain: https://github.com/OUIsolutions/SilverChain
-#include "../../imports/imports.typesb.h"
+#include "../../imports/imports.consts.h"
 //silver_chain_scope_end
 
 void private_ctext_text_double_size_if_reachs(struct CTextStack *self);
