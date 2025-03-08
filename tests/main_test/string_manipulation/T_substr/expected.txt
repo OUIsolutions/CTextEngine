@@ -1,3 +1,0 @@
-start:my
-midle:st
-end:string
