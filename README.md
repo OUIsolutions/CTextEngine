@@ -4,31 +4,28 @@
 CTextEngine its single file C/C++ text engine for general propose, focused  on html/xml
 documents, with CTextEngine you can generate various kinds of documents with easy steps
 
-# Instalation
-## Single File
-As Others OUI Products, these lib is made to bee dumb as possible,so for instalation
-you can just copy the [CTextEngine.h](https://github.com/OUIsolutions/CTextEngine/releases/download/v2.002/CTextEngine.h) file  to your project and start using
 
-if these runs, it means it working
-~~~c
-#include "CTextEngine.h"
+# Releases
 
-int main(){
+| item          | What Is |
+|-------        |-----------|
+| [CTextEngine.zip](https://github.com/OUIsolutions/CTextEngine/releases/download/3.0.000/CTextEngine.zip)| Full Folder Mode  |
+| [CTextEngineOne.c](https://github.com/OUIsolutions/CTextEngine/releases/download/3.0.000/CTextEngineOne.c)| Single File Version|
+| [CTextEngine.h](https://github.com/OUIsolutions/CTextEngine/releases/download/3.0.000/CTextEngine.h)|Declaration |
+| [CTextEngine.c](https://github.com/OUIsolutions/CTextEngine/releases/download/3.0.000/CTextEngine.c)|Definition |
 
-}
-~~~
+## Build from scratch
 
+For buiding from scratch you need to have [darwin](https://github.com/OUIsolutions/Darwin/) installed on your machine. To install darwin:
+```bash
+curl -L https://github.com/OUIsolutions/Darwin/releases/download/0.020/darwin.out -o darwin.out && chmod +x darwin.out &&  sudo  mv darwin.out /usr/bin/darwin
+```
 
-## Full Folder
-You also can run by full folder , just copy the entire folder **src** in your project
-than run with:
-~~~c
-#include "src/one.c"
+Then you can build the project with in the root dir of the project:
+```bash
+darwin run_blueprint build/  --mode folder
+```
 
-int main(){
-
-}
-~~~
 
 # Usage
 
